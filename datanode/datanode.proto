@@ -161,13 +161,6 @@ message DelKeyvalueRes {
     string        resmsg = 2;
 }
 
-message VersionRes {
-    rescode.Code       rescode = 1;
-    string             resmsg = 2;
-    repeated common.VersionItem versions = 3;
-    map<string,string> extra = 4;
-}
-
 message SetUserInfoReq {
     int64                     uid = 1;
     common.UserInfo          info = 2;
