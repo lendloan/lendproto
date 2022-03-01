@@ -1,0 +1,143 @@
+syntax = "proto3";
+package usernode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./usernode";
+
+enum AttentionOpType {
+    NONE_ATTENTION = 0;
+    ADD_ATTENTION = 1;
+    DEL_ATTENTION = 2;
+}
+
+message UserObj {
+    string    phone = 1;
+    string    email = 2;
+    string    account = 3;
+    int32       status = 4;
+    int64       role = 5;
+    int64       vip = 6;
+    double    coin = 7;
+    string    reg_at = 8;
+    string    nick_name = 9;
+    string   avatar = 10;
+    int32      sex = 11;
+    string   province = 12;
+    string   city = 13;
+    string   country = 14;
+    bool     vip_expire = 15;
+}
+
+
+message UpdateCardidReq {
+    common.Authorize auth =1;
+    int64 uid = 2;
+    string card_id = 3;
+    map<string,string> extra = 4;
+}
+
+
+message UpdateAttentionReq {
+    common.Authorize auth = 1;
+    int64               uid = 2;
+    AttentionOpType op = 3; // 0:添加;1:删除
+    repeated int64         aid = 4;
+    map<string,string> extra = 5;
+}
+
+message UpdateUserRes {
+    rescode.Code      rescode = 1;
+    string            resmsg = 2;
+    map<string,string> extra = 3;
+}
+
+message UserInfoReq {
+    common.Authorize      auth = 1;
+    int64                   uid = 2;
+    common.FromPlatom    platom = 3; // 帐号来源平台
+    map<string,string>    extra = 4;
+}
+
+message UserInfoRes {
+    rescode.Code      rescode = 1;
+    string            resmsg = 2;
+    UserObj          user = 3;
+    map<string,string> extra = 4;
+}
+
+message UpdateUserinfoReq {
+    common.Authorize                  auth = 1;
+    common.UpdateUserinfoItem       info = 2;
+    map<string,string>                extra = 3;
+}
+
+message UpdateUserinfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    string                    value = 3;
+    map<string,string>        extra = 4;
+}
+
+message UserCacheReq {
+    common.Authorize      auth = 1;
+    string                key = 2;
+    string                value = 3;
+    int64                  expire = 4;
+    map<string,string>    extra = 5;
+}
+
+message UserCacheRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message UserScoreReq {
+    common.Authorize      auth = 1;
+    int64 		  userid = 2;
+    map<string,string>    extra = 3;
+}
+
+message UserScoreRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.UserScore            score = 3;
+    map<string,string>          extra = 4;
+}
+
+message UserVipReq {
+    common.Authorize      auth = 1;
+    int64 		          userid = 2;
+    map<string,string>    extra = 3;
+}
+
+message UserVipRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.UserVip              vip = 3;
+    map<string,string>          extra = 4;
+}
+
+service UsernodeService {
+    // 更新用户信息
+    rpc  UpdateUserInfo(UpdateUserinfoReq) returns(UpdateUserinfoRes) {}
+
+    // 更新身份证号
+    rpc  UpdateCardid(UpdateCardidReq) returns(UpdateUserRes) {}
+
+    // 更新关注对象
+    rpc  UpdateAttention(UpdateAttentionReq) returns(UpdateUserRes){}
+
+    // 获取用户信息
+    rpc  UserInfo(UserInfoReq) returns(UserInfoRes) {}
+
+    // 用户缓存
+    rpc  UserCache(UserCacheReq) returns(UserCacheRes){}
+
+    // 用户积分获取
+    rpc UserScore(UserScoreReq) returns (UserScoreRes) {}
+
+    // 用户VIP获取
+    rpc UserVip(UserVipReq) returns (UserVipRes) {}
+}

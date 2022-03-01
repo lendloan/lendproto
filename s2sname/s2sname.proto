@@ -1,0 +1,91 @@
+syntax = "proto3";
+package s2sname;
+import "rescode/rescode.proto";
+
+option go_package="./s2sname";
+
+message Request {
+    string      name = 1;
+}
+
+enum Const {
+    Const_None = 0;
+    Const_Expired  = 5; // 超时时间
+}
+
+message S2sname {
+    string    host = 1;
+    int32   port = 2;
+    int32   prority = 3;
+    string name = 4;
+    int64   expired = 5;
+}
+
+message RegisterReq {
+    string    name = 1;
+    S2sname   s2s = 2;
+}
+
+message RegisterRes {
+    rescode.Code    rescode = 1;
+    string    resmsg = 2;
+}
+
+message UpdateReq {
+    string    name = 1;
+    S2sname   s2s = 2;
+}
+
+message UpdateRes {
+    rescode.Code    rescode = 1;
+    string    resmsg = 2;
+}
+
+message FetchRes {
+    rescode.Code      rescode = 1;
+    string            resmsg = 2;
+    repeated S2sname     s2ss = 3;
+}
+
+message HeartReq {
+    string    name = 1;
+    S2sname   s2s = 2;
+}
+
+message HeartRes {
+    rescode.Code    rescode = 1;
+    string    resmsg = 2;
+}
+
+message S2sinfoReq {
+
+}
+
+message S2sinfoRes {
+    message S2snameItem {
+        repeated S2sname item = 1;
+    }
+    rescode.Code                  rescode = 1;
+    string                        resmsg = 2;
+    map<string, S2snameItem>    s2sinfo = 3;
+}
+
+service S2snameService {
+    // 注册s2s服务
+    rpc  RegisterS2sname(RegisterReq) returns(RegisterRes) {}
+
+    // 更新s2sname信息
+    rpc  UpdateS2sname(UpdateReq) returns(UpdateRes) {}
+
+    // 根据参数获取对应的s2s列表
+    rpc  FetchS2sname(Request) returns(FetchRes) {}
+
+    // 获取所有的s2sname 列表信息
+    rpc  FetchS2snames(Request) returns(FetchRes) {}
+
+    // 服务心跳包，用于更新服务的状态
+    rpc  Heart(HeartReq) returns(HeartRes) {}
+
+    // 获取所有的s2sname信息
+    rpc  S2sinfo(S2sinfoReq) returns(S2sinfoRes) {}
+}

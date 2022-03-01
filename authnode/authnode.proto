@@ -1,0 +1,48 @@
+syntax = "proto3";
+package authnode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./authnode";
+
+message VerifyTokenReq {
+    string                token = 1;
+    common.Authorize      auth = 2;
+    map<string,string>    extra = 3;
+}
+
+message VerifyTokenRes {
+    rescode.Code          rescode = 1;
+    map<string,string>    extra = 2;
+}
+
+message AdminRoleReq {
+    string                token = 1;
+    common.Authorize      auth = 2;
+    map<string,string>    extra = 3;
+}
+message AdminRoleRes {
+   rescode.Code          rescode = 1;
+   map<string,string>    extra = 2;
+}
+
+message CooperRoleReq {
+    string                token = 1;
+    common.Authorize      auth = 2;
+    map<string,string>    extra = 3;
+}
+
+message CooperRoleRes {
+    rescode.Code          rescode = 1;
+    map<string,string>    extra = 2;
+}
+
+
+service AuthnodeService {
+	// 验证token
+	rpc  VerifyToken(VerifyTokenReq) returns (VerifyTokenRes) {}
+	// 验证是否是管理用户
+	rpc  AdminRole(AdminRoleReq) returns (AdminRoleRes) {}
+	// 验证是否是合作用户
+	rpc  CooperRole(CooperRoleReq) returns (CooperRoleRes) {}
+}

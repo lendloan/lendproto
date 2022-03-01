@@ -1,0 +1,103 @@
+syntax  =  "proto3";
+package lognode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./lognode";
+
+enum LogLevel {
+    INFO   =  0;
+    DEBUG  =  1;
+    WARN   =  2;
+    ERROR  =  3;
+}
+
+enum LogDesc {
+    CONSOLE  =  0;
+    FILE  =  1;
+    DB  =  2;
+}
+
+message CallLogReq {
+     LogLevel  level = 1;
+     LogDesc   desc = 2;
+     string    server_name = 3;
+     string    ip = 4;
+     string    func = 5;
+     string    timestamp = 6;
+     string    status = 7;
+     string    req = 8;
+     string    res = 9;
+     map<string,string> extra = 10;
+}
+
+message LogReq {
+     LogLevel             level = 1;
+     LogDesc              desc = 2;
+     string                server_name = 3;
+     string                ip = 4;
+     string                timestamp = 5;
+     string                func = 6;
+     string                info = 7;
+     map<string,string>    extra = 8; 
+}
+
+message UserLogItem {
+     int64                id = 1;
+     int64                uid = 2;
+     string               username = 3;
+     string               ip = 4;
+     string               country = 5;
+     string               province = 6;
+     string               city = 7;
+     string               district = 8;
+     string               platom = 9;
+     string               appid = 10;
+     string               info = 11;
+     string               old_info = 12;
+     string               new_info = 13;
+     string               mark = 14;
+     string               create_at = 15;
+     int64                log_type = 16;
+     string               type_info = 17;
+}
+
+message QueryUserLogReq {
+     common.Authorize        auth = 1;
+     int64                   id = 2;
+     int64                   uid = 3;
+     int32                   log_type = 4;
+     int32                   page = 5;
+     int32                   size = 6;
+     map<string,string>      extra = 7;
+}
+
+message QueryUserLogRes {
+     rescode.Code                  rescode = 1;
+     string                        resmsg = 2;
+     repeated UserLogItem        logs = 3;
+     map<string,string>            extra = 4;
+}
+
+message UserLogCountReq {
+     common.Authorize      auth = 1;
+     int64                 uid = 2;
+     int32                 log_type = 3;
+     map<string,string>    extra = 4;
+}
+
+message UserLogCountRes {
+     rescode.Code              rescode = 1;
+     string                    resmsg = 2;
+     int64                     count = 3;
+     map<string,string>        extra = 4;
+}
+
+service LognodeService {
+	rpc  Log( LogReq) returns(common.Response) {}
+	rpc  CallLog( CallLogReq) returns (common.Response){}
+	// 获取日志
+	rpc  QueryUserLog( QueryUserLogReq) returns (QueryUserLogRes) {}
+	// 日志数量
+	rpc  UserLogCount( UserLogCountReq) returns (UserLogCountRes) {}
+}

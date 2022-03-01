@@ -1,0 +1,121 @@
+syntax = "proto3";
+package paynode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./paynode";
+
+message SponsorAddReq {
+    common.Authorize      auth = 1;
+    common.SponsorItem    sponsor = 2;
+    map<string,string>    extra = 3;
+}
+
+message SponsorAddRes {
+    rescode.Code        rescode = 1;
+    string              resmsg = 2;
+    map<string,string>  extra = 3;
+}
+
+message SponsorListReq {
+    common.Authorize      auth = 1;
+    int32                 page = 2;
+    int32                 size = 3;
+    int64                 uid = 4;
+    map<string,string>    extra = 5;
+}
+
+message SponsorListRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.SponsorItem lists = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipProductReq {
+    common.Authorize            auth = 1;
+    int32                       page = 2;
+    int32                       size = 3;
+    common.VipProduct           products = 4;
+    map<string,string>          extra = 5;
+}
+
+message VipProductRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.VipProduct  products = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipDescReq {
+    common.Authorize            auth = 1;
+    int32                       op = 2;     // 操作  0:获取 1:添加/更新
+    common.VipDesc              desc = 3;
+    map<string, string>         extra = 4;
+}
+
+message VipDescRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.VipDesc              desc = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipPayReq {
+    common.Authorize            auth = 1;
+    common.VipOrder             order = 2;
+    map<string,string>          extra = 3;
+}
+
+message VipPayRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.VipOrder             order = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipPayCallReq {
+    common.Authorize            auth = 1;
+    common.VipPayCb             cb = 2;
+    common.AlipayCb             acb = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipPayCallRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 4;
+}
+
+message VipOrderListReq {
+    common.Authorize            auth = 1;
+    common.VipOrder             order = 2;
+    int32                       page = 3;
+    int32                       size = 4;
+    map<string,string>          extra = 5;
+}
+
+message VipOrderListRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.VipOrder    order = 3;
+    map<string,string>          extra = 4;
+}
+
+service PaynodeService {
+    // 添加赞助信息
+    rpc  SponsorAdd(SponsorAddReq) returns(SponsorAddRes){}
+    // 获取赞助列表
+    rpc  SponsorList(SponsorListReq) returns(SponsorListRes){}
+
+    // vip产品列表
+    rpc VipProduct(VipProductReq) returns (VipProductRes) {}
+    // vip产品介绍
+    rpc VipDesc(VipDescReq) returns (VipDescRes) {}
+    // vip充值
+    rpc VipPay(VipPayReq) returns (VipPayRes) {}
+    // vip充值会掉
+    rpc VipPayCall(VipPayCallReq) returns (VipPayCallRes) {}
+    // 获取vip充值列表
+    rpc VipOrderList(VipOrderListReq) returns (VipOrderListRes) {}
+}

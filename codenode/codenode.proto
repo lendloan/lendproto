@@ -1,0 +1,56 @@
+syntax  =  "proto3";
+package codenode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./codenode";
+
+enum CodeType {
+    UID          =  0;
+    ACCOUNT      =  1;
+    MOBILE       =  2;
+    EMAIL        =  3;
+}
+
+// 请求验证码的操作类型
+enum OperateType {
+    NONE         =  0;
+    REGISTER     =  101;  // 注册请求
+    LOGIN        =  102;  // 登录请求
+}
+
+message CodeReq {
+    common.Authorize      auth =  1;
+    string                desc =  2;
+    CodeType             type =  3;
+    OperateType          optype =  4;
+    map<string,string>    extra =  5;
+}
+
+message CodeRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    string                code =  3;
+    map<string,string>    extra =  4;
+}
+
+message VerifyCodeReq {
+    common.Authorize      auth =  1;
+    string                desc =  2;
+    string                code =  3;
+    OperateType          optype =  4;
+    map<string,string>    extra =  5;
+}
+
+message VerifyCodeRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    map<string,string>    extra =  3;
+}
+
+service CodenodeService {
+	// 发送验证码
+	rpc SendCode(CodeReq) returns (CodeRes) {}
+	// 请求验证码
+	rpc VerifyCode(VerifyCodeReq) returns (VerifyCodeRes) {}
+}

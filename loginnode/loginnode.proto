@@ -1,0 +1,98 @@
+syntax  =  "proto3";
+package loginnode;
+import "rescode/rescode.proto";
+
+option go_package="./loginnode";
+
+message LoginReq {
+    string                account = 1;
+    string                passwd = 2;
+    map<string,string>    extra = 3;
+}
+
+message LoginRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    string                cookie = 3;
+    map<string,string>    extra = 4;
+}
+
+message LoginByCodeReq {
+    string                account = 1;
+    string                code = 2;
+    map<string,string>    extra = 3;
+}
+
+message LoginByCodeRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    string                cookie = 3;
+    map<string,string>    extra = 4;
+}
+
+
+message LoginWechatReq {
+    string                appid = 1;
+    string                Code = 2;
+    string                State = 3;
+    string                style = 4;
+    map<string,string>  extra = 5;
+}
+
+message LoginWechatRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    string                cookie = 3;
+    map<string,string>    extra = 4;
+}
+
+message LogoutReq {
+    string                cookie = 1;
+    map<string,string>    extra = 2;
+}
+
+message LogoutRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    map<string,string>    extra = 3;
+}
+
+message RefreshReq {
+    string                cookie = 1;
+    map<string,string>    extra = 2;
+}
+
+message RefreshRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    string                cookie = 3;
+    map<string,string>    extra = 4;
+}
+
+message LoginAlipayReq {
+    string                app_id = 1;
+    string                source = 2;
+    string                scope = 3;
+    string                auth_code = 4;
+    string              style = 5;
+    map<string,string>  extra = 6;
+}
+
+message LoginAlipayRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    string                cookie = 3;
+    map<string,string>    extra = 4;
+}
+
+service LoginnodeService {
+	// 登录
+	rpc  Login(LoginReq) returns (LoginRes) {}
+	rpc  LoginByCode(LoginByCodeReq) returns (LoginByCodeRes) {}
+	rpc  LoginWechat(LoginWechatReq) returns (LoginWechatRes) {}
+	rpc  LoginAlipay(LoginAlipayReq) returns (LoginAlipayRes) {}
+	// 退出登录
+	rpc  Logout(LogoutReq) returns (LogoutRes) {}
+	// 刷新
+	rpc  Refresh(RefreshReq) returns (RefreshRes) {}
+}

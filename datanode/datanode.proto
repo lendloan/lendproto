@@ -1,0 +1,706 @@
+syntax  =  "proto3";
+package datanode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./datanode";
+
+message User{
+    int64    uid = 1;
+    string   phone = 2;
+    string   email = 3;
+    string   account = 4;
+    string   pass_wd = 5;
+    int32    status = 6;
+    int64    role = 7;
+    int64    vip = 8;
+    double   coin = 9;
+    int64    reg_ip = 10;
+    string  reg_at = 11;
+}
+
+message UserInfoReq {
+    int64    uid = 1;
+    map<string,string> extra = 2;
+}
+
+message NewUserReq {
+    string    account = 1;
+    string    pass_wd = 2;
+    int32     role = 3;     
+    string    invitor = 4;
+    string    source = 5;
+    string    contactor = 6;
+    string    email = 7;
+    int64     reg_ip = 8;
+    int64     status = 9;
+    map<string,string> extra = 10;
+}
+
+message SearchUserReq {
+    repeated int64    uids = 1;
+    string            account = 2;
+    string            phone = 3;
+    string            email = 4;
+    map<string,string> extra = 5;
+}
+
+message SearchUserRes {
+    repeated    User    users  =  1;
+    map<string,string>  extra  =  2;
+}
+
+message UserRes {
+    rescode.Code      rescode = 1;
+    string            resmsg = 2;
+    User              user = 3;
+    map<string,string> extra = 4;
+}
+
+message FileItem {
+    string    name = 1;
+    int32     type = 2;
+    string    path = 3;
+    int64     size = 4;
+    string    url = 5;
+    int64     create_at = 6;
+    int64     update_at = 7;
+    string    extra = 8;
+}
+
+message FileDirReq {
+    int64       uid  =  1;
+    string      path  =  2;
+    map<string,string>  extra  =  3;
+}
+
+message FileDirRes {
+    rescode.Code      rescode = 1;
+    string            resmsg = 2;
+    repeated FileItem dirs = 3;
+}
+
+message AddDirReq {
+    int64       uid  =  1;
+    string    parent = 2;
+    string    name = 3;
+}
+
+message AddDirRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+}
+
+message AddFileReq {
+    int64   uid  =  1;
+    int64  size = 2;
+    string path = 3;
+    string name = 4;
+    string url = 5;
+    string thumb = 6;
+    string content_type = 7;
+}
+
+message AddFileRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+}
+
+message FileAttrReq {
+    int64       uid  =  1;
+    map<string,string> extra  =  2;
+}
+
+
+message FileAttrRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+    int64         capacity = 3;
+    int32         number = 4;
+}
+
+message ThumbnailReq {
+    int64       uid  =  1;
+    string      path  =  2;
+    map<string,string> extra  =  3;
+}
+
+message ThumbnailRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+    string        thumb = 3;
+}
+
+message SetKeyvalueReq {
+    string        key = 1;
+    string        value = 4;
+    int64         expire = 3;
+}
+
+message SetKeyvalueRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+}
+
+message GetKeyvalueReq {
+    string        key = 1;
+}
+
+message GetKeyvalueRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+    string        value = 3;
+}
+
+message DelKeyvalueReq {
+    string        key = 1;
+}
+
+message DelKeyvalueRes {
+    rescode.Code  rescode = 1;
+    string        resmsg = 2;
+}
+
+message VersionRes {
+    rescode.Code       rescode = 1;
+    string             resmsg = 2;
+    repeated common.VersionItem versions = 3;
+    map<string,string> extra = 4;
+}
+
+message SetUserInfoReq {
+    int64                     uid = 1;
+    common.UserInfo          info = 2;
+    map<string,string>        extra = 3;
+}
+
+message SetUserInfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message GetUserInfoReq {
+    int64                     uid = 1;
+    map<string,string>        extra = 2;
+}
+
+message GetUserInfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    common.UserInfo          info = 3;
+    map<string,string>        extra = 4;
+}
+
+message SetWechatUinfoReq {
+    int64                     uid = 1;
+    common.WechatUserinfo    info = 2;
+    map<string,string>        extra = 3;
+}
+
+message SetWechatUinfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message GetWechatUinfoReq {
+    int64                     uid = 1;
+    map<string,string>        extra = 2;
+}
+
+message GetWechatUinfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    common.WechatUserinfo    info = 3;
+    map<string,string>        extra = 4;
+}
+
+message SetAlipayUinfoReq {
+    int64                     uid = 1;
+    common.AlipayUserinfo    info = 2;
+    map<string,string>        extra = 3;
+}
+
+message SetAlipayUinfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message GetAlipayUinfoReq {
+    int64                     uid = 1;
+    map<string,string>        extra = 2;
+}
+
+message GetAlipayUinfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    common.AlipayUserinfo    info = 3;
+    map<string,string>        extra = 4;
+}
+
+message SetBaiduEntityReq {
+    string                    bid = 1;
+    repeated common.BaiduEntity entitys = 2;
+    map<string,string>        extra = 3;
+}
+
+message SetBaiduEntityRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message BaiduEntityReq {
+    string                    bid = 1;
+    int64                     page = 2;
+    int64                     size = 3;
+    map<string,string>        extra = 4;
+}
+
+message BaiduEntityRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    int64                     page = 3;
+    int64                     size = 4;
+    repeated common.BaiduEntity entitys = 5;
+    map<string,string>        extra = 6;
+}
+
+message RefreshUserCoinReq {
+    string                auth = 1;
+    int64                 userid = 2;
+    double                coin = 3;
+    map<string,string>    extra = 4;
+}
+
+message RefreshUserCoinRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    string                code = 3;
+    map<string,string>    extra = 4;
+}
+
+message SubmitCertReq {
+    common.PersonCert    cert = 1;
+    map<string,string>    extra = 2;
+}
+
+message SubmitCertRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    map<string,string>    extra = 3;
+}
+
+message CertStatusReq {
+    int64                 uid = 1;
+    int64                 cert_uid = 2;
+    string                cert_name = 3;
+    string                status = 4;
+    string                info = 5;
+    map<string,string>    extra = 6;
+}
+
+message CertStatusRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    common.PersonCert    cert = 3;
+    map<string,string>    extra = 4;
+}
+
+message CertInfoReq {
+    int64                 uid = 1;
+    string                status = 2;
+    string                idname = 3;
+    string                idnum = 4;
+    int32                 page = 5;
+    int32                 size = 6;
+    map<string,string>    extra = 7;
+}
+
+message CertInfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    repeated common.PersonCert  cert = 3;
+    map<string,string>        extra = 4;
+}
+
+message CertFlowReq {
+    int64                   uid = 1;
+    int32                   page = 2;
+    int32                   size = 3;
+    map<string,string>    extra = 4;
+}
+
+message CertFlowRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    repeated common.PersonCert  cert = 3;
+    map<string,string>        extra = 4;
+}
+
+message AddUserLogReq {
+    int64                 uid = 1;
+    int32                 log_type = 2;
+    string                log_info = 3;
+    string                create_at = 4;
+    map<string,string>    extra = 5;
+}
+
+message AddUserLogRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message QueryUserLogReq {
+    int64                 id = 1;
+    int64                 uid = 2;
+    int32                 log_type = 3;
+    int32                 page = 4;
+    int32                 size = 5;
+    map<string,string>    extra = 6;
+}
+
+message QueryUserLogRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    repeated common.UserLog  logs = 3;
+    map<string,string>        extra = 4;
+}
+
+message UserLogCountReq {
+    int64                 uid = 1;
+    int32                 log_type = 2;
+    map<string,string>    extra = 3;
+}
+
+message UserLogCountRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    int64                     count = 3;
+    map<string,string>        extra = 4;
+}
+
+
+message AddTaskReq {
+    common.CronItem      cron = 1;
+    string                admin = 2;
+    map<string,string>    extra = 3;
+}
+
+message AddTaskRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    map<string,string>    extra = 3;
+}
+
+message GetTaskReq {
+    bool                  repeated = 1;
+    bool                  mutitask = 2;
+    string                start_at = 3;
+    map<string,string>    extra = 4;
+}
+
+message GetTaskRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    repeated common.CronItem crons = 3;
+    map<string,string>        extra = 4;
+}
+
+message GetTaskCountReq {
+    bool                  repeated = 1;
+    bool                  mutitask = 2;
+    string                start_at = 3;
+    map<string,string>    extra = 4;
+}
+
+message GetTaskCountRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    int64                     count = 3;
+    map<string,string>        extra = 4;
+}
+
+message UpdateUserinfoReq {
+    common.UpdateUserinfoItem       info = 1;
+    map<string,string>                extra = 2;
+}
+
+message UpdateUserinfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    string                    value = 3;
+    map<string,string>        extra = 4;
+}
+
+
+message AddPkgReq {
+    string                name  = 1;
+    string                version = 2;
+    string                address = 3;
+    map<string,string>    extra = 4;
+}
+
+message AddPkgRes {
+    rescode.Code        rescode = 1;
+    string              resmsg = 2;
+    map<string,string>  extra = 3;
+}
+
+message DelPkgReq {
+    string                name  = 1;
+    string                version = 2;
+    map<string,string>    extra = 3;
+}
+
+message DelPkgRes {
+    rescode.Code        rescode = 1;
+    string              resmsg = 2;
+    map<string,string>  extra = 3;
+}
+
+message PkgListReq {
+    string                name = 1;
+    int64                 page = 2;
+    int64                 size = 3;
+    map<string,string>    extra = 4;
+}
+
+message PkgListRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.PkgItem  version = 3;
+    map<string,string>          extra = 4;
+}
+
+message PkgCountReq {
+    string                name = 1;
+    map<string,string>    extra = 2;
+}
+
+message PkgCountRes {
+    rescode.Code        rescode = 1;
+    string              resmsg = 2;
+    int64               count = 3;
+    map<string,string>  extra = 4;
+}
+
+message VipLimitReq {
+    int32                 vip = 1;      // 等级
+    int32                 type = 2;     // 限制类型  0:修改试题  1:添加试题  2:浏览试题  3:下载试题
+    map<string,string>    extra = 3;
+}
+
+message VipLimitRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    int64                       limit = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipProductReq {
+    int32                       page = 1;
+    int32                       size = 2;
+    common.VipProduct           products = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipProductRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.VipProduct  products = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipPayReq {
+    common.VipOrder             order = 1;
+    map<string,string>          extra = 2;
+}
+
+message VipPayRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.VipOrder             order = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipOrderStatusReq {
+    common.VipOrder             order = 1;
+    map<string,string>          extra = 2;
+}
+
+message VipOrderStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.VipOrder             order = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipOrderListReq {
+    common.VipOrder             order = 1;
+    int32                       page = 2;
+    int32                       size = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipOrderListRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.VipOrder    order = 3;
+    map<string,string>          extra = 4;
+}
+
+message UserScoreReq {
+    string                      auth = 1;
+    int32                       op = 2;     // 操作  0:获取 1:添加  2:更新
+    common.UserScore            score = 3;
+    map<string, string>         extra = 4;
+}
+
+message UserScoreRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.UserScore            score = 3;
+    map<string,string>          extra = 4;
+}
+
+message UserVipReq {
+    string                      auth = 1;
+    int32                       op = 2;     // 操作  0:获取 1:添加/更新
+    common.UserVip              vip = 3;
+    map<string, string>         extra = 4;
+}
+
+message UserVipRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.UserVip              vip = 3;
+    map<string,string>          extra = 4;
+}
+
+message VipDescReq {
+    int32                       op = 1;     // 操作  0:获取 1:添加/更新
+    common.VipDesc              desc = 2;
+    map<string, string>         extra = 3;
+}
+
+message VipDescRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    common.VipDesc              desc = 3;
+    map<string,string>          extra = 4;
+}
+
+message FootLogReq {
+    int32                       op = 1;     // 操作  0:获取 1:添加/更新
+    common.FootLog              foot_log = 2;
+    int32                       page = 3;
+    int32                       size = 4;
+    map<string,string>          extra = 5;
+}
+
+message FootLogRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.FootLog     desc = 3;
+    map<string,string>          extra = 4;
+}
+
+service DatanodeService {
+	// ---------- 用户接口 ------- //
+	// 创建新用户
+	rpc  CreateUser(NewUserReq) returns (UserRes) {}
+	// 获取用户信息
+	rpc  UserInfo(UserInfoReq) returns (UserRes) {}
+	// 搜索用户信息
+	rpc SearchUser(SearchUserReq) returns (SearchUserRes) {}
+	// 更新用户信息
+	rpc UpdateUserInfo(UpdateUserinfoReq) returns (UpdateUserinfoRes) {}
+	
+	// ---------------- 文件 ------------------//
+	// 获取目录,目录之间的/替换成-
+	rpc FileDirOne(FileDirReq) returns (FileDirRes) {}
+	// 添加目录
+	rpc FileDirAdd(AddDirReq) returns (AddDirRes) {}
+	// 添加文件
+	rpc AddFile(AddFileReq) returns (AddFileRes) {}
+	// 获取云盘属性，容量和文件数量
+	rpc YunSaveAttr(FileAttrReq) returns (FileAttrRes) {}
+	// 获取图像缩略图
+	rpc Thumbnail(ThumbnailReq) returns (ThumbnailRes) {}
+	// ------------- key-value ----------------//
+	// 设置缓存
+	rpc SetKeyValue(SetKeyvalueReq) returns (SetKeyvalueRes) {}
+	// 获取缓存
+	rpc GetKeyValue(GetKeyvalueReq) returns (GetKeyvalueRes) {}
+	// 删除
+	rpc DelKeyValue(DelKeyvalueReq) returns (DelKeyvalueRes) {}
+	
+	//用户信息
+	rpc SetUserInfo(SetUserInfoReq) returns (SetUserInfoRes) {}
+	rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRes) {}
+	//微信用户信息操作
+	rpc SetWechatUinfo(SetWechatUinfoReq) returns (SetWechatUinfoRes) {}
+	rpc GetWechatUinfo(GetWechatUinfoReq) returns (GetWechatUinfoRes) {}
+	// 支付宝用户信息操作
+	rpc SetAlipayUinfo(SetAlipayUinfoReq) returns (SetAlipayUinfoRes) {}
+	rpc GetAlipayUinfo(GetAlipayUinfoReq) returns (GetAlipayUinfoRes) {}
+	// 请求百度实体信息
+	rpc SetBaiduEntity(SetBaiduEntityReq) returns (SetBaiduEntityRes) {}
+	rpc BaiduEntity(BaiduEntityReq) returns (BaiduEntityRes) {}
+	
+	
+	// 提交实名
+	rpc SubmitCert(SubmitCertReq) returns (SubmitCertRes) {}
+	// 更新实名状态
+	rpc CertStatus(CertStatusReq) returns (CertStatusRes) {}
+	// 获取实名信息
+	rpc CertInfo(CertInfoReq) returns (CertInfoRes) {}
+	// 实名日志记录
+	rpc CertFlow(CertFlowReq) returns (CertFlowRes) {}
+	// 添加日志
+	rpc AddUserLog(AddUserLogReq) returns (AddUserLogRes) {}
+	// 获取日志
+	rpc QueryUserLog(QueryUserLogReq) returns (QueryUserLogRes) {}
+	// 日志数量
+	rpc UserLogCount(UserLogCountReq) returns (UserLogCountRes) {}
+	// 添加任务
+	rpc AddTask(AddTaskReq) returns (AddTaskRes) {}
+	// 获取任务
+	rpc GetTask(GetTaskReq) returns (GetTaskRes) {}
+	// 获取任务数量
+	rpc GetTaskCount(GetTaskCountReq) returns (GetTaskCountRes) {}
+    // 添加包信息
+    rpc  AddPkg(AddPkgReq) returns(AddPkgRes){}
+    // 删除包
+    rpc  DelPkg(DelPkgReq) returns(DelPkgRes){}
+    // 获取包列表
+    rpc  PkgLists(PkgListReq) returns(PkgListRes){}
+    // 获取包数量
+    rpc  PkgCount(PkgCountReq) returns(PkgCountRes) {}
+
+
+    // 获取vip对应的限制
+    rpc VipLimit(VipLimitReq) returns (VipLimitRes) {}
+
+    // vip产品列表
+    rpc VipProduct(VipProductReq) returns (VipProductRes) {}
+    // vip产品介绍
+    rpc VipDesc(VipDescReq) returns (VipDescRes) {}
+    // vip充值
+    rpc VipPay(VipPayReq) returns (VipPayRes) {}
+    // 更新vip充值状态
+    rpc VipOrderStatus(VipOrderStatusReq) returns (VipOrderStatusRes) {}
+    // 获取vip充值列表
+    rpc VipOrderList(VipOrderListReq) returns (VipOrderListRes) {}
+    // 用户积分操作
+    rpc UserScore(UserScoreReq) returns (UserScoreRes) {}
+    // 用户vip操作
+    rpc UserVip(UserVipReq) returns (UserVipRes) {}
+
+    // 服务调用日志
+    rpc FootLog(FootLogReq) returns (FootLogRes) {}
+}

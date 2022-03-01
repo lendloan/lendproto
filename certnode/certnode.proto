@@ -1,0 +1,144 @@
+syntax  =  "proto3";
+package certnode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./certnode";
+
+message SubmitCertReq {
+    common.Authorize      auth = 1;
+    common.PersonCert    cert = 2;
+    map<string,string>    extra = 3;
+}
+
+message SubmitCertRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    map<string,string>    extra = 3;
+}
+
+message CertApprovedReq {
+    common.Authorize      auth = 1;
+    int64                 uid = 2;
+    int64                 approve_uid = 3;
+    string                approve_name = 4;
+    string                info = 5;
+    map<string,string>    extra = 6;
+}
+
+message CertApprovedRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    common.PersonCert    cert = 3;
+    map<string,string>    extra = 4;
+}
+
+message CertRefuseReq {
+    common.Authorize      auth = 1;
+    int64                 uid = 2;
+    int64                 refuse_uid = 3;
+    string                refuse_name = 4;
+    string                info = 5;
+    map<string,string>    extra = 6;
+}
+
+message CertRefuseRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    common.PersonCert    cert = 3;
+    map<string,string>    extra = 4;
+}
+
+
+message CertInfoReq {
+    common.Authorize      auth = 1;
+    int64                 uid = 2;
+    string                status = 3;
+    string                idname = 4;
+    string                idnum = 5;
+    int32                 page = 6;
+    int32                 size = 7;
+    map<string,string>    extra = 8;
+}
+
+message CertInfoRes {
+    rescode.Code                  rescode = 1;
+    string                        resmsg = 2;
+    repeated common.PersonCert   cert = 3;
+    map<string,string>            extra = 4;
+}
+
+message CertFlowReq {
+    common.Authorize      auth = 1;
+    int64                 uid = 2;
+    int32                 page = 3;
+    int32                 size = 4;
+    map<string,string>    extra = 5;
+}
+
+message CertFlowRes {
+    rescode.Code                 rescode = 1;
+    string                       resmsg = 2;
+    repeated common.PersonCert  cert = 3;
+    map<string,string>           extra = 4;
+}
+
+message CertCancelReq {
+    common.Authorize      auth = 1;
+    int64                 uid = 2;
+    string                info = 3;
+    map<string,string>    extra = 4;
+}
+
+message CertCancelRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message CertCacheReq {
+    common.Authorize      auth = 1;
+    string                key = 2;
+    string                value = 3;
+    int64                 expire = 4;
+    map<string,string>    extra = 5;
+}
+
+message CertCacheRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    map<string,string>        extra = 3;
+}
+
+message CertStatusReq {
+    common.Authorize      auth = 1;
+    int64                 uid = 2;
+    map<string,string>    extra = 3;
+}
+
+message CertStatusRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    string                    status = 3; // S0A,S0S,S0X
+    map<string,string>        extra = 4;
+}
+
+service CertnodeService {
+	// 提交实名
+	rpc SubmitCert(SubmitCertReq)  returns (SubmitCertRes) {}
+	// 获取实名信息
+	rpc CertInfo(CertInfoReq)  returns (CertInfoRes) {}
+	// 实名日志记录
+	rpc CertFlow(CertFlowReq)  returns (CertFlowRes) {}
+	// 取消实名
+	rpc CertCancel(CertCancelReq)  returns (CertCancelRes) {}
+	//--------------需要授权--------------//
+	// 审核通过
+	rpc CertApproved(CertApprovedReq)  returns (CertApprovedRes) {}
+	// 实名失败 
+	rpc CertRefuse(CertRefuseReq) returns (CertRefuseRes) {}
+	// 实名缓存
+	rpc CertCache(CertCacheReq)  returns (CertCacheRes) {}
+    // 实名状态
+    rpc CertStatus(CertStatusReq) returns (CertStatusRes) {}
+}

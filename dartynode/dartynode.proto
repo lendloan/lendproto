@@ -1,0 +1,372 @@
+syntax  =  "proto3";
+package dartynode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./dartynode";
+
+message LoginWechatReq {
+    string                appid =  1;
+    string                Code =  2;
+    string                State =  3;
+    string                style =  4; // normal: 普通用户   cooper: 合作者   school: 学校
+    map<string,string>    extra =  5;
+}
+
+message LoginWechatRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    string                cookie =  3;
+    map<string,string>    extra =  4;
+}
+
+message RefreshWechatReq {
+    int64                   uid =  1;
+    string                  appid =  2;
+    string                  refresh_token =  3;
+    string                  access_token =  4;
+    map<string,string>      extra =  5;
+}
+
+message RefreshWechatRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    string                cookie =  3;
+    map<string,string>    extra =  4;
+}
+
+message LogoutWechatReq {
+    int64                   uid =  1;
+    string                  appid =  2;
+    string                  cookie =  3;
+    map<string,string>      extra =  4;
+}
+
+message LogoutWechatRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    map<string,string>    extra =  3;
+}
+
+message UserinfoWechatReq {
+    int64                   uid =  1;
+    string                  openid =  2;
+    string                  appid =  3;
+    string                  access_token = 4;
+    string                  refresh_token =  5;  // 用于刷新access_token
+    map<string,string>      extra =  6;
+}
+
+message UserinfoWechatRes {
+    rescode.Code              rescode =  1;
+    string                    resmsg =  2;
+    common.WechatUserinfo    userinfo =  3;
+    string                    cookie =  4; // 是否更新cookie
+    map<string,string>        extra =  5;
+}
+
+message LoginAlipayReq {
+    string                app_id =  1;
+    string                source =  2;
+    string                scope =  3;
+    string                auth_code =  4;
+    string                style =  5;  // normal: 普通用户   cooper: 合作者   school: 学校
+    map<string,string>    extra =  6;
+}
+
+message LoginAlipayRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    string                cookie =  3;
+    map<string,string>    extra =  4;
+}
+
+message UserinfoAlipayReq {
+    int64                   uid =  1;
+    string                  openid =  2;
+    string                  appid =  3;
+    string                  access_token =  4;
+    string                  refresh_token =  5;  // 用于刷新access_token
+    map<string,string>      extra =  6;
+}
+
+message UserinfoAlipayRes {
+    rescode.Code              rescode =  1;
+    string                    resmsg =  2;
+    common.AlipayUserinfo    userinfo =  3;
+    string                    cookie =  4; // 是否更新cookie
+    map<string,string>        extra =  5;
+}
+
+message RefreshAlipayReq {
+    int64                   uid =  1;
+    string                  appid =  2;
+    string                  refresh_token =  3;
+    string                  access_token =  4;
+    map<string,string>      extra =  5;
+}
+
+message RefreshAlipayRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    string                cookie =  3;
+    map<string,string>    extra =  4;
+}
+
+message LogoutAlipayReq {
+    int64                   uid =  1;
+    string                  appid =  2;
+    string                  cookie =  3;
+    map<string,string>      extra =  4;
+}
+
+message LogoutAlipayRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    map<string,string>    extra =  3;
+}
+
+message BaiduEntityReq {
+    int32                   page =  1;
+    int32                   size =  2;
+    string                  statement =  3;
+    map<string,string>      extra =  4;
+}
+
+message BaiduEntityRes {
+    rescode.Code                 rescode =  1;
+    string                       resmsg =  2;
+    int32                        page =  3;
+    int32                        size =  4;
+   repeated common.BaiduEntity  entitys =  5;
+    map<string,string>           extra =  6;
+}
+
+message BaiduDocAnalysisReq {
+    int64                   uid =  1;
+    string                  image_base64 =  2;
+    map<string,string>      extra =  3;
+}
+
+message BaiduDocAnalysisRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    common.BaiduDocAnalysis         analysis =  3;
+    map<string,string>                extra =  4;
+}
+
+message BaiduIdcardIdentReq {
+    int64                   uid =  1;
+    string                  idcard_side =  2;
+    string                  image_base64 =  3;
+    map<string,string>      extra =  4;
+}
+
+message BaiduIdcardIdentRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    common.BaiduIdcardIdent           ident =  3;
+    map<string,string>                extra =  4;
+}
+
+message BaiduTextCensorReq {
+    int64                   uid =  1;
+    string                  text =  2;
+    map<string,string>      extra =  3;
+}
+
+message BaiduTextCensorRes {
+    rescode.Code                      rescode =  1;
+    int64                             censor = 2;
+    string                            resmsg =  3;
+    map<string,string>                extra =  4;
+}
+
+message BaiduImgCensorReq {
+    int64                   uid =  1;
+    string                  base64 =  2;
+    map<string,string>      extra =  3;
+}
+
+message BaiduImgCensorRes {
+    rescode.Code                      rescode =  1;
+    int64                              censor = 2;
+    string                            resmsg =  3;
+    map<string,string>                extra =  4;
+}
+
+message PayDetail  {
+	string 		goods_name = 1;
+	string 		goods_id = 2;
+	int64 		quantity = 3;
+	int64 		price = 4;
+	string 		pay_goods_id = 5;
+	map<string,string>	extra = 6;
+}
+
+message Address {
+	string 	name = 1;
+	string 	province = 2;
+	string 	city = 3;
+	string 	post_code = 4;
+	string 	tel = 5;
+	map<string,string>	extra = 6;
+}
+
+message WechatPayReq {
+	string 				trade_no = 1;
+	string 				desc = 2;
+	int64 				amount = 3;
+	repeated PayDetail 	details = 4;
+	Address 			sender = 5;
+	Address 			recver = 6;
+	map<string,string>	extra = 7;
+}
+
+message WechatPayRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    string                            code_url = 3;
+    map<string,string>                extra =  4;
+}
+
+message WxNativeOrderCloseReq {
+    string              trade_no = 1;
+    map<string,string>  extra = 2;
+}
+
+message WxNativeOrderCloseRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    map<string,string>                extra =  3;
+}
+
+message WxNativeTrans {
+    string              appid = 1;
+    string              attach = 2;
+    string              bank_type = 3;
+    string              mchid = 4;
+    string              out_trade_no = 5;
+    string              success_time = 6;
+    string              trade_state = 7;
+    string              trade_state_desc = 8;
+    string              trade_type = 9;
+    string              trans_id = 10;
+    string              openid = 11;
+    map<string,string>  extra = 12;
+}
+
+message WxNativeOrderQueryReq {
+    string                  trade_no = 1;   // 商户订单号
+    string                  trans_id = 2;   // 微信订单号
+    map<string,string>      extra = 4;
+}
+
+message WxNativeOrderQueryRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    WxNativeTrans                     transaction = 3;
+    map<string,string>                extra =  4;
+}
+
+message AliPayReq {
+    string 				               trade_no = 1;
+	string 				               desc = 2;
+	int64 				               amount = 3;
+	repeated PayDetail 	               details = 4;
+	Address 			               sender = 5;
+	Address 			               recver = 6;
+	map<string,string>	               extra = 7;
+}
+
+message AliPayRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    string                            code_url = 3;
+    map<string,string>                extra =  4;
+}
+
+message AliOrderCloseReq {
+    string              trade_no = 1;
+    map<string,string>  extra = 2;
+}
+
+message AliOrderCloseRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    map<string,string>                extra =  3;
+}
+
+message AlipayTrans {
+    string                  trade_no = 1;       // alipay订单号
+    string                  out_trade_no = 2;   // 平台订单号
+    string                  buyer_user_id = 3;
+    string                  buyer_logon_id = 4;
+    string                  trade_status = 5;
+}
+
+message AlipayOrderQueryReq {
+    string                  trade_no = 1;   // 商户订单号
+    string                  trans_id = 2;   // alipay订单号
+    map<string,string>      extra = 4;
+}
+
+message AlipayOrderQueryRes {
+    rescode.Code                      rescode =  1;
+    string                            resmsg =  2;
+    AlipayTrans                       transaction = 3;
+    map<string,string>                extra =  4;
+}
+
+service DartynodeService {
+	// 登录微信
+	rpc LoginWechat(LoginWechatReq) returns (LoginWechatRes) {}
+	
+	// 刷新微信的token
+	rpc RefreshWechat(RefreshWechatReq) returns (RefreshWechatRes) {}
+	
+	// 退出微信登录
+	rpc LogoutWechat(LogoutWechatReq) returns (LogoutWechatRes) {}
+	
+	// 获取用户信息
+	rpc UserinfoWechat(UserinfoWechatReq) returns (UserinfoWechatRes) {}
+	
+	// 支付宝登陆
+	rpc LoginAlipay(LoginAlipayReq) returns (LoginAlipayRes) {}
+	
+	// 刷新alipay的token
+	rpc RefreshAlipay(RefreshAlipayReq) returns (RefreshAlipayRes) {}
+	
+	// 退出alipay登录
+	rpc LogoutAlipay(LogoutAlipayReq) returns (LogoutAlipayRes) {}
+	
+	// 获取用户信息
+	rpc UserinfoAlipay(UserinfoAlipayReq) returns (UserinfoAlipayRes) {}
+	
+	// 百度实体
+	rpc BaiduEntity(BaiduEntityReq) returns (BaiduEntityRes) {}
+	
+	// 试卷识别
+	rpc BaiduDocAnalysis(BaiduDocAnalysisReq) returns (BaiduDocAnalysisRes) {}
+	
+	// 身份证识别
+	rpc  BaiduIdcardIdent(BaiduIdcardIdentReq) returns (BaiduIdcardIdentRes) {}
+
+    // 检查文本是否违规
+    rpc  BaiduTextCensor(BaiduTextCensorReq) returns (BaiduTextCensorRes) {}
+
+    // 检查图像是否违规
+    rpc  BaiduImgCensor(BaiduImgCensorReq) returns (BaiduImgCensorRes) {}
+
+    // 微信支付
+    rpc WechatPay(WechatPayReq) returns (WechatPayRes) {}
+    // 微信native订单关闭
+    rpc WxNativeOrderClose(WxNativeOrderCloseReq) returns (WxNativeOrderCloseRes) {}
+    // 微信native订单查询
+    rpc WxNativeOrderQuery(WxNativeOrderQueryReq) returns (WxNativeOrderQueryRes) {}
+
+    // 支付宝支付
+    rpc Alipay(AliPayReq) returns (AliPayRes) {}
+    rpc AliOrderClose(AliOrderCloseReq) returns(AliOrderCloseRes) {}
+    rpc AlipayOrderQuery(AlipayOrderQueryReq) returns(AlipayOrderQueryRes) {}
+}

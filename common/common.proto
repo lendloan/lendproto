@@ -1,0 +1,360 @@
+syntax = "proto3";
+package common;
+
+option go_package="./common";
+
+message Authorize {
+    string              key = 1;
+    string              value = 2;
+    map<string,string>  extra = 3;
+}
+
+message Request {
+    map<string,string>  extra = 1;
+}
+
+message Response {
+    map<string,string>  extra = 1;
+}
+
+enum Role {
+    NORMAL          = 0x0000;        // 普通用户
+    COOPERATOR      = 0x0001;        // 企业用户
+    TEACHER         = 0x0002;        // 教师用户
+    
+    STAFFOR         = 0x0100;       // 员工同事
+    SUPEROR         = 0x0200;       // 超级用户 
+}
+
+enum VipLevel {
+    vip_level_VIP_NOT         = 0;
+    vip_level_VIP_1LEVEL      = 1;        // 1 month
+    vip_level_VIP_2LEVEL      = 2;        // 6 month
+    vip_level_VIP_3LEVEL      = 3;        // 1 year
+    vip_level_VIP_16LEVEL     = 15;       // forever
+}
+
+enum UserStatus {
+    user_status_FROM_PLATOM      =  0x00000;    // 平台帐号
+    user_status_FROM_WECHAT      =  0x00001;    // wechat帐号
+    user_status_FROM_ALIPAY      =  0x00002;    // alipay帐号
+
+    user_status_FROM_INVALID     =  0x00801;    // 无效用户
+}
+
+enum FromPlatom {
+    from_platom_FROM_LOCAL      = 0x0000;     // 自己平台
+    from_platom_FROM_WECHAT     = 0x0001;    // 微信平台
+    from_platom_FROM_ALIPAY     = 0x0002;    // 支付宝平台
+}
+
+enum CertTyoe {
+    cert_tyoe_ID              =   0x0000;     // 身份证实名
+    cert_tyoe_FACE            =   0x0001;     // 刷脸实名
+}
+
+enum Update_userinfo_field {
+    update_userinfo_field_USER_NONE       =   0x0000;     //  
+    update_userinfo_field_USER_EMAIL      =   0x0001;     //  更新用户邮箱
+    update_userinfo_field_USER_PASS       =   0x0002;     //  更新用户密码
+    update_userinfo_field_USER_AVATAR     =   0x0003;     //  用户头像
+    update_userinfo_field_USER_NICKNAME   =   0x0004;     //  用户名
+    update_userinfo_field_USER_SEX        =   0x0005;     //  用户性别
+}
+
+message UpdateUserinfoItem {
+    int64                               uid = 1;
+    Update_userinfo_field             field = 2;
+    string                            new_value = 3;
+    string                            old_value = 4;
+    map<string,string>                extra = 5;
+}
+
+message UserInfo {
+    string                avatar = 1;
+    string                nickname = 2;
+    int32                 sex = 3;
+    string                province = 4;
+    string                city = 5;
+    string                country = 6;
+    int64                 vip = 7;
+}
+
+message WechatUserinfo {
+    string                openid = 1;
+    string                nickname = 2;
+    int32                 sex = 3;
+    string                province = 4;
+    string                city = 5;
+    string                country = 6;
+    string                headimgurl = 7;
+    repeated string       privilege = 8;
+    string                unionid = 9;
+}
+
+message AlipayUserinfo {
+    string    code = 1;
+    string    msg = 2;
+    string    user_id = 3;
+    string    avatar = 4;
+    string    province = 5;
+    string    city = 6;
+    string    nick_name = 7;
+    string    gender = 8;
+}
+
+message BaiduConcept {
+    string    level1 = 1; // 一级概
+    string    level2 = 2; // 二级概念
+}
+
+message BaiduEntity {
+    string            status = 1;             // 用于对关联结果进行标识
+    string            confidence = 2;         // 实体关联至该@id的置信度
+    string            annoType = 3;           // 标注类型：Instance | Category | Property
+    BaiduConcept     concept = 4;            // 概念标注结果
+    string            bdbkKgId = 5;           // 百科newid
+    string            mainReqRankList = 6;    // 主需求实体，列出所有候选实体信息，根据热度从高到低排列
+    string            bdbkUrl = 7;            // 百科url
+    string            offset = 8;
+    string            desc = 9;               // 实体的简介
+    string            mention = 10;            // 实体名
+}
+
+message BaiduWordLocation {
+    int32   top = 1;
+    int32   left = 2;
+    int32   width = 3;
+    int32   height = 4;
+}
+
+message BaiduLineProbability {
+
+}
+
+message BaiduWordsItem {
+    BaiduWordLocation     location = 1;
+    BaiduLineProbability  probability = 2;
+    string                  word = 3;
+}
+
+message BaiduResultItem {
+    string                words_type = 1;
+    BaiduWordsItem      word = 2;
+}
+
+message BaiduDocAnalysis {
+    int64                       log_id = 1;
+    int32                       img_direction = 2;
+    int32                       results_num = 3;
+    int32                       layouts_num = 4;
+    repeated BaiduResultItem  results = 5;
+}
+
+
+message BaiduIdentItem {
+    int64                         uid = 1;
+    string                        iid = 2;
+    string                        sign = 3;
+    string                        status = 4;
+    BaiduDocAnalysis            result = 5;
+    string                        create_at = 6;
+    string                        update_at = 7;
+    double                        reward = 8;
+    string                        image_url = 9;
+}
+
+message PersonCert {
+    int64                 uid = 1;
+    string                idname = 2;
+    string                idnum = 3;
+    string                image_up = 4;
+    string                image_down = 5;
+    string                image_face = 6;
+    int32                 cert_type = 7;
+    string                status = 8;
+    string                info = 9;
+    string                mark = 10;
+    int64                 approv_id = 11;
+    string                approv_name = 12;
+    int64                 submit_at = 13;
+    int64                 create_at = 14;
+    int64                 update_at = 15;
+    string                data1 = 16;
+    string                data2 = 17;
+    map<string,string>    extra = 18;
+}
+
+
+message BaiduIdcardIdent {
+    int32                 image_status = 1; // 0:成功  1:失败
+    string                idname = 2;
+    string                idnum = 3;
+    string                address = 4;
+    string                brithday = 5;
+    string                sex = 6;
+    string                ethnic = 7; // 民族
+    map<string,string>    extra = 8;
+}
+
+// 日志类型,日志类型并不重复，所有采用对应的整型
+enum LogType {
+    log_type_NONE_USER           =   0x0000; // 
+    log_type_CREATE_USER         =   0x0001; // 用户创建
+    log_type_UPDATE_USER         =   0x0002; // 用户更新
+    log_type_LOGIN_USER          =   0x0003; // 用户登录
+    log_type_LOGOUT_USER         =   0x0004; // 用户退出
+    log_type_SUBMIT_CERT         =   0x0005; // 提交实名
+    log_type_CANCEL_CERT         =   0x0006; // 取消实名
+    log_type_CERT_FAIL           =   0x0007; // 实名失败
+    log_type_CERT_SUCCESS        =   0x0008; // 实名成功
+    log_type_VIP_LEVELUP         =   0x0009; // 升级vip
+    log_type_COIN_APPEND         =   0x000A; // 增加coin
+    log_type_COIN_USED           =   0x000B; // 减少coin
+}
+
+// 用户日志
+message UserLog {
+    int64       id = 1;
+    int64       uid = 2;
+    int32       log_type = 3;
+    string    log_info = 4;
+    string    create_at = 5;
+}
+
+message CronItem {
+    string                interval = 1;
+    string                start_at = 2;
+    bool                  repeadted = 3;
+    string                func = 4;
+    bool                  mutitask = 5;
+    string                info = 6;
+    string                version = 7;
+    map<string,string>    extra = 8;
+}
+
+message PkgItem {
+    string                  name = 1;
+    string                  version = 2;
+    string                  address = 3;
+    string                  admin = 4;
+    int32                   flag = 5;
+    string                  create_at = 6;
+}
+
+message VipProduct {
+    int64                   id = 1;       
+    int64                   level = 2;
+    int64                   genre = 3;      
+    int64                   amount = 4;   
+    int64                   cost_price = 5;
+    int64                   score = 6;
+    string                  info = 7;     
+    int64                   status = 8;
+    int64                   invalid = 9;   
+    string                  creator = 10;  
+    string                  create_at = 11; 
+    string                  desc = 12;
+    string                  func = 13;
+    string                  extra = 14;
+}
+
+message VipDesc {
+    int64                   id = 1;
+    string                  desc = 2;
+    string                  create_at = 3;
+    map<string,string>      extra = 4;
+}
+
+message VipOrder {
+    int64                   id = 1;      
+    int64                   level = 2;   
+    int64                   genre = 3; 
+    int64                   uid = 4;     
+    string                  trade_no = 5; 
+    string                  code_url = 6; 
+    int64                   amount = 7;  
+    int64                   status = 8; 
+    int64                   pay_style = 9; 
+    string                  info = 10;  
+    string                  extra = 11;  
+    string                  create_at = 12;
+    string                  update_at = 13;
+    string                  openid = 14;
+    string                  trans_id = 15;
+    string                  desc = 16;
+    int64                   score =  17;
+    int64                   invalid = 18;
+}
+
+enum VipPayStyle {
+    NONE        = 0x0000;
+    WECHART     = 0x0001;   // 微信充值
+    ALIPAY      = 0x0002;   // 支付宝充值
+}
+
+message VipPayCbRe {
+    string              original_type = 1;
+    string              algorithm = 2;
+    string              ciphertext = 3;
+    string              associated_data = 4;
+    string              nonce = 5;
+}
+message VipPayCb {
+    string              id = 1;
+    string              create_time = 2;
+    string              resource_type = 3;
+    string              event_type = 4;
+    string              summary = 5;
+    VipPayCbRe          resource = 6;
+}
+
+message UserScore {
+   int64                uid = 1;
+   int64                score = 2;
+   string               create_at = 3;
+   string               update_at = 4; 
+}
+
+message UserVip {
+    int64                uid = 1;
+    int64                vip = 2;
+    int64                invalid = 3;
+    string               create_at = 4;
+    string               update_at = 5; 
+    int64 		         vip_at = 6;
+}
+
+message FootLog {
+    int64               id = 1;
+    string              svr_name = 2;
+    string              call_svr = 3;
+    string              call_method = 4;
+    int64               timeout = 5;
+    string              remote = 6;
+    int64               rescode = 7;
+    string              svr_type = 8;
+    int64               create_at = 9;
+    map<string,string>  extra = 10;
+}
+
+message AlipayCb {
+    // @inject_tag: form:"trade_no"
+    string      trade_no = 1;   // 支付宝交易号
+    // @inject_tag: form:"app_id"
+    string      app_id = 2;
+    // @inject_tag: form:"out_trade_no"
+    string      out_trade_no = 3;  // 商户订单号
+    // @inject_tag: form:"buyer_id"
+    string      buyer_id = 4;   // 买房用户唯一id
+    // @inject_tag: form:"buyer_logon_id"
+    string      buyer_logon_id = 5; // 买方支付宝账号
+    // @inject_tag: form:"seller_id"
+    string      seller_id = 6; // 卖方用户唯一Id
+    // @inject_tag: form:"trade_status"
+    string      trade_status = 7; // 交易状态, WAIT_BUYER_PAY(创建),TRADE_CLOSED(关闭),TRADE_SUCCESS(成功),TRADE_FINISHED(结束)
+    // @inject_tag: form:"notify_type"
+    string      notify_type = 8;
+    // @inject_tag: form:"notify_id"
+    string      notify_id = 9;
+}
