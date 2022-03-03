@@ -1,0 +1,50 @@
+syntax = "proto3";
+package registernode;
+import "rescode/rescode.proto";
+import "common/common.proto";
+
+option go_package="./registernode";
+
+message NormalUserReq {
+    common.Authorize auth = 1;
+    string    account = 2;
+    string    passwd = 3;
+    string    code = 4;
+    bool      policy = 5;
+    string    source = 6;
+    string    invitor = 7;
+    map<string,string> extra = 8;
+}
+
+message NormalUserRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    map<string,string>    extra = 3;
+}
+
+message CooperatorUserReq {
+    common.Authorize auth = 1;
+    string    account = 2;
+    string    passwd = 3;
+    string    code = 4;
+    string    contactor = 5;  // 联系人
+    string    email = 6;
+    bool      policy = 7;
+    string    source = 8;
+    string    invitor = 9;
+    map<string,string> extra = 10;
+}
+
+message CooperatorUserRes {
+    rescode.Code          rescode = 1;
+    string                resmsg =  2;
+    map<string,string>    extra = 3;
+}
+
+service RegisternodeService {
+    // 创建普通用户
+    rpc NormalUser(NormalUserReq) returns(NormalUserRes) {}
+
+    // 创建合作用户
+    rpc CooperatorUser(CooperatorUserReq) returns(CooperatorUserRes) {}
+}
