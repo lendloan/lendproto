@@ -4,8 +4,8 @@
 package paynode
 
 import (
-	_ "github.com/lendloan/lendproto/common"
-	_ "github.com/lendloan/lendproto/rescode"
+	_ "github.com/lendloan/common"
+	_ "github.com/lendloan/rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -38,10 +38,6 @@ func NewPaynodeServiceEndpoints() []*api.Endpoint {
 // Client API for PaynodeService service
 
 type PaynodeService interface {
-	// 添加赞助信息
-	SponsorAdd(ctx context.Context, in *SponsorAddReq, opts ...client.CallOption) (*SponsorAddRes, error)
-	// 获取赞助列表
-	SponsorList(ctx context.Context, in *SponsorListReq, opts ...client.CallOption) (*SponsorListRes, error)
 	// vip产品列表
 	VipProduct(ctx context.Context, in *VipProductReq, opts ...client.CallOption) (*VipProductRes, error)
 	// vip产品介绍
@@ -64,26 +60,6 @@ func NewPaynodeService(name string, c client.Client) PaynodeService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *paynodeService) SponsorAdd(ctx context.Context, in *SponsorAddReq, opts ...client.CallOption) (*SponsorAddRes, error) {
-	req := c.c.NewRequest(c.name, "PaynodeService.SponsorAdd", in)
-	out := new(SponsorAddRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paynodeService) SponsorList(ctx context.Context, in *SponsorListReq, opts ...client.CallOption) (*SponsorListRes, error) {
-	req := c.c.NewRequest(c.name, "PaynodeService.SponsorList", in)
-	out := new(SponsorListRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *paynodeService) VipProduct(ctx context.Context, in *VipProductReq, opts ...client.CallOption) (*VipProductRes, error) {
@@ -139,10 +115,6 @@ func (c *paynodeService) VipOrderList(ctx context.Context, in *VipOrderListReq, 
 // Server API for PaynodeService service
 
 type PaynodeServiceHandler interface {
-	// 添加赞助信息
-	SponsorAdd(context.Context, *SponsorAddReq, *SponsorAddRes) error
-	// 获取赞助列表
-	SponsorList(context.Context, *SponsorListReq, *SponsorListRes) error
 	// vip产品列表
 	VipProduct(context.Context, *VipProductReq, *VipProductRes) error
 	// vip产品介绍
@@ -157,8 +129,6 @@ type PaynodeServiceHandler interface {
 
 func RegisterPaynodeServiceHandler(s server.Server, hdlr PaynodeServiceHandler, opts ...server.HandlerOption) error {
 	type paynodeService interface {
-		SponsorAdd(ctx context.Context, in *SponsorAddReq, out *SponsorAddRes) error
-		SponsorList(ctx context.Context, in *SponsorListReq, out *SponsorListRes) error
 		VipProduct(ctx context.Context, in *VipProductReq, out *VipProductRes) error
 		VipDesc(ctx context.Context, in *VipDescReq, out *VipDescRes) error
 		VipPay(ctx context.Context, in *VipPayReq, out *VipPayRes) error
@@ -174,14 +144,6 @@ func RegisterPaynodeServiceHandler(s server.Server, hdlr PaynodeServiceHandler, 
 
 type paynodeServiceHandler struct {
 	PaynodeServiceHandler
-}
-
-func (h *paynodeServiceHandler) SponsorAdd(ctx context.Context, in *SponsorAddReq, out *SponsorAddRes) error {
-	return h.PaynodeServiceHandler.SponsorAdd(ctx, in, out)
-}
-
-func (h *paynodeServiceHandler) SponsorList(ctx context.Context, in *SponsorListReq, out *SponsorListRes) error {
-	return h.PaynodeServiceHandler.SponsorList(ctx, in, out)
 }
 
 func (h *paynodeServiceHandler) VipProduct(ctx context.Context, in *VipProductReq, out *VipProductRes) error {
