@@ -7,8 +7,8 @@
 package paynode
 
 import (
-	common "github.com/lendloan/common"
-	rescode "github.com/lendloan/rescode"
+	common "github.com/lendloan/lendproto/common"
+	rescode "github.com/lendloan/lendproto/rescode"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

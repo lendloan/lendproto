@@ -4,8 +4,8 @@
 package paynode
 
 import (
-	_ "github.com/lendloan/common"
-	_ "github.com/lendloan/rescode"
+	_ "github.com/lendloan/lendproto/common"
+	_ "github.com/lendloan/lendproto/rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
