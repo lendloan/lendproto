@@ -694,6 +694,8 @@ service DatanodeService {
     // 用户vip操作
     rpc UserVip(UserVipReq) returns (UserVipRes) {}
 
+    rpc RefreshUserCoin(RefreshUserCoinReq) returns (RefreshUserCoinRes) {}
+
     // 服务调用日志
     rpc FootLog(FootLogReq) returns (FootLogRes) {}
 }

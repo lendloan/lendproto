@@ -7191,7 +7191,7 @@ var file_datanode_proto_rawDesc = []byte{
 	0x0a, 0x45, 0x78, 0x74, 0x72, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b,
 	0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a,
 	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61,
-	0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x32, 0x81, 0x16, 0x0a, 0x0f, 0x44, 0x61, 0x74, 0x61,
+	0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x32, 0xd2, 0x16, 0x0a, 0x0f, 0x44, 0x61, 0x74, 0x61,
 	0x6e, 0x6f, 0x64, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x37, 0x0a, 0x0a, 0x43,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x14, 0x2e, 0x64, 0x61, 0x74, 0x61,
 	0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x1a,
@@ -7364,12 +7364,17 @@ var file_datanode_proto_rawDesc = []byte{
 	0x72, 0x56, 0x69, 0x70, 0x12, 0x14, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
 	0x55, 0x73, 0x65, 0x72, 0x56, 0x69, 0x70, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x64, 0x61, 0x74,
 	0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x56, 0x69, 0x70, 0x52, 0x65, 0x73,
-	0x22, 0x00, 0x12, 0x37, 0x0a, 0x07, 0x46, 0x6f, 0x6f, 0x74, 0x4c, 0x6f, 0x67, 0x12, 0x14, 0x2e,
-	0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x46, 0x6f, 0x6f, 0x74, 0x4c, 0x6f, 0x67,
-	0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x46,
-	0x6f, 0x6f, 0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x73, 0x22, 0x00, 0x42, 0x0c, 0x5a, 0x0a, 0x2e,
-	0x2f, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x22, 0x00, 0x12, 0x4f, 0x0a, 0x0f, 0x52, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x55, 0x73, 0x65,
+	0x72, 0x43, 0x6f, 0x69, 0x6e, 0x12, 0x1c, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65,
+	0x2e, 0x52, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x55, 0x73, 0x65, 0x72, 0x43, 0x6f, 0x69, 0x6e,
+	0x52, 0x65, 0x71, 0x1a, 0x1c, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x52,
+	0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x55, 0x73, 0x65, 0x72, 0x43, 0x6f, 0x69, 0x6e, 0x52, 0x65,
+	0x73, 0x22, 0x00, 0x12, 0x37, 0x0a, 0x07, 0x46, 0x6f, 0x6f, 0x74, 0x4c, 0x6f, 0x67, 0x12, 0x14,
+	0x2e, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x46, 0x6f, 0x6f, 0x74, 0x4c, 0x6f,
+	0x67, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
+	0x46, 0x6f, 0x6f, 0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x73, 0x22, 0x00, 0x42, 0x0c, 0x5a, 0x0a,
+	0x2e, 0x2f, 0x64, 0x61, 0x74, 0x61, 0x6e, 0x6f, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -7761,52 +7766,54 @@ var file_datanode_proto_depIdxs = []int32{
 	79,  // 191: datanode.DatanodeService.VipOrderList:input_type -> datanode.VipOrderListReq
 	81,  // 192: datanode.DatanodeService.UserScore:input_type -> datanode.UserScoreReq
 	83,  // 193: datanode.DatanodeService.UserVip:input_type -> datanode.UserVipReq
-	87,  // 194: datanode.DatanodeService.FootLog:input_type -> datanode.FootLogReq
-	5,   // 195: datanode.DatanodeService.CreateUser:output_type -> datanode.UserRes
-	5,   // 196: datanode.DatanodeService.UserInfo:output_type -> datanode.UserRes
-	4,   // 197: datanode.DatanodeService.SearchUser:output_type -> datanode.SearchUserRes
-	62,  // 198: datanode.DatanodeService.UpdateUserInfo:output_type -> datanode.UpdateUserinfoRes
-	8,   // 199: datanode.DatanodeService.FileDirOne:output_type -> datanode.FileDirRes
-	10,  // 200: datanode.DatanodeService.FileDirAdd:output_type -> datanode.AddDirRes
-	12,  // 201: datanode.DatanodeService.AddFile:output_type -> datanode.AddFileRes
-	14,  // 202: datanode.DatanodeService.YunSaveAttr:output_type -> datanode.FileAttrRes
-	16,  // 203: datanode.DatanodeService.Thumbnail:output_type -> datanode.ThumbnailRes
-	18,  // 204: datanode.DatanodeService.SetKeyValue:output_type -> datanode.SetKeyvalueRes
-	20,  // 205: datanode.DatanodeService.GetKeyValue:output_type -> datanode.GetKeyvalueRes
-	22,  // 206: datanode.DatanodeService.DelKeyValue:output_type -> datanode.DelKeyvalueRes
-	24,  // 207: datanode.DatanodeService.SetUserInfo:output_type -> datanode.SetUserInfoRes
-	26,  // 208: datanode.DatanodeService.GetUserInfo:output_type -> datanode.GetUserInfoRes
-	28,  // 209: datanode.DatanodeService.SetWechatUinfo:output_type -> datanode.SetWechatUinfoRes
-	30,  // 210: datanode.DatanodeService.GetWechatUinfo:output_type -> datanode.GetWechatUinfoRes
-	32,  // 211: datanode.DatanodeService.SetAlipayUinfo:output_type -> datanode.SetAlipayUinfoRes
-	34,  // 212: datanode.DatanodeService.GetAlipayUinfo:output_type -> datanode.GetAlipayUinfoRes
-	36,  // 213: datanode.DatanodeService.SetBaiduEntity:output_type -> datanode.SetBaiduEntityRes
-	38,  // 214: datanode.DatanodeService.BaiduEntity:output_type -> datanode.BaiduEntityRes
-	42,  // 215: datanode.DatanodeService.SubmitCert:output_type -> datanode.SubmitCertRes
-	44,  // 216: datanode.DatanodeService.CertStatus:output_type -> datanode.CertStatusRes
-	46,  // 217: datanode.DatanodeService.CertInfo:output_type -> datanode.CertInfoRes
-	48,  // 218: datanode.DatanodeService.CertFlow:output_type -> datanode.CertFlowRes
-	50,  // 219: datanode.DatanodeService.AddUserLog:output_type -> datanode.AddUserLogRes
-	52,  // 220: datanode.DatanodeService.QueryUserLog:output_type -> datanode.QueryUserLogRes
-	54,  // 221: datanode.DatanodeService.UserLogCount:output_type -> datanode.UserLogCountRes
-	56,  // 222: datanode.DatanodeService.AddTask:output_type -> datanode.AddTaskRes
-	58,  // 223: datanode.DatanodeService.GetTask:output_type -> datanode.GetTaskRes
-	60,  // 224: datanode.DatanodeService.GetTaskCount:output_type -> datanode.GetTaskCountRes
-	64,  // 225: datanode.DatanodeService.AddPkg:output_type -> datanode.AddPkgRes
-	66,  // 226: datanode.DatanodeService.DelPkg:output_type -> datanode.DelPkgRes
-	68,  // 227: datanode.DatanodeService.PkgLists:output_type -> datanode.PkgListRes
-	70,  // 228: datanode.DatanodeService.PkgCount:output_type -> datanode.PkgCountRes
-	72,  // 229: datanode.DatanodeService.VipLimit:output_type -> datanode.VipLimitRes
-	74,  // 230: datanode.DatanodeService.VipProduct:output_type -> datanode.VipProductRes
-	86,  // 231: datanode.DatanodeService.VipDesc:output_type -> datanode.VipDescRes
-	76,  // 232: datanode.DatanodeService.VipPay:output_type -> datanode.VipPayRes
-	78,  // 233: datanode.DatanodeService.VipOrderStatus:output_type -> datanode.VipOrderStatusRes
-	80,  // 234: datanode.DatanodeService.VipOrderList:output_type -> datanode.VipOrderListRes
-	82,  // 235: datanode.DatanodeService.UserScore:output_type -> datanode.UserScoreRes
-	84,  // 236: datanode.DatanodeService.UserVip:output_type -> datanode.UserVipRes
-	88,  // 237: datanode.DatanodeService.FootLog:output_type -> datanode.FootLogRes
-	195, // [195:238] is the sub-list for method output_type
-	152, // [152:195] is the sub-list for method input_type
+	39,  // 194: datanode.DatanodeService.RefreshUserCoin:input_type -> datanode.RefreshUserCoinReq
+	87,  // 195: datanode.DatanodeService.FootLog:input_type -> datanode.FootLogReq
+	5,   // 196: datanode.DatanodeService.CreateUser:output_type -> datanode.UserRes
+	5,   // 197: datanode.DatanodeService.UserInfo:output_type -> datanode.UserRes
+	4,   // 198: datanode.DatanodeService.SearchUser:output_type -> datanode.SearchUserRes
+	62,  // 199: datanode.DatanodeService.UpdateUserInfo:output_type -> datanode.UpdateUserinfoRes
+	8,   // 200: datanode.DatanodeService.FileDirOne:output_type -> datanode.FileDirRes
+	10,  // 201: datanode.DatanodeService.FileDirAdd:output_type -> datanode.AddDirRes
+	12,  // 202: datanode.DatanodeService.AddFile:output_type -> datanode.AddFileRes
+	14,  // 203: datanode.DatanodeService.YunSaveAttr:output_type -> datanode.FileAttrRes
+	16,  // 204: datanode.DatanodeService.Thumbnail:output_type -> datanode.ThumbnailRes
+	18,  // 205: datanode.DatanodeService.SetKeyValue:output_type -> datanode.SetKeyvalueRes
+	20,  // 206: datanode.DatanodeService.GetKeyValue:output_type -> datanode.GetKeyvalueRes
+	22,  // 207: datanode.DatanodeService.DelKeyValue:output_type -> datanode.DelKeyvalueRes
+	24,  // 208: datanode.DatanodeService.SetUserInfo:output_type -> datanode.SetUserInfoRes
+	26,  // 209: datanode.DatanodeService.GetUserInfo:output_type -> datanode.GetUserInfoRes
+	28,  // 210: datanode.DatanodeService.SetWechatUinfo:output_type -> datanode.SetWechatUinfoRes
+	30,  // 211: datanode.DatanodeService.GetWechatUinfo:output_type -> datanode.GetWechatUinfoRes
+	32,  // 212: datanode.DatanodeService.SetAlipayUinfo:output_type -> datanode.SetAlipayUinfoRes
+	34,  // 213: datanode.DatanodeService.GetAlipayUinfo:output_type -> datanode.GetAlipayUinfoRes
+	36,  // 214: datanode.DatanodeService.SetBaiduEntity:output_type -> datanode.SetBaiduEntityRes
+	38,  // 215: datanode.DatanodeService.BaiduEntity:output_type -> datanode.BaiduEntityRes
+	42,  // 216: datanode.DatanodeService.SubmitCert:output_type -> datanode.SubmitCertRes
+	44,  // 217: datanode.DatanodeService.CertStatus:output_type -> datanode.CertStatusRes
+	46,  // 218: datanode.DatanodeService.CertInfo:output_type -> datanode.CertInfoRes
+	48,  // 219: datanode.DatanodeService.CertFlow:output_type -> datanode.CertFlowRes
+	50,  // 220: datanode.DatanodeService.AddUserLog:output_type -> datanode.AddUserLogRes
+	52,  // 221: datanode.DatanodeService.QueryUserLog:output_type -> datanode.QueryUserLogRes
+	54,  // 222: datanode.DatanodeService.UserLogCount:output_type -> datanode.UserLogCountRes
+	56,  // 223: datanode.DatanodeService.AddTask:output_type -> datanode.AddTaskRes
+	58,  // 224: datanode.DatanodeService.GetTask:output_type -> datanode.GetTaskRes
+	60,  // 225: datanode.DatanodeService.GetTaskCount:output_type -> datanode.GetTaskCountRes
+	64,  // 226: datanode.DatanodeService.AddPkg:output_type -> datanode.AddPkgRes
+	66,  // 227: datanode.DatanodeService.DelPkg:output_type -> datanode.DelPkgRes
+	68,  // 228: datanode.DatanodeService.PkgLists:output_type -> datanode.PkgListRes
+	70,  // 229: datanode.DatanodeService.PkgCount:output_type -> datanode.PkgCountRes
+	72,  // 230: datanode.DatanodeService.VipLimit:output_type -> datanode.VipLimitRes
+	74,  // 231: datanode.DatanodeService.VipProduct:output_type -> datanode.VipProductRes
+	86,  // 232: datanode.DatanodeService.VipDesc:output_type -> datanode.VipDescRes
+	76,  // 233: datanode.DatanodeService.VipPay:output_type -> datanode.VipPayRes
+	78,  // 234: datanode.DatanodeService.VipOrderStatus:output_type -> datanode.VipOrderStatusRes
+	80,  // 235: datanode.DatanodeService.VipOrderList:output_type -> datanode.VipOrderListRes
+	82,  // 236: datanode.DatanodeService.UserScore:output_type -> datanode.UserScoreRes
+	84,  // 237: datanode.DatanodeService.UserVip:output_type -> datanode.UserVipRes
+	40,  // 238: datanode.DatanodeService.RefreshUserCoin:output_type -> datanode.RefreshUserCoinRes
+	88,  // 239: datanode.DatanodeService.FootLog:output_type -> datanode.FootLogRes
+	196, // [196:240] is the sub-list for method output_type
+	152, // [152:196] is the sub-list for method input_type
 	152, // [152:152] is the sub-list for extension type_name
 	152, // [152:152] is the sub-list for extension extendee
 	0,   // [0:152] is the sub-list for field type_name

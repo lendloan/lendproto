@@ -121,6 +121,7 @@ type DatanodeService interface {
 	UserScore(ctx context.Context, in *UserScoreReq, opts ...client.CallOption) (*UserScoreRes, error)
 	// 用户vip操作
 	UserVip(ctx context.Context, in *UserVipReq, opts ...client.CallOption) (*UserVipRes, error)
+	RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, opts ...client.CallOption) (*RefreshUserCoinRes, error)
 	// 服务调用日志
 	FootLog(ctx context.Context, in *FootLogReq, opts ...client.CallOption) (*FootLogRes, error)
 }
@@ -557,6 +558,16 @@ func (c *datanodeService) UserVip(ctx context.Context, in *UserVipReq, opts ...c
 	return out, nil
 }
 
+func (c *datanodeService) RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, opts ...client.CallOption) (*RefreshUserCoinRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.RefreshUserCoin", in)
+	out := new(RefreshUserCoinRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *datanodeService) FootLog(ctx context.Context, in *FootLogReq, opts ...client.CallOption) (*FootLogRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.FootLog", in)
 	out := new(FootLogRes)
@@ -653,6 +664,7 @@ type DatanodeServiceHandler interface {
 	UserScore(context.Context, *UserScoreReq, *UserScoreRes) error
 	// 用户vip操作
 	UserVip(context.Context, *UserVipReq, *UserVipRes) error
+	RefreshUserCoin(context.Context, *RefreshUserCoinReq, *RefreshUserCoinRes) error
 	// 服务调用日志
 	FootLog(context.Context, *FootLogReq, *FootLogRes) error
 }
@@ -701,6 +713,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		VipOrderList(ctx context.Context, in *VipOrderListReq, out *VipOrderListRes) error
 		UserScore(ctx context.Context, in *UserScoreReq, out *UserScoreRes) error
 		UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error
+		RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, out *RefreshUserCoinRes) error
 		FootLog(ctx context.Context, in *FootLogReq, out *FootLogRes) error
 	}
 	type DatanodeService struct {
@@ -880,6 +893,10 @@ func (h *datanodeServiceHandler) UserScore(ctx context.Context, in *UserScoreReq
 
 func (h *datanodeServiceHandler) UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error {
 	return h.DatanodeServiceHandler.UserVip(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, out *RefreshUserCoinRes) error {
+	return h.DatanodeServiceHandler.RefreshUserCoin(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) FootLog(ctx context.Context, in *FootLogReq, out *FootLogRes) error {
