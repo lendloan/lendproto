@@ -2,7 +2,7 @@
 
 ## gen proto
 ```
-protoc --proto_path=$GOPATH/src/heegproto:. --micro_out=. --go_out=. common.proto
+protoc --proto_path=$GOPATH/src/github.com/lendloan/lendproto:. --micro_out=. --go_out=. common.proto
 ```
 
 ## 添加自定义tag

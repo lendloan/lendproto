@@ -411,7 +411,7 @@ message ShareItem {
 	string                  FromUser = 7; 	 
 	string                  FromAvatar = 8; 	 
 	string                  Title = 9; 		 
-	repeated ShareImage    Images = 10;		 
+	repeated ShareImage     Images = 10;		 
 	int64                   CreateAt = 11;	
     int64                   UpdateAt = 12;
     bool                    is_self = 13;
