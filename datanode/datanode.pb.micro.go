@@ -124,6 +124,15 @@ type DatanodeService interface {
 	RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, opts ...client.CallOption) (*RefreshUserCoinRes, error)
 	// 服务调用日志
 	FootLog(ctx context.Context, in *FootLogReq, opts ...client.CallOption) (*FootLogRes, error)
+	// 更新或添加共享记录
+	UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error)
+	// 获取共享记录
+	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
+	// 我的物品
+	AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, opts ...client.CallOption) (*AddMeGoodsCategoryRes, error)
+	FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, opts ...client.CallOption) (*FidMeGoodsCategoryRes, error)
+	UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, opts ...client.CallOption) (*UpdateMeGoodsRes, error)
+	QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error)
 }
 
 type datanodeService struct {
@@ -578,6 +587,66 @@ func (c *datanodeService) FootLog(ctx context.Context, in *FootLogReq, opts ...c
 	return out, nil
 }
 
+func (c *datanodeService) UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateShare", in)
+	out := new(UpdateShareRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.QueryShare", in)
+	out := new(QueryShareRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, opts ...client.CallOption) (*AddMeGoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddMeGoodsCategory", in)
+	out := new(AddMeGoodsCategoryRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, opts ...client.CallOption) (*FidMeGoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.FidMeGoodsCategory", in)
+	out := new(FidMeGoodsCategoryRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, opts ...client.CallOption) (*UpdateMeGoodsRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateMeGoods", in)
+	out := new(UpdateMeGoodsRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.QueryMeGoods", in)
+	out := new(QueryMeGoodsRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -667,6 +736,15 @@ type DatanodeServiceHandler interface {
 	RefreshUserCoin(context.Context, *RefreshUserCoinReq, *RefreshUserCoinRes) error
 	// 服务调用日志
 	FootLog(context.Context, *FootLogReq, *FootLogRes) error
+	// 更新或添加共享记录
+	UpdateShare(context.Context, *UpdateShareReq, *UpdateShareRes) error
+	// 获取共享记录
+	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
+	// 我的物品
+	AddMeGoodsCategory(context.Context, *AddMeGoodsCategoryReq, *AddMeGoodsCategoryRes) error
+	FidMeGoodsCategory(context.Context, *FidMeGoodsCategoryReq, *FidMeGoodsCategoryRes) error
+	UpdateMeGoods(context.Context, *UpdateMeGoodsReq, *UpdateMeGoodsRes) error
+	QueryMeGoods(context.Context, *QueryMeGoodsReq, *QueryMeGoodsRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -715,6 +793,12 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error
 		RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, out *RefreshUserCoinRes) error
 		FootLog(ctx context.Context, in *FootLogReq, out *FootLogRes) error
+		UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error
+		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
+		AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, out *AddMeGoodsCategoryRes) error
+		FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, out *FidMeGoodsCategoryRes) error
+		UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error
+		QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -901,4 +985,28 @@ func (h *datanodeServiceHandler) RefreshUserCoin(ctx context.Context, in *Refres
 
 func (h *datanodeServiceHandler) FootLog(ctx context.Context, in *FootLogReq, out *FootLogRes) error {
 	return h.DatanodeServiceHandler.FootLog(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error {
+	return h.DatanodeServiceHandler.UpdateShare(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error {
+	return h.DatanodeServiceHandler.QueryShare(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, out *AddMeGoodsCategoryRes) error {
+	return h.DatanodeServiceHandler.AddMeGoodsCategory(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, out *FidMeGoodsCategoryRes) error {
+	return h.DatanodeServiceHandler.FidMeGoodsCategory(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error {
+	return h.DatanodeServiceHandler.UpdateMeGoods(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error {
+	return h.DatanodeServiceHandler.QueryMeGoods(ctx, in, out)
 }

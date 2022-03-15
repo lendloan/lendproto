@@ -621,12 +621,12 @@ message QueryShareReq {
     int64                       from_uid = 4;
     int64                       start_at = 5;
     int64                       end_at = 6;
-    int                         page = 7;
-    int                         size = 8;
-    map<string,string>          extra = 7;
+    int32                       page = 7;
+    int32                       size = 8;
+    map<string,string>          extra = 9;
 }
 
-message QueryShareReq {
+message QueryShareRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     repeated common.ShareItem   shares = 3;

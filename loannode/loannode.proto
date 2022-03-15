@@ -5,6 +5,19 @@ import "common/common.proto";
 
 option go_package="./loannode";
 
-service LoannodeService {
 
+message AddLendLoanReq {
+    common.Authorize        auth = 1;
+    common.LendLoanItem     lendload = 2;
+    map<string,string>      extra = 3;
+}
+
+message AddLendLoanRes {
+    rescode.Code          rescode =  1;
+    string                resmsg =  2;
+    map<string,string>    extra =  3;
+}
+
+service LoannodeService {
+    rpc AddLendLoan (AddLendLoanReq) returns (AddLendLoanRes);
 }
