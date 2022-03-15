@@ -399,6 +399,7 @@ message LendLoanGather  {
 message ShareImage {
     string      image = 1;
     string      thumb = 2;
+    int64       Stype = 3; // 注意是针对我的物品而存在
 }
 
 message ShareItem {
@@ -410,11 +411,33 @@ message ShareItem {
 	int64                   FromUid = 6; 	
 	string                  FromUser = 7; 	 
 	string                  FromAvatar = 8; 	 
-	string                  Title = 9; 		 
-	repeated ShareImage     Images = 10;		 
-	int64                   CreateAt = 11;	
-    int64                   UpdateAt = 12;
-    bool                    is_self = 13;
-    bool                    is_edit = 14;
-    map<string, string>     extra = 15;		
+	string                  Title = 9;
+    int64                   MType = 10; 		 
+	repeated ShareImage     Images = 11;		 
+	int64                   CreateAt = 12;	
+    int64                   UpdateAt = 13;
+    bool                    IsSelf = 14;
+    bool                    IsEdit = 15;
+}
+
+message MeGoodsCategory {
+    int64                   Id = 1;
+    int64                   Uid = 2;
+    string                  Name = 3;
+    string                  Icon = 4;
+    int64                   CreateAt = 5;
+}
+
+message MeGoods {
+    int64                   Id = 1;
+    int64                   CateId = 2;
+    int64                   Uid = 3;
+    string                  Name = 4;
+    string                  Info = 5;
+    repeated ShareImage     Images = 6;
+    int64                   Total = 7;
+    int64                   Price = 8;
+    int64                   Status = 9;
+    string                  Extra = 10;
+    int64                   CreateAt = 11;
 }
