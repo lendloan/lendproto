@@ -395,3 +395,26 @@ message LendLoanGather  {
 	int64           UpdateAt = 14;
     map<string, string>    extra = 15;		
 }
+
+message ShareImage {
+    string      image = 1;
+    string      thumb = 2;
+}
+
+message ShareItem {
+	int64                   Id = 1; 			 
+	int64                   Uid = 2; 		
+	string                  User = 3;		 
+	string                  Avatar = 4; 		 
+	int64                   FromId = 5;		
+	int64                   FromUid = 6; 	
+	string                  FromUser = 7; 	 
+	string                  FromAvatar = 8; 	 
+	string                  Title = 9; 		 
+	repeated ShareImage    Images = 10;		 
+	int64                   CreateAt = 11;	
+    int64                   UpdateAt = 12;
+    bool                    is_self = 13;
+    bool                    is_edit = 14;
+    map<string, string>     extra = 15;		
+}

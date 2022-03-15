@@ -602,6 +602,35 @@ message FootLogRes {
     map<string,string>          extra = 4;
 }
 
+message UpdateShareReq {
+	common.ShareItem            share = 1;
+    repeated  int64             to_uids = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateShareRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message QueryShareReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    int64                       from_id = 3;
+    int64                       from_uid = 4;
+    int64                       start_at = 5;
+    int64                       end_at = 6;
+    map<string,string>          extra = 7;
+}
+
+message QueryShareReq {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.ShareItem   shares = 3;
+    map<string,string>          extra = 4;
+}
+
 service DatanodeService {
 	// ---------- 用户接口 ------- //
 	// 创建新用户
@@ -698,4 +727,9 @@ service DatanodeService {
 
     // 服务调用日志
     rpc FootLog(FootLogReq) returns (FootLogRes) {}
+
+    // 更新或添加共享记录
+    rpc UpdateShare(UpdateShareReq) returns (UpdateShareRes) {}
+    // 获取共享记录
+    rpc QueryShare(QueryShareReq) returns (QueryShareRes) {}
 }
