@@ -407,17 +407,16 @@ message ShareItem {
 	int64                   Uid = 2; 		
 	string                  User = 3;		 
 	string                  Avatar = 4; 		 
-	int64                   FromId = 5;		
-	int64                   FromUid = 6; 	
-	string                  FromUser = 7; 	 
-	string                  FromAvatar = 8; 	 
-	string                  Title = 9;
-    int64                   MType = 10; 		 
-	repeated ShareImage     Images = 11;		 
-	int64                   CreateAt = 12;	
-    int64                   UpdateAt = 13;
-    bool                    IsSelf = 14;
-    bool                    IsEdit = 15;
+	int64                   FromUid = 5; 	
+	string                  FromUser = 6; 	 
+	string                  FromAvatar = 7; 	 
+	string                  Title = 8;
+    int64                   MType = 9; 		 
+	repeated ShareImage     Images = 10;		 
+	int64                   CreateAt = 11;	
+    int64                   UpdateAt = 12;
+    bool                    IsSelf = 13;
+    bool                    IsEdit = 14;
 }
 
 message MeGoodsCategory {

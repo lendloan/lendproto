@@ -617,13 +617,12 @@ message UpdateShareRes {
 message QueryShareReq {
     int64                       id = 1;
     int64                       uid = 2;
-    int64                       from_id = 3;
-    int64                       from_uid = 4;
-    int64                       start_at = 5;
-    int64                       end_at = 6;
-    int32                       page = 7;
-    int32                       size = 8;
-    map<string,string>          extra = 9;
+    int64                       from_uid = 3;
+    int64                       start_at = 4;
+    int64                       end_at = 5;
+    int32                       page = 6;
+    int32                       size = 7;
+    map<string,string>          extra = 8;
 }
 
 message QueryShareRes {
@@ -645,12 +644,12 @@ message AddMeGoodsCategoryRes {
     map<string,string>          extra = 3;
 }
 
-message FidMeGoodsCategoryReq {
+message GetMeGoodsCategoryReq {
     int64                       uid = 1;
     map<string, string>         extra = 2;
 }
 
-message FidMeGoodsCategoryRes {
+message GetMeGoodsCategoryRes {
     rescode.Code                        rescode = 1;
     string                              resmsg = 2;
     repeated common.MeGoodsCategory     categorys = 3;
@@ -785,7 +784,7 @@ service DatanodeService {
 
     // 我的物品
     rpc AddMeGoodsCategory(AddMeGoodsCategoryReq) returns (AddMeGoodsCategoryRes) {}
-    rpc FidMeGoodsCategory(FidMeGoodsCategoryReq) returns (FidMeGoodsCategoryRes) {}
+    rpc GetMeGoodsCategory(GetMeGoodsCategoryReq) returns (GetMeGoodsCategoryRes) {}
     rpc UpdateMeGoods(UpdateMeGoodsReq) returns (UpdateMeGoodsRes) {}
     rpc QueryMeGoods(QueryMeGoodsReq) returns (QueryMeGoodsRes) {}
 }

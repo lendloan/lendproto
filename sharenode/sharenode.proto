@@ -1,9 +1,21 @@
 syntax = "proto3";
-package sensinode;
+package sharenode;
 import "rescode/rescode.proto";
 import "common/common.proto";
 
 option go_package="./sharenode";
+
+message AddShareReq {
+	common.ShareItem            share = 1;
+    repeated  int64             to_uids = 2;
+    map<string,string>          extra = 3;
+}
+
+message AddShareRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
 
 message UpdateShareReq {
 	common.ShareItem            share = 1;
@@ -20,13 +32,12 @@ message UpdateShareRes {
 message QueryShareReq {
     int64                       id = 1;
     int64                       uid = 2;
-    int64                       from_id = 3;
-    int64                       from_uid = 4;
-    int64                       start_at = 5;
-    int64                       end_at = 6;
-    int32                       page = 7;
-    int32                       size = 8;
-    map<string,string>          extra = 9;
+    int64                       from_uid = 3;
+    int64                       start_at = 4;
+    int64                       end_at = 5;
+    int32                       page = 6;
+    int32                       size = 7;
+    map<string,string>          extra = 8;
 }
 
 message QueryShareRes {
@@ -37,8 +48,12 @@ message QueryShareRes {
 }
 
 service SharenodeService {
-    // 更新或添加共享记录
+    // 添加共享记录
+    rpc AddShare(AddShareReq) returns (AddShareRes) {}
+
+    // 更新共享记录
     rpc UpdateShare(UpdateShareReq) returns (UpdateShareRes) {}
+    
     // 获取共享记录
     rpc QueryShare(QueryShareReq) returns (QueryShareRes) {}
 }
