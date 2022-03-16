@@ -130,7 +130,7 @@ type DatanodeService interface {
 	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
 	// 我的物品
 	AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, opts ...client.CallOption) (*AddMeGoodsCategoryRes, error)
-	FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, opts ...client.CallOption) (*FidMeGoodsCategoryRes, error)
+	GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, opts ...client.CallOption) (*GetMeGoodsCategoryRes, error)
 	UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, opts ...client.CallOption) (*UpdateMeGoodsRes, error)
 	QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error)
 }
@@ -617,9 +617,9 @@ func (c *datanodeService) AddMeGoodsCategory(ctx context.Context, in *AddMeGoods
 	return out, nil
 }
 
-func (c *datanodeService) FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, opts ...client.CallOption) (*FidMeGoodsCategoryRes, error) {
-	req := c.c.NewRequest(c.name, "DatanodeService.FidMeGoodsCategory", in)
-	out := new(FidMeGoodsCategoryRes)
+func (c *datanodeService) GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, opts ...client.CallOption) (*GetMeGoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.GetMeGoodsCategory", in)
+	out := new(GetMeGoodsCategoryRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -742,7 +742,7 @@ type DatanodeServiceHandler interface {
 	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
 	// 我的物品
 	AddMeGoodsCategory(context.Context, *AddMeGoodsCategoryReq, *AddMeGoodsCategoryRes) error
-	FidMeGoodsCategory(context.Context, *FidMeGoodsCategoryReq, *FidMeGoodsCategoryRes) error
+	GetMeGoodsCategory(context.Context, *GetMeGoodsCategoryReq, *GetMeGoodsCategoryRes) error
 	UpdateMeGoods(context.Context, *UpdateMeGoodsReq, *UpdateMeGoodsRes) error
 	QueryMeGoods(context.Context, *QueryMeGoodsReq, *QueryMeGoodsRes) error
 }
@@ -796,7 +796,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error
 		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
 		AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, out *AddMeGoodsCategoryRes) error
-		FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, out *FidMeGoodsCategoryRes) error
+		GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, out *GetMeGoodsCategoryRes) error
 		UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error
 		QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error
 	}
@@ -999,8 +999,8 @@ func (h *datanodeServiceHandler) AddMeGoodsCategory(ctx context.Context, in *Add
 	return h.DatanodeServiceHandler.AddMeGoodsCategory(ctx, in, out)
 }
 
-func (h *datanodeServiceHandler) FidMeGoodsCategory(ctx context.Context, in *FidMeGoodsCategoryReq, out *FidMeGoodsCategoryRes) error {
-	return h.DatanodeServiceHandler.FidMeGoodsCategory(ctx, in, out)
+func (h *datanodeServiceHandler) GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, out *GetMeGoodsCategoryRes) error {
+	return h.DatanodeServiceHandler.GetMeGoodsCategory(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error {

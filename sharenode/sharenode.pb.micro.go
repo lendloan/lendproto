@@ -38,7 +38,9 @@ func NewSharenodeServiceEndpoints() []*api.Endpoint {
 // Client API for SharenodeService service
 
 type SharenodeService interface {
-	// 更新或添加共享记录
+	// 添加共享记录
+	AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error)
+	// 更新共享记录
 	UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error)
 	// 获取共享记录
 	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
@@ -54,6 +56,16 @@ func NewSharenodeService(name string, c client.Client) SharenodeService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *sharenodeService) AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.AddShare", in)
+	out := new(AddShareRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *sharenodeService) UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error) {
@@ -79,7 +91,9 @@ func (c *sharenodeService) QueryShare(ctx context.Context, in *QueryShareReq, op
 // Server API for SharenodeService service
 
 type SharenodeServiceHandler interface {
-	// 更新或添加共享记录
+	// 添加共享记录
+	AddShare(context.Context, *AddShareReq, *AddShareRes) error
+	// 更新共享记录
 	UpdateShare(context.Context, *UpdateShareReq, *UpdateShareRes) error
 	// 获取共享记录
 	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
@@ -87,6 +101,7 @@ type SharenodeServiceHandler interface {
 
 func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandler, opts ...server.HandlerOption) error {
 	type sharenodeService interface {
+		AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error
 		UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error
 		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
 	}
@@ -99,6 +114,10 @@ func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandl
 
 type sharenodeServiceHandler struct {
 	SharenodeServiceHandler
+}
+
+func (h *sharenodeServiceHandler) AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error {
+	return h.SharenodeServiceHandler.AddShare(ctx, in, out)
 }
 
 func (h *sharenodeServiceHandler) UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error {

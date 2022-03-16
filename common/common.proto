@@ -412,7 +412,7 @@ message ShareItem {
 	string                  FromAvatar = 7; 	 
 	string                  Title = 8;
     int64                   MType = 9; 		 
-	repeated ShareImage     Images = 10;		 
+	repeated ShareImage     Media = 10;		 
 	int64                   CreateAt = 11;	
     int64                   UpdateAt = 12;
     bool                    IsSelf = 13;
@@ -433,7 +433,7 @@ message MeGoods {
     int64                   Uid = 3;
     string                  Name = 4;
     string                  Info = 5;
-    repeated ShareImage     Images = 6;
+    repeated ShareImage     Media = 6;
     int64                   Total = 7;
     int64                   Price = 8;
     int64                   Status = 9;
