@@ -399,24 +399,24 @@ message LendLoanGather  {
 message ShareImage {
     string      image = 1;
     string      thumb = 2;
-    int64       Stype = 3; // 注意是针对我的物品而存在
+    int64       stype = 3; // 注意是针对我的物品而存在
 }
 
 message ShareItem {
-	int64                   Id = 1; 			 
-	int64                   Uid = 2; 		
+	int64                   id = 1; 			 
+	int64                   uid = 2; 		
 	string                  User = 3;		 
-	string                  Avatar = 4; 		 
-	int64                   FromUid = 5; 	
-	string                  FromUser = 6; 	 
-	string                  FromAvatar = 7; 	 
-	string                  Title = 8;
-    int64                   MType = 9; 		 
-	repeated ShareImage     Media = 10;		 
-	int64                   CreateAt = 11;	
-    int64                   UpdateAt = 12;
-    bool                    IsSelf = 13;
-    bool                    IsEdit = 14;
+	string                  avatar = 4; 		 
+	int64                   from_uid = 5; 	
+	string                  from_user = 6; 	 
+	string                  from_avatar = 7; 	 
+	string                  title = 8;
+    int64                   mtype = 9; 		 
+	repeated ShareImage     media = 10;		 
+	int64                   create_at = 11;	
+    int64                   update_at = 12;
+    bool                    is_self = 13;
+    bool                    is_edit = 14;
 }
 
 message MeGoodsCategory {
