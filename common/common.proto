@@ -419,6 +419,15 @@ message ShareItem {
     bool                    is_edit = 14;
 }
 
+message TemplateItem {
+    int64                   id = 1;
+    int64                   uid = 2;
+    string                  template = 3;
+    int64                   create_at = 4;
+    int64                   update_at = 5;
+    map<string,string>      extra = 6;
+}
+
 message MeGoodsCategory {
     int64                   Id = 1;
     int64                   Uid = 2;
