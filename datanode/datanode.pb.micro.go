@@ -4,8 +4,8 @@
 package datanode
 
 import (
-	_ "github.com/lendloan/lendproto/common"
-	_ "github.com/lendloan/lendproto/rescode"
+	_ "./common"
+	_ "./rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -133,6 +133,8 @@ type DatanodeService interface {
 	GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, opts ...client.CallOption) (*GetMeGoodsCategoryRes, error)
 	UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, opts ...client.CallOption) (*UpdateMeGoodsRes, error)
 	QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error)
+	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
+	QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error)
 }
 
 type datanodeService struct {
@@ -647,6 +649,26 @@ func (c *datanodeService) QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq,
 	return out, nil
 }
 
+func (c *datanodeService) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateTemplate", in)
+	out := new(UpdateTemplateRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.QueryTemplate", in)
+	out := new(QueryTemplateRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -745,6 +767,8 @@ type DatanodeServiceHandler interface {
 	GetMeGoodsCategory(context.Context, *GetMeGoodsCategoryReq, *GetMeGoodsCategoryRes) error
 	UpdateMeGoods(context.Context, *UpdateMeGoodsReq, *UpdateMeGoodsRes) error
 	QueryMeGoods(context.Context, *QueryMeGoodsReq, *QueryMeGoodsRes) error
+	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
+	QueryTemplate(context.Context, *QueryTemplateReq, *QueryTemplateRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -799,6 +823,8 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, out *GetMeGoodsCategoryRes) error
 		UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error
 		QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error
+		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
+		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1009,4 +1035,12 @@ func (h *datanodeServiceHandler) UpdateMeGoods(ctx context.Context, in *UpdateMe
 
 func (h *datanodeServiceHandler) QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error {
 	return h.DatanodeServiceHandler.QueryMeGoods(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error {
+	return h.DatanodeServiceHandler.UpdateTemplate(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error {
+	return h.DatanodeServiceHandler.QueryTemplate(ctx, in, out)
 }

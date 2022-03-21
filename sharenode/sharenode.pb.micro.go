@@ -4,8 +4,8 @@
 package sharenode
 
 import (
-	_ "github.com/lendloan/lendproto/common"
-	_ "github.com/lendloan/lendproto/rescode"
+	_ "./common"
+	_ "./rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -44,6 +44,10 @@ type SharenodeService interface {
 	UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error)
 	// 获取共享记录
 	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
+	// 更新模板
+	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
+	// 索引模板
+	QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error)
 }
 
 type sharenodeService struct {
@@ -88,6 +92,26 @@ func (c *sharenodeService) QueryShare(ctx context.Context, in *QueryShareReq, op
 	return out, nil
 }
 
+func (c *sharenodeService) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.UpdateTemplate", in)
+	out := new(UpdateTemplateRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharenodeService) QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.QueryTemplate", in)
+	out := new(QueryTemplateRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SharenodeService service
 
 type SharenodeServiceHandler interface {
@@ -97,6 +121,10 @@ type SharenodeServiceHandler interface {
 	UpdateShare(context.Context, *UpdateShareReq, *UpdateShareRes) error
 	// 获取共享记录
 	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
+	// 更新模板
+	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
+	// 索引模板
+	QueryTemplate(context.Context, *QueryTemplateReq, *QueryTemplateRes) error
 }
 
 func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandler, opts ...server.HandlerOption) error {
@@ -104,6 +132,8 @@ func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandl
 		AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error
 		UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error
 		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
+		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
+		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
 	}
 	type SharenodeService struct {
 		sharenodeService
@@ -126,4 +156,12 @@ func (h *sharenodeServiceHandler) UpdateShare(ctx context.Context, in *UpdateSha
 
 func (h *sharenodeServiceHandler) QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error {
 	return h.SharenodeServiceHandler.QueryShare(ctx, in, out)
+}
+
+func (h *sharenodeServiceHandler) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error {
+	return h.SharenodeServiceHandler.UpdateTemplate(ctx, in, out)
+}
+
+func (h *sharenodeServiceHandler) QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error {
+	return h.SharenodeServiceHandler.QueryTemplate(ctx, in, out)
 }
