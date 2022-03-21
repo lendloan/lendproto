@@ -72,6 +72,20 @@ message QueryTemplateRes {
     map<string,string>                  extra = 4;
 }
 
+message TemplateCountReq {
+    common.TemplateItem                 template = 1;
+    int32                               page = 2;
+    int32                               size = 3;
+    map<string, string>                 extra = 4;
+}
+
+message TemplateCountRes {
+    rescode.Code                        rescode = 1;
+    string                              resmsg = 2;
+    int32                               count = 3;
+    map<string,string>                  extra = 4;
+}
+
 service SharenodeService {
     // 添加共享记录
     rpc AddShare(AddShareReq) returns (AddShareRes) {}
@@ -87,4 +101,7 @@ service SharenodeService {
     
     // 索引模板
     rpc QueryTemplate(QueryTemplateReq) returns (QueryTemplateRes) {}
+
+    // 获取模板数量
+    rpc TemplateCount(TemplateCountReq) returns (TemplateCountRes) {}
 }
