@@ -4,8 +4,8 @@
 package datanode
 
 import (
-	_ "./common"
-	_ "./rescode"
+	_ "github.com/lendloan/lendproto/common"
+	_ "github.com/lendloan/lendproto/rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
