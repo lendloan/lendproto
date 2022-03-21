@@ -4,8 +4,8 @@
 package datanode
 
 import (
-	_ "github.com/lendloan/lendproto/common"
-	_ "github.com/lendloan/lendproto/rescode"
+	_ "./common"
+	_ "./rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -135,6 +135,7 @@ type DatanodeService interface {
 	QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error)
 	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
 	QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error)
+	TemplateCount(ctx context.Context, in *TemplateCountReq, opts ...client.CallOption) (*TemplateCountRes, error)
 }
 
 type datanodeService struct {
@@ -669,6 +670,16 @@ func (c *datanodeService) QueryTemplate(ctx context.Context, in *QueryTemplateRe
 	return out, nil
 }
 
+func (c *datanodeService) TemplateCount(ctx context.Context, in *TemplateCountReq, opts ...client.CallOption) (*TemplateCountRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.TemplateCount", in)
+	out := new(TemplateCountRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -769,6 +780,7 @@ type DatanodeServiceHandler interface {
 	QueryMeGoods(context.Context, *QueryMeGoodsReq, *QueryMeGoodsRes) error
 	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
 	QueryTemplate(context.Context, *QueryTemplateReq, *QueryTemplateRes) error
+	TemplateCount(context.Context, *TemplateCountReq, *TemplateCountRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -825,6 +837,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error
 		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
 		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
+		TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1043,4 +1056,8 @@ func (h *datanodeServiceHandler) UpdateTemplate(ctx context.Context, in *UpdateT
 
 func (h *datanodeServiceHandler) QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error {
 	return h.DatanodeServiceHandler.QueryTemplate(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error {
+	return h.DatanodeServiceHandler.TemplateCount(ctx, in, out)
 }

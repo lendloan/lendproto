@@ -4,8 +4,8 @@
 package sharenode
 
 import (
-	_ "github.com/lendloan/lendproto/common"
-	_ "github.com/lendloan/lendproto/rescode"
+	_ "./common"
+	_ "./rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -48,6 +48,8 @@ type SharenodeService interface {
 	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
 	// 索引模板
 	QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error)
+	// 获取模板数量
+	TemplateCount(ctx context.Context, in *TemplateCountReq, opts ...client.CallOption) (*TemplateCountRes, error)
 }
 
 type sharenodeService struct {
@@ -112,6 +114,16 @@ func (c *sharenodeService) QueryTemplate(ctx context.Context, in *QueryTemplateR
 	return out, nil
 }
 
+func (c *sharenodeService) TemplateCount(ctx context.Context, in *TemplateCountReq, opts ...client.CallOption) (*TemplateCountRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.TemplateCount", in)
+	out := new(TemplateCountRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SharenodeService service
 
 type SharenodeServiceHandler interface {
@@ -125,6 +137,8 @@ type SharenodeServiceHandler interface {
 	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
 	// 索引模板
 	QueryTemplate(context.Context, *QueryTemplateReq, *QueryTemplateRes) error
+	// 获取模板数量
+	TemplateCount(context.Context, *TemplateCountReq, *TemplateCountRes) error
 }
 
 func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandler, opts ...server.HandlerOption) error {
@@ -134,6 +148,7 @@ func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandl
 		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
 		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
 		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
+		TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error
 	}
 	type SharenodeService struct {
 		sharenodeService
@@ -164,4 +179,8 @@ func (h *sharenodeServiceHandler) UpdateTemplate(ctx context.Context, in *Update
 
 func (h *sharenodeServiceHandler) QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error {
 	return h.SharenodeServiceHandler.QueryTemplate(ctx, in, out)
+}
+
+func (h *sharenodeServiceHandler) TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error {
+	return h.SharenodeServiceHandler.TemplateCount(ctx, in, out)
 }
