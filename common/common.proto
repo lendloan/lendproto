@@ -412,7 +412,7 @@ message ShareItem {
 	string                  from_avatar = 7; 	 
 	string                  title = 8;
     int64                   mtype = 9; 		 
-	repeated ShareImage     media = 10;		 
+	repeated ShareImage     media = 10;
 	int64                   create_at = 11;	
     int64                   update_at = 12;
     bool                    is_self = 13;

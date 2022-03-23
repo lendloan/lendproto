@@ -17,13 +17,40 @@ message AddShareRes {
     map<string,string>          extra = 3;
 }
 
-message UpdateShareReq {
-	common.ShareItem            share = 1;
-    repeated  int64             to_uids = 2;
+message ShareTitleReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    string                      title = 3;
+    map<string,string>          extra = 4;
+}
+
+message ShareTitleRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
     map<string,string>          extra = 3;
 }
 
-message UpdateShareRes {
+message ShareMediaReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    ShareImage                  media = 3;
+    map<string,string>          extra = 4;
+}
+
+message ShareMediaRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message ShareUidsReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    repeated  int64             to_uids = 3;
+    map<string,string>          extra = 4;
+}
+
+message ShareUidsReq {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     map<string,string>          extra = 3;
@@ -89,13 +116,7 @@ message TemplateCountRes {
 service SharenodeService {
     // 添加共享记录
     rpc AddShare(AddShareReq) returns (AddShareRes) {}
-
-    // 更新共享记录
-    rpc UpdateShare(UpdateShareReq) returns (UpdateShareRes) {}
     
-    // 获取共享记录
-    rpc QueryShare(QueryShareReq) returns (QueryShareRes) {}
-
     // 更新模板
     rpc UpdateTemplate(UpdateTemplateReq) returns (UpdateTemplateRes) {}
     
@@ -104,4 +125,9 @@ service SharenodeService {
 
     // 获取模板数量
     rpc TemplateCount(TemplateCountReq) returns (TemplateCountRes) {}
+
+    // 更新share
+    rpc ShareTitle(ShareTitleReq) returns (ShareTitleRes) {}
+    rpc ShareMedia(ShareMediaReq) returns (ShareMediaRes) {}
+    rpc ShareUids(ShareUidsReq) returns (ShareUidsRes) {}
 }

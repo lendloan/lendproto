@@ -719,6 +719,45 @@ message TemplateCountRes {
     map<string,string>                  extra = 4;
 }
 
+message ShareTitleReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    string                      title = 3;
+    map<string,string>          extra = 4;
+}
+
+message ShareTitleRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message ShareMediaReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    ShareImage                  media = 3;
+    map<string,string>          extra = 4;
+}
+
+message ShareMediaRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message ShareUidsReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    repeated  int64             to_uids = 3;
+    map<string,string>          extra = 4;
+}
+
+message ShareUidsReq {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
 service DatanodeService {
 	// ---------- 用户接口 ------- //
 	// 创建新用户
@@ -830,4 +869,9 @@ service DatanodeService {
     rpc UpdateTemplate(UpdateTemplateReq) returns (UpdateTemplateRes) {}
     rpc QueryTemplate(QueryTemplateReq) returns (QueryTemplateRes) {}
     rpc TemplateCount(TemplateCountReq) returns (TemplateCountRes) {}
+
+    // 更新share
+    rpc ShareTitle(ShareTitleReq) returns (ShareTitleRes) {}
+    rpc ShareMedia(ShareMediaReq) returns (ShareMediaRes) {}
+    rpc ShareUids(ShareUidsReq) returns (ShareUidsRes) {}
 }
