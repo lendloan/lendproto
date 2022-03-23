@@ -125,7 +125,7 @@ type DatanodeService interface {
 	// 服务调用日志
 	FootLog(ctx context.Context, in *FootLogReq, opts ...client.CallOption) (*FootLogRes, error)
 	// 更新或添加共享记录
-	UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error)
+	AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error)
 	// 获取共享记录
 	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
 	// 我的物品
@@ -594,9 +594,9 @@ func (c *datanodeService) FootLog(ctx context.Context, in *FootLogReq, opts ...c
 	return out, nil
 }
 
-func (c *datanodeService) UpdateShare(ctx context.Context, in *UpdateShareReq, opts ...client.CallOption) (*UpdateShareRes, error) {
-	req := c.c.NewRequest(c.name, "DatanodeService.UpdateShare", in)
-	out := new(UpdateShareRes)
+func (c *datanodeService) AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddShare", in)
+	out := new(AddShareRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -804,7 +804,7 @@ type DatanodeServiceHandler interface {
 	// 服务调用日志
 	FootLog(context.Context, *FootLogReq, *FootLogRes) error
 	// 更新或添加共享记录
-	UpdateShare(context.Context, *UpdateShareReq, *UpdateShareRes) error
+	AddShare(context.Context, *AddShareReq, *AddShareRes) error
 	// 获取共享记录
 	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
 	// 我的物品
@@ -867,7 +867,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error
 		RefreshUserCoin(ctx context.Context, in *RefreshUserCoinReq, out *RefreshUserCoinRes) error
 		FootLog(ctx context.Context, in *FootLogReq, out *FootLogRes) error
-		UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error
+		AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error
 		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
 		AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, out *AddMeGoodsCategoryRes) error
 		GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, out *GetMeGoodsCategoryRes) error
@@ -1067,8 +1067,8 @@ func (h *datanodeServiceHandler) FootLog(ctx context.Context, in *FootLogReq, ou
 	return h.DatanodeServiceHandler.FootLog(ctx, in, out)
 }
 
-func (h *datanodeServiceHandler) UpdateShare(ctx context.Context, in *UpdateShareReq, out *UpdateShareRes) error {
-	return h.DatanodeServiceHandler.UpdateShare(ctx, in, out)
+func (h *datanodeServiceHandler) AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error {
+	return h.DatanodeServiceHandler.AddShare(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error {
