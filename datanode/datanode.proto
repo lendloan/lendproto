@@ -602,13 +602,13 @@ message FootLogRes {
     map<string,string>          extra = 4;
 }
 
-message UpdateShareReq {
+message AddShareReq {
 	common.ShareItem            share = 1;
     repeated  int64             to_uids = 2;
     map<string,string>          extra = 3;
 }
 
-message UpdateShareRes {
+message AddShareRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     map<string,string>          extra = 3;
@@ -856,7 +856,7 @@ service DatanodeService {
     rpc FootLog(FootLogReq) returns (FootLogRes) {}
 
     // 更新或添加共享记录
-    rpc UpdateShare(UpdateShareReq) returns (UpdateShareRes) {}
+    rpc AddShare(AddShareReq) returns (AddShareRes) {}
     // 获取共享记录
     rpc QueryShare(QueryShareReq) returns (QueryShareRes) {}
 
