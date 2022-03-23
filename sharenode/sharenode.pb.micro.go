@@ -40,6 +40,8 @@ func NewSharenodeServiceEndpoints() []*api.Endpoint {
 type SharenodeService interface {
 	// 添加共享记录
 	AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error)
+	// 获取共享记录
+	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
 	// 更新模板
 	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
 	// 索引模板
@@ -67,6 +69,16 @@ func NewSharenodeService(name string, c client.Client) SharenodeService {
 func (c *sharenodeService) AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error) {
 	req := c.c.NewRequest(c.name, "SharenodeService.AddShare", in)
 	out := new(AddShareRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharenodeService) QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.QueryShare", in)
+	out := new(QueryShareRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -139,6 +151,8 @@ func (c *sharenodeService) ShareUids(ctx context.Context, in *ShareUidsReq, opts
 type SharenodeServiceHandler interface {
 	// 添加共享记录
 	AddShare(context.Context, *AddShareReq, *AddShareRes) error
+	// 获取共享记录
+	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
 	// 更新模板
 	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
 	// 索引模板
@@ -154,6 +168,7 @@ type SharenodeServiceHandler interface {
 func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandler, opts ...server.HandlerOption) error {
 	type sharenodeService interface {
 		AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error
+		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
 		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
 		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
 		TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error
@@ -174,6 +189,10 @@ type sharenodeServiceHandler struct {
 
 func (h *sharenodeServiceHandler) AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error {
 	return h.SharenodeServiceHandler.AddShare(ctx, in, out)
+}
+
+func (h *sharenodeServiceHandler) QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error {
+	return h.SharenodeServiceHandler.QueryShare(ctx, in, out)
 }
 
 func (h *sharenodeServiceHandler) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error {
