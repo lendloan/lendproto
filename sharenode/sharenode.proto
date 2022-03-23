@@ -116,6 +116,8 @@ message TemplateCountRes {
 service SharenodeService {
     // 添加共享记录
     rpc AddShare(AddShareReq) returns (AddShareRes) {}
+    // 获取共享记录
+    rpc QueryShare(QueryShareReq) returns (QueryShareRes) {}
     
     // 更新模板
     rpc UpdateTemplate(UpdateTemplateReq) returns (UpdateTemplateRes) {}
