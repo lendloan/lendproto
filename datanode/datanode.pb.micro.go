@@ -4,8 +4,8 @@
 package datanode
 
 import (
-	_ "github.com/lendloan/lendproto/common"
-	_ "github.com/lendloan/lendproto/rescode"
+	_ "./common"
+	_ "./rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -136,6 +136,10 @@ type DatanodeService interface {
 	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
 	QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error)
 	TemplateCount(ctx context.Context, in *TemplateCountReq, opts ...client.CallOption) (*TemplateCountRes, error)
+	// 更新share
+	ShareTitle(ctx context.Context, in *ShareTitleReq, opts ...client.CallOption) (*ShareTitleRes, error)
+	ShareMedia(ctx context.Context, in *ShareMediaReq, opts ...client.CallOption) (*ShareMediaRes, error)
+	ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error)
 }
 
 type datanodeService struct {
@@ -680,6 +684,36 @@ func (c *datanodeService) TemplateCount(ctx context.Context, in *TemplateCountRe
 	return out, nil
 }
 
+func (c *datanodeService) ShareTitle(ctx context.Context, in *ShareTitleReq, opts ...client.CallOption) (*ShareTitleRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.ShareTitle", in)
+	out := new(ShareTitleRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) ShareMedia(ctx context.Context, in *ShareMediaReq, opts ...client.CallOption) (*ShareMediaRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.ShareMedia", in)
+	out := new(ShareMediaRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.ShareUids", in)
+	out := new(ShareUidsRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -781,6 +815,10 @@ type DatanodeServiceHandler interface {
 	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
 	QueryTemplate(context.Context, *QueryTemplateReq, *QueryTemplateRes) error
 	TemplateCount(context.Context, *TemplateCountReq, *TemplateCountRes) error
+	// 更新share
+	ShareTitle(context.Context, *ShareTitleReq, *ShareTitleRes) error
+	ShareMedia(context.Context, *ShareMediaReq, *ShareMediaRes) error
+	ShareUids(context.Context, *ShareUidsReq, *ShareUidsRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -838,6 +876,9 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
 		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
 		TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error
+		ShareTitle(ctx context.Context, in *ShareTitleReq, out *ShareTitleRes) error
+		ShareMedia(ctx context.Context, in *ShareMediaReq, out *ShareMediaRes) error
+		ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1060,4 +1101,16 @@ func (h *datanodeServiceHandler) QueryTemplate(ctx context.Context, in *QueryTem
 
 func (h *datanodeServiceHandler) TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error {
 	return h.DatanodeServiceHandler.TemplateCount(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) ShareTitle(ctx context.Context, in *ShareTitleReq, out *ShareTitleRes) error {
+	return h.DatanodeServiceHandler.ShareTitle(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) ShareMedia(ctx context.Context, in *ShareMediaReq, out *ShareMediaRes) error {
+	return h.DatanodeServiceHandler.ShareMedia(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error {
+	return h.DatanodeServiceHandler.ShareUids(ctx, in, out)
 }
