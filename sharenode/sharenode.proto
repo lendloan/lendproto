@@ -125,6 +125,18 @@ message DelShareRes {
     map<string,string>          extra = 3;
 }
 
+message DelTemplateReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    map<string,string>          extra = 3;
+}
+
+message DelTemplateRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
 service SharenodeService {
     // 添加共享记录
     rpc AddShare(AddShareReq) returns (AddShareRes) {}
@@ -145,4 +157,5 @@ service SharenodeService {
     rpc ShareMedia(ShareMediaReq) returns (ShareMediaRes) {}
     rpc ShareUids(ShareUidsReq) returns (ShareUidsRes) {}
     rpc DelShare(DelShareReq) returns (DelShareRes) {}
+    rpc DelTemplate(DelTemplateReq) returns (DelTemplateRes) {}
 }
