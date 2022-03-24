@@ -141,6 +141,7 @@ type DatanodeService interface {
 	ShareMedia(ctx context.Context, in *ShareMediaReq, opts ...client.CallOption) (*ShareMediaRes, error)
 	ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error)
 	DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error)
+	DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...client.CallOption) (*DelTemplateRes, error)
 }
 
 type datanodeService struct {
@@ -725,6 +726,16 @@ func (c *datanodeService) DelShare(ctx context.Context, in *DelShareReq, opts ..
 	return out, nil
 }
 
+func (c *datanodeService) DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...client.CallOption) (*DelTemplateRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.DelTemplate", in)
+	out := new(DelTemplateRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -831,6 +842,7 @@ type DatanodeServiceHandler interface {
 	ShareMedia(context.Context, *ShareMediaReq, *ShareMediaRes) error
 	ShareUids(context.Context, *ShareUidsReq, *ShareUidsRes) error
 	DelShare(context.Context, *DelShareReq, *DelShareRes) error
+	DelTemplate(context.Context, *DelTemplateReq, *DelTemplateRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -892,6 +904,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		ShareMedia(ctx context.Context, in *ShareMediaReq, out *ShareMediaRes) error
 		ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error
 		DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error
+		DelTemplate(ctx context.Context, in *DelTemplateReq, out *DelTemplateRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1130,4 +1143,8 @@ func (h *datanodeServiceHandler) ShareUids(ctx context.Context, in *ShareUidsReq
 
 func (h *datanodeServiceHandler) DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error {
 	return h.DatanodeServiceHandler.DelShare(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) DelTemplate(ctx context.Context, in *DelTemplateReq, out *DelTemplateRes) error {
+	return h.DatanodeServiceHandler.DelTemplate(ctx, in, out)
 }
