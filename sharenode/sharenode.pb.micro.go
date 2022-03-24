@@ -52,6 +52,7 @@ type SharenodeService interface {
 	ShareTitle(ctx context.Context, in *ShareTitleReq, opts ...client.CallOption) (*ShareTitleRes, error)
 	ShareMedia(ctx context.Context, in *ShareMediaReq, opts ...client.CallOption) (*ShareMediaRes, error)
 	ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error)
+	DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error)
 }
 
 type sharenodeService struct {
@@ -146,6 +147,16 @@ func (c *sharenodeService) ShareUids(ctx context.Context, in *ShareUidsReq, opts
 	return out, nil
 }
 
+func (c *sharenodeService) DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.DelShare", in)
+	out := new(DelShareRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SharenodeService service
 
 type SharenodeServiceHandler interface {
@@ -163,6 +174,7 @@ type SharenodeServiceHandler interface {
 	ShareTitle(context.Context, *ShareTitleReq, *ShareTitleRes) error
 	ShareMedia(context.Context, *ShareMediaReq, *ShareMediaRes) error
 	ShareUids(context.Context, *ShareUidsReq, *ShareUidsRes) error
+	DelShare(context.Context, *DelShareReq, *DelShareRes) error
 }
 
 func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandler, opts ...server.HandlerOption) error {
@@ -175,6 +187,7 @@ func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandl
 		ShareTitle(ctx context.Context, in *ShareTitleReq, out *ShareTitleRes) error
 		ShareMedia(ctx context.Context, in *ShareMediaReq, out *ShareMediaRes) error
 		ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error
+		DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error
 	}
 	type SharenodeService struct {
 		sharenodeService
@@ -217,4 +230,8 @@ func (h *sharenodeServiceHandler) ShareMedia(ctx context.Context, in *ShareMedia
 
 func (h *sharenodeServiceHandler) ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error {
 	return h.SharenodeServiceHandler.ShareUids(ctx, in, out)
+}
+
+func (h *sharenodeServiceHandler) DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error {
+	return h.SharenodeServiceHandler.DelShare(ctx, in, out)
 }

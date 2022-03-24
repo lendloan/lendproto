@@ -140,6 +140,7 @@ type DatanodeService interface {
 	ShareTitle(ctx context.Context, in *ShareTitleReq, opts ...client.CallOption) (*ShareTitleRes, error)
 	ShareMedia(ctx context.Context, in *ShareMediaReq, opts ...client.CallOption) (*ShareMediaRes, error)
 	ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error)
+	DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error)
 }
 
 type datanodeService struct {
@@ -714,6 +715,16 @@ func (c *datanodeService) ShareUids(ctx context.Context, in *ShareUidsReq, opts 
 	return out, nil
 }
 
+func (c *datanodeService) DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.DelShare", in)
+	out := new(DelShareRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -819,6 +830,7 @@ type DatanodeServiceHandler interface {
 	ShareTitle(context.Context, *ShareTitleReq, *ShareTitleRes) error
 	ShareMedia(context.Context, *ShareMediaReq, *ShareMediaRes) error
 	ShareUids(context.Context, *ShareUidsReq, *ShareUidsRes) error
+	DelShare(context.Context, *DelShareReq, *DelShareRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -879,6 +891,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		ShareTitle(ctx context.Context, in *ShareTitleReq, out *ShareTitleRes) error
 		ShareMedia(ctx context.Context, in *ShareMediaReq, out *ShareMediaRes) error
 		ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error
+		DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1113,4 +1126,8 @@ func (h *datanodeServiceHandler) ShareMedia(ctx context.Context, in *ShareMediaR
 
 func (h *datanodeServiceHandler) ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error {
 	return h.DatanodeServiceHandler.ShareUids(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error {
+	return h.DatanodeServiceHandler.DelShare(ctx, in, out)
 }
