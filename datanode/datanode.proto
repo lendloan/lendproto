@@ -758,6 +758,18 @@ message ShareUidsRes {
     map<string,string>          extra = 3;
 }
 
+message DelShareReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    map<string,string>          extra = 3;
+}
+
+message DelShareRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
 service DatanodeService {
 	// ---------- 用户接口 ------- //
 	// 创建新用户
@@ -874,4 +886,5 @@ service DatanodeService {
     rpc ShareTitle(ShareTitleReq) returns (ShareTitleRes) {}
     rpc ShareMedia(ShareMediaReq) returns (ShareMediaRes) {}
     rpc ShareUids(ShareUidsReq) returns (ShareUidsRes) {}
+    rpc DelShare(DelShareReq) returns (DelShareRes) {}
 }
