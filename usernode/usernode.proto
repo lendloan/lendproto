@@ -119,6 +119,18 @@ message UserVipRes {
     map<string,string>          extra = 4;
 }
 
+message GetUserInfoReq {
+    int64                     uid = 1;
+    map<string,string>        extra = 2;
+}
+
+message GetUserInfoRes {
+    rescode.Code              rescode = 1;
+    string                    resmsg = 2;
+    common.UserInfo          info = 3;
+    map<string,string>        extra = 4;
+}
+
 service UsernodeService {
     // 更新用户信息
     rpc  UpdateUserInfo(UpdateUserinfoReq) returns(UpdateUserinfoRes) {}
@@ -140,4 +152,6 @@ service UsernodeService {
 
     // 用户VIP获取
     rpc UserVip(UserVipReq) returns (UserVipRes) {}
+    // 获取用户基本信息
+    rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRes) {}
 }
