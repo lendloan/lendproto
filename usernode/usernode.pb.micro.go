@@ -52,6 +52,8 @@ type UsernodeService interface {
 	UserScore(ctx context.Context, in *UserScoreReq, opts ...client.CallOption) (*UserScoreRes, error)
 	// 用户VIP获取
 	UserVip(ctx context.Context, in *UserVipReq, opts ...client.CallOption) (*UserVipRes, error)
+	// 获取用户基本信息
+	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...client.CallOption) (*GetUserInfoRes, error)
 }
 
 type usernodeService struct {
@@ -136,6 +138,16 @@ func (c *usernodeService) UserVip(ctx context.Context, in *UserVipReq, opts ...c
 	return out, nil
 }
 
+func (c *usernodeService) GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...client.CallOption) (*GetUserInfoRes, error) {
+	req := c.c.NewRequest(c.name, "UsernodeService.GetUserInfo", in)
+	out := new(GetUserInfoRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for UsernodeService service
 
 type UsernodeServiceHandler interface {
@@ -153,6 +165,8 @@ type UsernodeServiceHandler interface {
 	UserScore(context.Context, *UserScoreReq, *UserScoreRes) error
 	// 用户VIP获取
 	UserVip(context.Context, *UserVipReq, *UserVipRes) error
+	// 获取用户基本信息
+	GetUserInfo(context.Context, *GetUserInfoReq, *GetUserInfoRes) error
 }
 
 func RegisterUsernodeServiceHandler(s server.Server, hdlr UsernodeServiceHandler, opts ...server.HandlerOption) error {
@@ -164,6 +178,7 @@ func RegisterUsernodeServiceHandler(s server.Server, hdlr UsernodeServiceHandler
 		UserCache(ctx context.Context, in *UserCacheReq, out *UserCacheRes) error
 		UserScore(ctx context.Context, in *UserScoreReq, out *UserScoreRes) error
 		UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error
+		GetUserInfo(ctx context.Context, in *GetUserInfoReq, out *GetUserInfoRes) error
 	}
 	type UsernodeService struct {
 		usernodeService
@@ -202,4 +217,8 @@ func (h *usernodeServiceHandler) UserScore(ctx context.Context, in *UserScoreReq
 
 func (h *usernodeServiceHandler) UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error {
 	return h.UsernodeServiceHandler.UserVip(ctx, in, out)
+}
+
+func (h *usernodeServiceHandler) GetUserInfo(ctx context.Context, in *GetUserInfoReq, out *GetUserInfoRes) error {
+	return h.UsernodeServiceHandler.GetUserInfo(ctx, in, out)
 }
