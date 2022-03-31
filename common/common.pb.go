@@ -335,6 +335,52 @@ func (UpdateUserinfoField) EnumDescriptor() ([]byte, []int) {
 	return file_common_proto_rawDescGZIP(), []int{5}
 }
 
+type LoginType int32
+
+const (
+	LoginType_login_password LoginType = 0 // 密码登陆
+	LoginType_login_code     LoginType = 1 // 验证码登陆，如果不存在直接注册
+)
+
+// Enum value maps for LoginType.
+var (
+	LoginType_name = map[int32]string{
+		0: "login_password",
+		1: "login_code",
+	}
+	LoginType_value = map[string]int32{
+		"login_password": 0,
+		"login_code":     1,
+	}
+)
+
+func (x LoginType) Enum() *LoginType {
+	p := new(LoginType)
+	*p = x
+	return p
+}
+
+func (x LoginType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LoginType) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_proto_enumTypes[6].Descriptor()
+}
+
+func (LoginType) Type() protoreflect.EnumType {
+	return &file_common_proto_enumTypes[6]
+}
+
+func (x LoginType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LoginType.Descriptor instead.
+func (LoginType) EnumDescriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{6}
+}
+
 // 日志类型,日志类型并不重复，所有采用对应的整型
 type LogType int32
 
@@ -396,11 +442,11 @@ func (x LogType) String() string {
 }
 
 func (LogType) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[6].Descriptor()
+	return file_common_proto_enumTypes[7].Descriptor()
 }
 
 func (LogType) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[6]
+	return &file_common_proto_enumTypes[7]
 }
 
 func (x LogType) Number() protoreflect.EnumNumber {
@@ -409,7 +455,7 @@ func (x LogType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use LogType.Descriptor instead.
 func (LogType) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{6}
+	return file_common_proto_rawDescGZIP(), []int{7}
 }
 
 type VipPayStyle int32
@@ -445,11 +491,11 @@ func (x VipPayStyle) String() string {
 }
 
 func (VipPayStyle) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[7].Descriptor()
+	return file_common_proto_enumTypes[8].Descriptor()
 }
 
 func (VipPayStyle) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[7]
+	return &file_common_proto_enumTypes[8]
 }
 
 func (x VipPayStyle) Number() protoreflect.EnumNumber {
@@ -458,7 +504,7 @@ func (x VipPayStyle) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VipPayStyle.Descriptor instead.
 func (VipPayStyle) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{7}
+	return file_common_proto_rawDescGZIP(), []int{8}
 }
 
 type Authorize struct {
@@ -4524,31 +4570,34 @@ var file_common_proto_rawDesc = []byte{
 	0x64, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x5f, 0x4e, 0x49, 0x43, 0x4b, 0x4e, 0x41, 0x4d, 0x45, 0x10,
 	0x04, 0x12, 0x22, 0x0a, 0x1e, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x5f, 0x75, 0x73, 0x65, 0x72,
 	0x69, 0x6e, 0x66, 0x6f, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x5f,
-	0x53, 0x45, 0x58, 0x10, 0x05, 0x2a, 0xbb, 0x02, 0x0a, 0x07, 0x4c, 0x6f, 0x67, 0x54, 0x79, 0x70,
-	0x65, 0x12, 0x16, 0x0a, 0x12, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x4e, 0x4f,
-	0x4e, 0x45, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x00, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67,
-	0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x52, 0x45, 0x41, 0x54, 0x45, 0x5f, 0x55, 0x53, 0x45,
-	0x52, 0x10, 0x01, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f,
-	0x55, 0x50, 0x44, 0x41, 0x54, 0x45, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x02, 0x12, 0x17, 0x0a,
-	0x13, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x4c, 0x4f, 0x47, 0x49, 0x4e, 0x5f,
-	0x55, 0x53, 0x45, 0x52, 0x10, 0x03, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79,
-	0x70, 0x65, 0x5f, 0x4c, 0x4f, 0x47, 0x4f, 0x55, 0x54, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x04,
-	0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x53, 0x55, 0x42,
-	0x4d, 0x49, 0x54, 0x5f, 0x43, 0x45, 0x52, 0x54, 0x10, 0x05, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f,
-	0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x41, 0x4e, 0x43, 0x45, 0x4c, 0x5f, 0x43, 0x45,
-	0x52, 0x54, 0x10, 0x06, 0x12, 0x16, 0x0a, 0x12, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65,
-	0x5f, 0x43, 0x45, 0x52, 0x54, 0x5f, 0x46, 0x41, 0x49, 0x4c, 0x10, 0x07, 0x12, 0x19, 0x0a, 0x15,
-	0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x45, 0x52, 0x54, 0x5f, 0x53, 0x55,
-	0x43, 0x43, 0x45, 0x53, 0x53, 0x10, 0x08, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74,
-	0x79, 0x70, 0x65, 0x5f, 0x56, 0x49, 0x50, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x55, 0x50, 0x10,
-	0x09, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x4f,
-	0x49, 0x4e, 0x5f, 0x41, 0x50, 0x50, 0x45, 0x4e, 0x44, 0x10, 0x0a, 0x12, 0x16, 0x0a, 0x12, 0x6c,
-	0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x4f, 0x49, 0x4e, 0x5f, 0x55, 0x53, 0x45,
-	0x44, 0x10, 0x0b, 0x2a, 0x30, 0x0a, 0x0b, 0x56, 0x69, 0x70, 0x50, 0x61, 0x79, 0x53, 0x74, 0x79,
-	0x6c, 0x65, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07,
-	0x57, 0x45, 0x43, 0x48, 0x41, 0x52, 0x54, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x4c, 0x49,
-	0x50, 0x41, 0x59, 0x10, 0x02, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x53, 0x45, 0x58, 0x10, 0x05, 0x2a, 0x2f, 0x0a, 0x09, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x12, 0x0a, 0x0e, 0x6c, 0x6f, 0x67, 0x69, 0x6e, 0x5f, 0x70, 0x61, 0x73, 0x73,
+	0x77, 0x6f, 0x72, 0x64, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x6c, 0x6f, 0x67, 0x69, 0x6e, 0x5f,
+	0x63, 0x6f, 0x64, 0x65, 0x10, 0x01, 0x2a, 0xbb, 0x02, 0x0a, 0x07, 0x4c, 0x6f, 0x67, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x16, 0x0a, 0x12, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x4e,
+	0x4f, 0x4e, 0x45, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x00, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f,
+	0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x52, 0x45, 0x41, 0x54, 0x45, 0x5f, 0x55, 0x53,
+	0x45, 0x52, 0x10, 0x01, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65,
+	0x5f, 0x55, 0x50, 0x44, 0x41, 0x54, 0x45, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x02, 0x12, 0x17,
+	0x0a, 0x13, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x4c, 0x4f, 0x47, 0x49, 0x4e,
+	0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x03, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x5f, 0x4c, 0x4f, 0x47, 0x4f, 0x55, 0x54, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10,
+	0x04, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x53, 0x55,
+	0x42, 0x4d, 0x49, 0x54, 0x5f, 0x43, 0x45, 0x52, 0x54, 0x10, 0x05, 0x12, 0x18, 0x0a, 0x14, 0x6c,
+	0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x41, 0x4e, 0x43, 0x45, 0x4c, 0x5f, 0x43,
+	0x45, 0x52, 0x54, 0x10, 0x06, 0x12, 0x16, 0x0a, 0x12, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70,
+	0x65, 0x5f, 0x43, 0x45, 0x52, 0x54, 0x5f, 0x46, 0x41, 0x49, 0x4c, 0x10, 0x07, 0x12, 0x19, 0x0a,
+	0x15, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x45, 0x52, 0x54, 0x5f, 0x53,
+	0x55, 0x43, 0x43, 0x45, 0x53, 0x53, 0x10, 0x08, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f,
+	0x74, 0x79, 0x70, 0x65, 0x5f, 0x56, 0x49, 0x50, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x55, 0x50,
+	0x10, 0x09, 0x12, 0x18, 0x0a, 0x14, 0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43,
+	0x4f, 0x49, 0x4e, 0x5f, 0x41, 0x50, 0x50, 0x45, 0x4e, 0x44, 0x10, 0x0a, 0x12, 0x16, 0x0a, 0x12,
+	0x6c, 0x6f, 0x67, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x43, 0x4f, 0x49, 0x4e, 0x5f, 0x55, 0x53,
+	0x45, 0x44, 0x10, 0x0b, 0x2a, 0x30, 0x0a, 0x0b, 0x56, 0x69, 0x70, 0x50, 0x61, 0x79, 0x53, 0x74,
+	0x79, 0x6c, 0x65, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10, 0x00, 0x12, 0x0b, 0x0a,
+	0x07, 0x57, 0x45, 0x43, 0x48, 0x41, 0x52, 0x54, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x4c,
+	0x49, 0x50, 0x41, 0x59, 0x10, 0x02, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2f, 0x63, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4563,7 +4612,7 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
+var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
 var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_common_proto_goTypes = []interface{}{
 	(Role)(0),                    // 0: common.Role
@@ -4572,80 +4621,81 @@ var file_common_proto_goTypes = []interface{}{
 	(FromPlatom)(0),              // 3: common.FromPlatom
 	(CertTyoe)(0),                // 4: common.CertTyoe
 	(UpdateUserinfoField)(0),     // 5: common.Update_userinfo_field
-	(LogType)(0),                 // 6: common.LogType
-	(VipPayStyle)(0),             // 7: common.VipPayStyle
-	(*Authorize)(nil),            // 8: common.Authorize
-	(*Request)(nil),              // 9: common.Request
-	(*Response)(nil),             // 10: common.Response
-	(*UpdateUserinfoItem)(nil),   // 11: common.UpdateUserinfoItem
-	(*UserInfo)(nil),             // 12: common.UserInfo
-	(*WechatUserinfo)(nil),       // 13: common.WechatUserinfo
-	(*AlipayUserinfo)(nil),       // 14: common.AlipayUserinfo
-	(*BaiduConcept)(nil),         // 15: common.BaiduConcept
-	(*BaiduEntity)(nil),          // 16: common.BaiduEntity
-	(*BaiduWordLocation)(nil),    // 17: common.BaiduWordLocation
-	(*BaiduLineProbability)(nil), // 18: common.BaiduLineProbability
-	(*BaiduWordsItem)(nil),       // 19: common.BaiduWordsItem
-	(*BaiduResultItem)(nil),      // 20: common.BaiduResultItem
-	(*BaiduDocAnalysis)(nil),     // 21: common.BaiduDocAnalysis
-	(*BaiduIdentItem)(nil),       // 22: common.BaiduIdentItem
-	(*PersonCert)(nil),           // 23: common.PersonCert
-	(*BaiduIdcardIdent)(nil),     // 24: common.BaiduIdcardIdent
-	(*UserLog)(nil),              // 25: common.UserLog
-	(*CronItem)(nil),             // 26: common.CronItem
-	(*PkgItem)(nil),              // 27: common.PkgItem
-	(*VipProduct)(nil),           // 28: common.VipProduct
-	(*VipDesc)(nil),              // 29: common.VipDesc
-	(*VipOrder)(nil),             // 30: common.VipOrder
-	(*VipPayCbRe)(nil),           // 31: common.VipPayCbRe
-	(*VipPayCb)(nil),             // 32: common.VipPayCb
-	(*UserScore)(nil),            // 33: common.UserScore
-	(*UserVip)(nil),              // 34: common.UserVip
-	(*FootLog)(nil),              // 35: common.FootLog
-	(*AlipayCb)(nil),             // 36: common.AlipayCb
-	(*LendLoanItem)(nil),         // 37: common.LendLoanItem
-	(*LendLoanGather)(nil),       // 38: common.LendLoanGather
-	(*ShareImage)(nil),           // 39: common.ShareImage
-	(*ShareItem)(nil),            // 40: common.ShareItem
-	(*TemplateItem)(nil),         // 41: common.TemplateItem
-	(*MeGoodsCategory)(nil),      // 42: common.MeGoodsCategory
-	(*MeGoods)(nil),              // 43: common.MeGoods
-	nil,                          // 44: common.Authorize.ExtraEntry
-	nil,                          // 45: common.Request.ExtraEntry
-	nil,                          // 46: common.Response.ExtraEntry
-	nil,                          // 47: common.UpdateUserinfoItem.ExtraEntry
-	nil,                          // 48: common.PersonCert.ExtraEntry
-	nil,                          // 49: common.BaiduIdcardIdent.ExtraEntry
-	nil,                          // 50: common.CronItem.ExtraEntry
-	nil,                          // 51: common.VipDesc.ExtraEntry
-	nil,                          // 52: common.FootLog.ExtraEntry
-	nil,                          // 53: common.LendLoanItem.ExtraEntry
-	nil,                          // 54: common.LendLoanGather.ExtraEntry
-	nil,                          // 55: common.TemplateItem.ExtraEntry
+	(LoginType)(0),               // 6: common.LoginType
+	(LogType)(0),                 // 7: common.LogType
+	(VipPayStyle)(0),             // 8: common.VipPayStyle
+	(*Authorize)(nil),            // 9: common.Authorize
+	(*Request)(nil),              // 10: common.Request
+	(*Response)(nil),             // 11: common.Response
+	(*UpdateUserinfoItem)(nil),   // 12: common.UpdateUserinfoItem
+	(*UserInfo)(nil),             // 13: common.UserInfo
+	(*WechatUserinfo)(nil),       // 14: common.WechatUserinfo
+	(*AlipayUserinfo)(nil),       // 15: common.AlipayUserinfo
+	(*BaiduConcept)(nil),         // 16: common.BaiduConcept
+	(*BaiduEntity)(nil),          // 17: common.BaiduEntity
+	(*BaiduWordLocation)(nil),    // 18: common.BaiduWordLocation
+	(*BaiduLineProbability)(nil), // 19: common.BaiduLineProbability
+	(*BaiduWordsItem)(nil),       // 20: common.BaiduWordsItem
+	(*BaiduResultItem)(nil),      // 21: common.BaiduResultItem
+	(*BaiduDocAnalysis)(nil),     // 22: common.BaiduDocAnalysis
+	(*BaiduIdentItem)(nil),       // 23: common.BaiduIdentItem
+	(*PersonCert)(nil),           // 24: common.PersonCert
+	(*BaiduIdcardIdent)(nil),     // 25: common.BaiduIdcardIdent
+	(*UserLog)(nil),              // 26: common.UserLog
+	(*CronItem)(nil),             // 27: common.CronItem
+	(*PkgItem)(nil),              // 28: common.PkgItem
+	(*VipProduct)(nil),           // 29: common.VipProduct
+	(*VipDesc)(nil),              // 30: common.VipDesc
+	(*VipOrder)(nil),             // 31: common.VipOrder
+	(*VipPayCbRe)(nil),           // 32: common.VipPayCbRe
+	(*VipPayCb)(nil),             // 33: common.VipPayCb
+	(*UserScore)(nil),            // 34: common.UserScore
+	(*UserVip)(nil),              // 35: common.UserVip
+	(*FootLog)(nil),              // 36: common.FootLog
+	(*AlipayCb)(nil),             // 37: common.AlipayCb
+	(*LendLoanItem)(nil),         // 38: common.LendLoanItem
+	(*LendLoanGather)(nil),       // 39: common.LendLoanGather
+	(*ShareImage)(nil),           // 40: common.ShareImage
+	(*ShareItem)(nil),            // 41: common.ShareItem
+	(*TemplateItem)(nil),         // 42: common.TemplateItem
+	(*MeGoodsCategory)(nil),      // 43: common.MeGoodsCategory
+	(*MeGoods)(nil),              // 44: common.MeGoods
+	nil,                          // 45: common.Authorize.ExtraEntry
+	nil,                          // 46: common.Request.ExtraEntry
+	nil,                          // 47: common.Response.ExtraEntry
+	nil,                          // 48: common.UpdateUserinfoItem.ExtraEntry
+	nil,                          // 49: common.PersonCert.ExtraEntry
+	nil,                          // 50: common.BaiduIdcardIdent.ExtraEntry
+	nil,                          // 51: common.CronItem.ExtraEntry
+	nil,                          // 52: common.VipDesc.ExtraEntry
+	nil,                          // 53: common.FootLog.ExtraEntry
+	nil,                          // 54: common.LendLoanItem.ExtraEntry
+	nil,                          // 55: common.LendLoanGather.ExtraEntry
+	nil,                          // 56: common.TemplateItem.ExtraEntry
 }
 var file_common_proto_depIdxs = []int32{
-	44, // 0: common.Authorize.extra:type_name -> common.Authorize.ExtraEntry
-	45, // 1: common.Request.extra:type_name -> common.Request.ExtraEntry
-	46, // 2: common.Response.extra:type_name -> common.Response.ExtraEntry
+	45, // 0: common.Authorize.extra:type_name -> common.Authorize.ExtraEntry
+	46, // 1: common.Request.extra:type_name -> common.Request.ExtraEntry
+	47, // 2: common.Response.extra:type_name -> common.Response.ExtraEntry
 	5,  // 3: common.UpdateUserinfoItem.field:type_name -> common.Update_userinfo_field
-	47, // 4: common.UpdateUserinfoItem.extra:type_name -> common.UpdateUserinfoItem.ExtraEntry
-	15, // 5: common.BaiduEntity.concept:type_name -> common.BaiduConcept
-	17, // 6: common.BaiduWordsItem.location:type_name -> common.BaiduWordLocation
-	18, // 7: common.BaiduWordsItem.probability:type_name -> common.BaiduLineProbability
-	19, // 8: common.BaiduResultItem.word:type_name -> common.BaiduWordsItem
-	20, // 9: common.BaiduDocAnalysis.results:type_name -> common.BaiduResultItem
-	21, // 10: common.BaiduIdentItem.result:type_name -> common.BaiduDocAnalysis
-	48, // 11: common.PersonCert.extra:type_name -> common.PersonCert.ExtraEntry
-	49, // 12: common.BaiduIdcardIdent.extra:type_name -> common.BaiduIdcardIdent.ExtraEntry
-	50, // 13: common.CronItem.extra:type_name -> common.CronItem.ExtraEntry
-	51, // 14: common.VipDesc.extra:type_name -> common.VipDesc.ExtraEntry
-	31, // 15: common.VipPayCb.resource:type_name -> common.VipPayCbRe
-	52, // 16: common.FootLog.extra:type_name -> common.FootLog.ExtraEntry
-	53, // 17: common.LendLoanItem.extra:type_name -> common.LendLoanItem.ExtraEntry
-	54, // 18: common.LendLoanGather.extra:type_name -> common.LendLoanGather.ExtraEntry
-	39, // 19: common.ShareItem.media:type_name -> common.ShareImage
-	55, // 20: common.TemplateItem.extra:type_name -> common.TemplateItem.ExtraEntry
-	39, // 21: common.MeGoods.Media:type_name -> common.ShareImage
+	48, // 4: common.UpdateUserinfoItem.extra:type_name -> common.UpdateUserinfoItem.ExtraEntry
+	16, // 5: common.BaiduEntity.concept:type_name -> common.BaiduConcept
+	18, // 6: common.BaiduWordsItem.location:type_name -> common.BaiduWordLocation
+	19, // 7: common.BaiduWordsItem.probability:type_name -> common.BaiduLineProbability
+	20, // 8: common.BaiduResultItem.word:type_name -> common.BaiduWordsItem
+	21, // 9: common.BaiduDocAnalysis.results:type_name -> common.BaiduResultItem
+	22, // 10: common.BaiduIdentItem.result:type_name -> common.BaiduDocAnalysis
+	49, // 11: common.PersonCert.extra:type_name -> common.PersonCert.ExtraEntry
+	50, // 12: common.BaiduIdcardIdent.extra:type_name -> common.BaiduIdcardIdent.ExtraEntry
+	51, // 13: common.CronItem.extra:type_name -> common.CronItem.ExtraEntry
+	52, // 14: common.VipDesc.extra:type_name -> common.VipDesc.ExtraEntry
+	32, // 15: common.VipPayCb.resource:type_name -> common.VipPayCbRe
+	53, // 16: common.FootLog.extra:type_name -> common.FootLog.ExtraEntry
+	54, // 17: common.LendLoanItem.extra:type_name -> common.LendLoanItem.ExtraEntry
+	55, // 18: common.LendLoanGather.extra:type_name -> common.LendLoanGather.ExtraEntry
+	40, // 19: common.ShareItem.media:type_name -> common.ShareImage
+	56, // 20: common.TemplateItem.extra:type_name -> common.TemplateItem.ExtraEntry
+	40, // 21: common.MeGoods.Media:type_name -> common.ShareImage
 	22, // [22:22] is the sub-list for method output_type
 	22, // [22:22] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name
@@ -5097,7 +5147,7 @@ func file_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_proto_rawDesc,
-			NumEnums:      8,
+			NumEnums:      9,
 			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -4,6 +4,7 @@
 package loginnode
 
 import (
+	_ "github.com/lendloan/lendproto/common"
 	_ "github.com/lendloan/lendproto/rescode"
 	fmt "fmt"
 	proto "google.golang.org/protobuf/proto"

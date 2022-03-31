@@ -1,13 +1,14 @@
 syntax  =  "proto3";
 package loginnode;
 import "rescode/rescode.proto";
+import "common/common.proto";
 
 option go_package="./loginnode";
 
 message LoginReq {
     string                account = 1;
     string                passwd = 2;
-    int32                 ltype = 3;
+    common.LoginType      ltype = 3;
     string                code = 4;
     map<string,string>    extra = 5;
 }
