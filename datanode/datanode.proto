@@ -735,7 +735,7 @@ message ShareTitleRes {
 message ShareMediaReq {
     int64                       id = 1;
     int64                       uid = 2;
-    common.ShareImage                  media = 3;
+    common.ShareImage           media = 3;
     map<string,string>          extra = 4;
 }
 
@@ -780,6 +780,42 @@ message DelTemplateRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     map<string,string>          extra = 3;
+}
+
+message AddFriendsReq {
+    int64                       uid1 = 1;
+    int64                       uid2 = 2;
+    map<string,string>          extra = 3;
+}
+
+message AddFriendsRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message FriendsCountReq {
+    int64                       uid = 1;
+    map<string,string>          extra = 2;
+}
+
+message FriendsCountRes {
+    rescode.Code                        rescode = 1;
+    string                              resmsg = 2;
+    int32                               count = 3;
+    map<string,string>                  extra = 4;
+}
+
+message GetFriendsReq {
+    int64                       uid = 1;
+    map<string,string>          extra = 2;
+}
+
+message GetFriendsRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.UserInfo    friends = 3;
+    map<string,string>          extra = 4;
 }
 
 service DatanodeService {
@@ -900,4 +936,8 @@ service DatanodeService {
     rpc ShareUids(ShareUidsReq) returns (ShareUidsRes) {}
     rpc DelShare(DelShareReq) returns (DelShareRes) {}
     rpc DelTemplate(DelTemplateReq) returns (DelTemplateRes) {}
+
+    rpc AddFriends(AddFriendsReq) returns (AddFriendsRes) {}
+    rpc FriendsCount(FriendsCountReq) returns (FriendsCountRes) {}
+    rpc GetFriends(GetFriendsReq) returns (GetFriendsRes) {}
 }
