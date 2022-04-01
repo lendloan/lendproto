@@ -142,6 +142,9 @@ type DatanodeService interface {
 	ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error)
 	DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error)
 	DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...client.CallOption) (*DelTemplateRes, error)
+	AddFriends(ctx context.Context, in *AddFriendsReq, opts ...client.CallOption) (*AddFriendsRes, error)
+	FriendsCount(ctx context.Context, in *FriendsCountReq, opts ...client.CallOption) (*FriendsCountRes, error)
+	GetFriends(ctx context.Context, in *GetFriendsReq, opts ...client.CallOption) (*GetFriendsRes, error)
 }
 
 type datanodeService struct {
@@ -736,6 +739,36 @@ func (c *datanodeService) DelTemplate(ctx context.Context, in *DelTemplateReq, o
 	return out, nil
 }
 
+func (c *datanodeService) AddFriends(ctx context.Context, in *AddFriendsReq, opts ...client.CallOption) (*AddFriendsRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddFriends", in)
+	out := new(AddFriendsRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) FriendsCount(ctx context.Context, in *FriendsCountReq, opts ...client.CallOption) (*FriendsCountRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.FriendsCount", in)
+	out := new(FriendsCountRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) GetFriends(ctx context.Context, in *GetFriendsReq, opts ...client.CallOption) (*GetFriendsRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.GetFriends", in)
+	out := new(GetFriendsRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -843,6 +876,9 @@ type DatanodeServiceHandler interface {
 	ShareUids(context.Context, *ShareUidsReq, *ShareUidsRes) error
 	DelShare(context.Context, *DelShareReq, *DelShareRes) error
 	DelTemplate(context.Context, *DelTemplateReq, *DelTemplateRes) error
+	AddFriends(context.Context, *AddFriendsReq, *AddFriendsRes) error
+	FriendsCount(context.Context, *FriendsCountReq, *FriendsCountRes) error
+	GetFriends(context.Context, *GetFriendsReq, *GetFriendsRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -905,6 +941,9 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error
 		DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error
 		DelTemplate(ctx context.Context, in *DelTemplateReq, out *DelTemplateRes) error
+		AddFriends(ctx context.Context, in *AddFriendsReq, out *AddFriendsRes) error
+		FriendsCount(ctx context.Context, in *FriendsCountReq, out *FriendsCountRes) error
+		GetFriends(ctx context.Context, in *GetFriendsReq, out *GetFriendsRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1147,4 +1186,16 @@ func (h *datanodeServiceHandler) DelShare(ctx context.Context, in *DelShareReq, 
 
 func (h *datanodeServiceHandler) DelTemplate(ctx context.Context, in *DelTemplateReq, out *DelTemplateRes) error {
 	return h.DatanodeServiceHandler.DelTemplate(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) AddFriends(ctx context.Context, in *AddFriendsReq, out *AddFriendsRes) error {
+	return h.DatanodeServiceHandler.AddFriends(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) FriendsCount(ctx context.Context, in *FriendsCountReq, out *FriendsCountRes) error {
+	return h.DatanodeServiceHandler.FriendsCount(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) GetFriends(ctx context.Context, in *GetFriendsReq, out *GetFriendsRes) error {
+	return h.DatanodeServiceHandler.GetFriends(ctx, in, out)
 }
