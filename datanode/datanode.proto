@@ -818,6 +818,74 @@ message GetFriendsRes {
     map<string,string>          extra = 4;
 }
 
+message AddLendLoanReq {
+    common.Authorize            auth =  1;
+    int64                       uid = 2;
+    common.LenLoan              lendloan = 3;
+    map<string,string>          extra = 4;
+}
+
+message AddLendLoanRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message LendLoanGatherReq {
+    common.Authorize            auth =  1;
+    int64                       uid = 2;
+    int32                       page = 3;
+    int32                       size = 4;
+    map<string,string>          extra = 5;
+}
+
+message LendLoanGatherRes {
+    rescode.Code                    rescode = 1;
+    string                          resmsg = 2;
+    repeated common.LendLoanGather  gather = 3;
+    map<string,string>              extra = 4;
+}
+
+message LendLoanReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    map<string,string>          extra = 4;
+}
+
+message LendLoanRes {
+    rescode.Code                    rescode = 1;
+    string                          resmsg = 2;
+    repeated common.LenLoan         lendloan = 3;
+    map<string,string>              extra = 4;
+}
+
+message GatherStatusReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    map<string,string>          extra = 4;
+}
+
+message GatherStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message LendLoanStatusReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    map<string,string>          extra = 4;
+}
+
+message LendLoanStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
 service DatanodeService {
 	// ---------- 用户接口 ------- //
 	// 创建新用户
@@ -940,4 +1008,15 @@ service DatanodeService {
     rpc AddFriends(AddFriendsReq) returns (AddFriendsRes) {}
     rpc FriendsCount(FriendsCountReq) returns (FriendsCountRes) {}
     rpc GetFriends(GetFriendsReq) returns (GetFriendsRes) {}
+
+    // 添加借入借出
+    rpc AddLendLoan(AddLendLoanReq) returns (AddLendLoanRes) {}
+    // 获取借入借出聚集记录
+    rpc LendLoanGather(LendLoanGatherReq) returns (LendLoanGatherRes) {}
+    // 获取借入借入借出记录
+    rpc LendLoan(LendLoanReq) returns (LendLoanRes) {}
+    // 修改借出借入聚集记录状态
+    rpc GatherStatus(GatherStatusReq) returns (GatherStatusRes) {}
+    // 修改借入借出状态
+    rpc LendLoanStatus(LendLoanStatusReq) returns (LendLoanStatusRes) {}
 }

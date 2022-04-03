@@ -454,3 +454,41 @@ message MeGoods {
     string                  Extra = 10;
     int64                   CreateAt = 11;
 }
+
+message LendLoanGather {
+    int64                   Id = 1;
+    int64                   NdUid = 2;
+    int64                   AnUid = 3;
+    repeadted string        LlIds = 4;
+    int64                   Status = 5;
+    string                  Bits = 6;
+    int64                   Expire = 7;
+    string                  Credentials = 8;
+    string                  Signature = 9;
+    repeadted ShareImage    Thumbs = 10;
+    repeadted ShareImage    RetImages = 11;
+    string                  RetInfos = 12;
+    string                  Remark = 13;
+    int64                   CreateAt = 14;
+    int64                   UpdateAt = 15;
+    map<string,string>      extra = 16;
+}
+
+message LendLoan  {
+    int64                   Id = 1;
+    int64                   NdUid = 2;
+    int64                   AnUid = 3;
+    string                  Guid = 4;
+    string                  Name = 5;
+    repeadted ShareImage    Images = 6;
+    string                  Location = 7;
+    string                  NdIp = 8;
+    string                  AnIp = 9;
+    string                  NdDvid = 10;
+    string                  AnDvid = 11;
+    int64                   Status = 12;
+    int64                   Expire = 13;
+    int64                   CreateAt = 14;
+    int64                   UpdateAt = 15;
+    map<string,string>      extra = 16;
+}

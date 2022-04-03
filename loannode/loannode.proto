@@ -5,19 +5,78 @@ import "common/common.proto";
 
 option go_package="./loannode";
 
-
 message AddLendLoanReq {
-    common.Authorize        auth = 1;
-    common.LendLoanItem     lendload = 2;
-    map<string,string>      extra = 3;
+    int64                       uid = 1;
+    common.LenLoan              lendloan = 2;
+    map<string,string>          extra = 3;
 }
 
 message AddLendLoanRes {
-    rescode.Code          rescode =  1;
-    string                resmsg =  2;
-    map<string,string>    extra =  3;
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message LendLoanGatherReq {
+    int64                       uid = 1;
+    int32                       page = 2;
+    int32                       size = 3;
+    map<string,string>          extra = 4;
+}
+
+message LendLoanGatherRes {
+    rescode.Code                    rescode = 1;
+    string                          resmsg = 2;
+    repeated common.LendLoanGather  gather = 3;
+    map<string,string>              extra = 4;
+}
+
+message LendLoanReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    map<string,string>          extra = 3;
+}
+
+message LendLoanRes {
+    rescode.Code                    rescode = 1;
+    string                          resmsg = 2;
+    repeated common.LenLoan         lendloan = 3;
+    map<string,string>              extra = 4;
+}
+
+message GatherStatusReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    map<string,string>          extra = 3;
+}
+
+message GatherStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message LendLoanStatusReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    map<string,string>          extra = 3;
+}
+
+message LendLoanStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
 }
 
 service LoannodeService {
-    rpc AddLendLoan (AddLendLoanReq) returns (AddLendLoanRes);
+    // 添加借入借出
+    rpc AddLendLoan(AddLendLoanReq) returns (AddLendLoanRes) {}
+    // 获取借入借出聚集记录
+    rpc LendLoanGather(LendLoanGatherReq) returns (LendLoanGatherRes) {}
+    // 获取借入借入借出记录
+    rpc LendLoan(LendLoanReq) returns (LendLoanRes) {}
+    // 修改借出借入聚集记录状态
+    rpc GatherStatus(GatherStatusReq) returns (GatherStatusRes) {}
+    // 修改借入借出状态
+    rpc LendLoanStatus(LendLoanStatusReq) returns (LendLoanStatusRes) {}
 }
