@@ -821,7 +821,7 @@ message GetFriendsRes {
 message AddLendLoanReq {
     common.Authorize            auth =  1;
     int64                       uid = 2;
-    common.LenLoan              lendloan = 3;
+    common.LendLoan             lendloan = 3;
     map<string,string>          extra = 4;
 }
 
@@ -856,7 +856,7 @@ message LendLoanReq {
 message LendLoanRes {
     rescode.Code                    rescode = 1;
     string                          resmsg = 2;
-    repeated common.LenLoan         lendloan = 3;
+    repeated common.LendLoan        LendLoanlendloan = 3;
     map<string,string>              extra = 4;
 }
 
