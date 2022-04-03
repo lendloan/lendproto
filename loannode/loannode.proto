@@ -7,7 +7,7 @@ option go_package="./loannode";
 
 message AddLendLoanReq {
     int64                       uid = 1;
-    common.LenLoan              lendloan = 2;
+    common.LendLoan             lendloan = 2;
     map<string,string>          extra = 3;
 }
 
@@ -40,7 +40,7 @@ message LendLoanReq {
 message LendLoanRes {
     rescode.Code                    rescode = 1;
     string                          resmsg = 2;
-    repeated common.LenLoan         lendloan = 3;
+    repeated common.LendLoan        lendloan = 3;
     map<string,string>              extra = 4;
 }
 
