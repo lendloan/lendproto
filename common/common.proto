@@ -364,43 +364,6 @@ message AlipayCb {
     string      notify_id = 9;
 }
 
-message LendLoanItem  {
-	int64           Id = 1; 				
-	int64           NdUid = 2;  //	借入的用户uid
-	int64           AnUid = 3;  //	借出的用户uid
-	string          GUig = 4;   //  商品ID(如果有的话)
-	string          Name = 5;   //	商品名称
-	string          Images = 6; //	商品图像	
-	string          Location = 7; //	借入借出位置
-	string          NdIp = 8; //	借入ip地址
-	string          AnIp = 9; //	借出ip地址
-	string          NdDvid = 10; //	借入设备id
-	string          AnDvid = 11; //	借出设备id
-	int64           Status = 12; //	状态，在借、已还、取消
-	int64           Expire = 13; //	到期时间
-	int64           CreateAt = 14; 		
-	int64           UpdateAt = 15;	
-    map<string,string>    extra = 16;	
-}
-
-message LendLoanGather  {
-	int64           Id = 1;	
-	int64           NdUid = 2; // 借入的用户uid
-	int64           AnUid = 3; // 借出的用户uid 
-	string          LlIds = 4; // 借出借入的id列表，来自LendLoanTotal
-	int64           Status  = 5; // 状态，在借、已还、取消
-	string          Bits = 6; // 已还Id对应的比特位"000001101" 长度和Llids一致，1代表已还
-	int64           Expire = 7; //	// 到期时间，列表中最后一个的到期时间
-	string          Credentials = 8; // 确认证书
-	string          Signature = 9; // 签名
-	string          RetImages = 10; // 已还图片信息	
-	string          RetInfos = 11; // 返还信息
-	string          Remark = 12; // 备注
-	int64           CreateAt = 13; 		
-	int64           UpdateAt = 14;
-    map<string, string>    extra = 15;		
-}
-
 message ShareImage {
     string      image = 1;
     string      thumb = 2;
