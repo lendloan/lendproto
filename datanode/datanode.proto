@@ -864,7 +864,8 @@ message GatherStatusReq {
     common.Authorize            auth =  1;
     int64                       id = 2;
     int64                       uid = 3;
-    map<string,string>          extra = 4;
+    common.LendLoan_Status      status = 4;
+    map<string,string>          extra = 5;
 }
 
 message GatherStatusRes {
@@ -877,8 +878,10 @@ message LendLoanStatusReq {
     common.Authorize            auth =  1;
     int64                       id = 2;
     int64                       uid = 3;
-    map<string,string>          extra = 4;
+    common.LendLoan_Status      status = 4;
+    map<string,string>          extra = 5;
 }
+
 
 message LendLoanStatusRes {
     rescode.Code                rescode = 1;

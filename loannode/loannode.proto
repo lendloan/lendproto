@@ -6,9 +6,10 @@ import "common/common.proto";
 option go_package="./loannode";
 
 message AddLendLoanReq {
-    int64                       uid = 1;
-    common.LendLoan             lendloan = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+    int64                       uid = 2;
+    common.LendLoan             lendloan = 3;
+    map<string,string>          extra = 4;
 }
 
 message AddLendLoanRes {
@@ -18,10 +19,11 @@ message AddLendLoanRes {
 }
 
 message LendLoanGatherReq {
-    int64                       uid = 1;
-    int32                       page = 2;
-    int32                       size = 3;
-    map<string,string>          extra = 4;
+    common.Authorize            auth =  1;
+    int64                       uid = 2;
+    int32                       page = 3;
+    int32                       size = 4;
+    map<string,string>          extra = 5;
 }
 
 message LendLoanGatherRes {
@@ -32,9 +34,10 @@ message LendLoanGatherRes {
 }
 
 message LendLoanReq {
-    int64                       gid = 1;
-    int64                       uid = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+    int64                       gid = 2;
+    int64                       uid = 3;
+    map<string,string>          extra = 4;
 }
 
 message LendLoanRes {
@@ -45,9 +48,11 @@ message LendLoanRes {
 }
 
 message GatherStatusReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    common.LendLoan_Status      status = 4;
+    map<string,string>          extra = 5;
 }
 
 message GatherStatusRes {
@@ -57,9 +62,11 @@ message GatherStatusRes {
 }
 
 message LendLoanStatusReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    common.LendLoan_Status      status = 4;
+    map<string,string>          extra = 5;
 }
 
 message LendLoanStatusRes {

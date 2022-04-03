@@ -418,6 +418,14 @@ message MeGoods {
     int64                   CreateAt = 11;
 }
 
+enum LendLoan_Status {
+    WAIT_LOAN               = 0x00000 // 创建状态
+	ALREADY_LOAN            = 0x00001 // 已经借出
+	ALREADY_FINISH          = 0x00002 // 已经完成
+	ALREADY_EXPIRE          = 0x00004 // 已经过期
+	ALREADY_INVALID         = 0x00008 // 已经无效
+}
+
 message LendLoanGather {
     int64                   Id = 1;
     int64                   NdUid = 2;
