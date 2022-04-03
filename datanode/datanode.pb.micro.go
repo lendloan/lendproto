@@ -145,6 +145,16 @@ type DatanodeService interface {
 	AddFriends(ctx context.Context, in *AddFriendsReq, opts ...client.CallOption) (*AddFriendsRes, error)
 	FriendsCount(ctx context.Context, in *FriendsCountReq, opts ...client.CallOption) (*FriendsCountRes, error)
 	GetFriends(ctx context.Context, in *GetFriendsReq, opts ...client.CallOption) (*GetFriendsRes, error)
+	// 添加借入借出
+	AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error)
+	// 获取借入借出聚集记录
+	LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error)
+	// 获取借入借入借出记录
+	LendLoan(ctx context.Context, in *LendLoanReq, opts ...client.CallOption) (*LendLoanRes, error)
+	// 修改借出借入聚集记录状态
+	GatherStatus(ctx context.Context, in *GatherStatusReq, opts ...client.CallOption) (*GatherStatusRes, error)
+	// 修改借入借出状态
+	LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, opts ...client.CallOption) (*LendLoanStatusRes, error)
 }
 
 type datanodeService struct {
@@ -769,6 +779,56 @@ func (c *datanodeService) GetFriends(ctx context.Context, in *GetFriendsReq, opt
 	return out, nil
 }
 
+func (c *datanodeService) AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddLendLoan", in)
+	out := new(AddLendLoanRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.LendLoanGather", in)
+	out := new(LendLoanGatherRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) LendLoan(ctx context.Context, in *LendLoanReq, opts ...client.CallOption) (*LendLoanRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.LendLoan", in)
+	out := new(LendLoanRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) GatherStatus(ctx context.Context, in *GatherStatusReq, opts ...client.CallOption) (*GatherStatusRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.GatherStatus", in)
+	out := new(GatherStatusRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, opts ...client.CallOption) (*LendLoanStatusRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.LendLoanStatus", in)
+	out := new(LendLoanStatusRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -879,6 +939,16 @@ type DatanodeServiceHandler interface {
 	AddFriends(context.Context, *AddFriendsReq, *AddFriendsRes) error
 	FriendsCount(context.Context, *FriendsCountReq, *FriendsCountRes) error
 	GetFriends(context.Context, *GetFriendsReq, *GetFriendsRes) error
+	// 添加借入借出
+	AddLendLoan(context.Context, *AddLendLoanReq, *AddLendLoanRes) error
+	// 获取借入借出聚集记录
+	LendLoanGather(context.Context, *LendLoanGatherReq, *LendLoanGatherRes) error
+	// 获取借入借入借出记录
+	LendLoan(context.Context, *LendLoanReq, *LendLoanRes) error
+	// 修改借出借入聚集记录状态
+	GatherStatus(context.Context, *GatherStatusReq, *GatherStatusRes) error
+	// 修改借入借出状态
+	LendLoanStatus(context.Context, *LendLoanStatusReq, *LendLoanStatusRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -944,6 +1014,11 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		AddFriends(ctx context.Context, in *AddFriendsReq, out *AddFriendsRes) error
 		FriendsCount(ctx context.Context, in *FriendsCountReq, out *FriendsCountRes) error
 		GetFriends(ctx context.Context, in *GetFriendsReq, out *GetFriendsRes) error
+		AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error
+		LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error
+		LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error
+		GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error
+		LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1198,4 +1273,24 @@ func (h *datanodeServiceHandler) FriendsCount(ctx context.Context, in *FriendsCo
 
 func (h *datanodeServiceHandler) GetFriends(ctx context.Context, in *GetFriendsReq, out *GetFriendsRes) error {
 	return h.DatanodeServiceHandler.GetFriends(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error {
+	return h.DatanodeServiceHandler.AddLendLoan(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error {
+	return h.DatanodeServiceHandler.LendLoanGather(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error {
+	return h.DatanodeServiceHandler.LendLoan(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error {
+	return h.DatanodeServiceHandler.GatherStatus(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error {
+	return h.DatanodeServiceHandler.LendLoanStatus(ctx, in, out)
 }

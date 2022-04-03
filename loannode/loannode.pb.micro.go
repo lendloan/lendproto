@@ -38,6 +38,16 @@ func NewLoannodeServiceEndpoints() []*api.Endpoint {
 // Client API for LoannodeService service
 
 type LoannodeService interface {
+	// 添加借入借出
+	AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error)
+	// 获取借入借出聚集记录
+	LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error)
+	// 获取借入借入借出记录
+	LendLoan(ctx context.Context, in *LendLoanReq, opts ...client.CallOption) (*LendLoanRes, error)
+	// 修改借出借入聚集记录状态
+	GatherStatus(ctx context.Context, in *GatherStatusReq, opts ...client.CallOption) (*GatherStatusRes, error)
+	// 修改借入借出状态
+	LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, opts ...client.CallOption) (*LendLoanStatusRes, error)
 }
 
 type loannodeService struct {
@@ -52,13 +62,78 @@ func NewLoannodeService(name string, c client.Client) LoannodeService {
 	}
 }
 
+func (c *loannodeService) AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.AddLendLoan", in)
+	out := new(AddLendLoanRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loannodeService) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.LendLoanGather", in)
+	out := new(LendLoanGatherRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loannodeService) LendLoan(ctx context.Context, in *LendLoanReq, opts ...client.CallOption) (*LendLoanRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.LendLoan", in)
+	out := new(LendLoanRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loannodeService) GatherStatus(ctx context.Context, in *GatherStatusReq, opts ...client.CallOption) (*GatherStatusRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.GatherStatus", in)
+	out := new(GatherStatusRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loannodeService) LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, opts ...client.CallOption) (*LendLoanStatusRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.LendLoanStatus", in)
+	out := new(LendLoanStatusRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LoannodeService service
 
 type LoannodeServiceHandler interface {
+	// 添加借入借出
+	AddLendLoan(context.Context, *AddLendLoanReq, *AddLendLoanRes) error
+	// 获取借入借出聚集记录
+	LendLoanGather(context.Context, *LendLoanGatherReq, *LendLoanGatherRes) error
+	// 获取借入借入借出记录
+	LendLoan(context.Context, *LendLoanReq, *LendLoanRes) error
+	// 修改借出借入聚集记录状态
+	GatherStatus(context.Context, *GatherStatusReq, *GatherStatusRes) error
+	// 修改借入借出状态
+	LendLoanStatus(context.Context, *LendLoanStatusReq, *LendLoanStatusRes) error
 }
 
 func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler, opts ...server.HandlerOption) error {
 	type loannodeService interface {
+		AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error
+		LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error
+		LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error
+		GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error
+		LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error
 	}
 	type LoannodeService struct {
 		loannodeService
@@ -69,4 +144,24 @@ func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler
 
 type loannodeServiceHandler struct {
 	LoannodeServiceHandler
+}
+
+func (h *loannodeServiceHandler) AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error {
+	return h.LoannodeServiceHandler.AddLendLoan(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error {
+	return h.LoannodeServiceHandler.LendLoanGather(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error {
+	return h.LoannodeServiceHandler.LendLoan(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error {
+	return h.LoannodeServiceHandler.GatherStatus(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error {
+	return h.LoannodeServiceHandler.LendLoanStatus(ctx, in, out)
 }
