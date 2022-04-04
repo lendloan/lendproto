@@ -397,25 +397,25 @@ message TemplateItem {
 }
 
 message MeGoodsCategory {
-    int64                   Id = 1;
-    int64                   Uid = 2;
-    string                  Name = 3;
-    string                  Icon = 4;
-    int64                   CreateAt = 5;
+    int64                   id = 1;
+    int64                   uid = 2;
+    string                  name = 3;
+    string                  icon = 4;
+    int64                   create_at = 5;
 }
 
 message MeGoods {
-    int64                   Id = 1;
-    int64                   CateId = 2;
-    int64                   Uid = 3;
-    string                  Name = 4;
-    string                  Info = 5;
-    repeated ShareImage     Media = 6;
-    int64                   Total = 7;
-    int64                   Price = 8;
-    int64                   Status = 9;
-    string                  Extra = 10;
-    int64                   CreateAt = 11;
+    int64                   id = 1;
+    int64                   cate_id = 2;
+    int64                   uid = 3;
+    string                  name = 4;
+    string                  info = 5;
+    repeated ShareImage     media = 6;
+    int64                   total = 7;
+    int64                   price = 8;
+    int64                   status = 9;
+    string                  extra = 10;
+    int64                   createAt = 11;
 }
 
 enum LendLoan_Status {
@@ -427,39 +427,39 @@ enum LendLoan_Status {
 }
 
 message LendLoanGather {
-    int64                   Id = 1;
-    int64                   NdUid = 2;
-    int64                   AnUid = 3;
-    repeated string        LlIds = 4;
-    int64                   Status = 5;
-    string                  Bits = 6;
-    int64                   Expire = 7;
-    string                  Credentials = 8;
-    string                  Signature = 9;
-    repeated ShareImage    Thumbs = 10;
-    repeated ShareImage    RetImages = 11;
-    string                  RetInfos = 12;
-    string                  Remark = 13;
-    int64                   CreateAt = 14;
-    int64                   UpdateAt = 15;
+    int64                   id = 1;
+    int64                   nd_uid = 2;
+    int64                   an_uid = 3;
+    repeated string         ll_ids = 4;
+    int64                   status = 5;
+    string                  bits = 6;
+    int64                   expire = 7;
+    string                  credentials = 8;
+    string                  signature = 9;
+    repeated ShareImage     thumbs = 10;
+    repeated ShareImage     retImages = 11;
+    string                  ret_infos = 12;
+    string                  remark = 13;
+    int64                   createAt = 14;
+    int64                   updateAt = 15;
     map<string,string>      extra = 16;
 }
 
 message LendLoan  {
-    int64                   Id = 1;
-    int64                   NdUid = 2;
-    int64                   AnUid = 3;
-    string                  Guid = 4;
-    string                  Name = 5;
-    repeated ShareImage    Images = 6;
-    string                  Location = 7;
-    string                  NdIp = 8;
-    string                  AnIp = 9;
-    string                  NdDvid = 10;
-    string                  AnDvid = 11;
-    int64                   Status = 12;
-    int64                   Expire = 13;
-    int64                   CreateAt = 14;
-    int64                   UpdateAt = 15;
+    int64                   id = 1;
+    int64                   nd_uid = 2;
+    int64                   an_uid = 3;
+    string                  guid = 4;
+    string                  name = 5;
+    repeated ShareImage     images = 6;
+    string                  location = 7;
+    string                  nd_ip = 8;
+    string                  an_ip = 9;
+    string                  nd_dvid = 10;
+    string                  an_dvid = 11;
+    int64                   status = 12;
+    int64                   expire = 13;
+    int64                   create_at = 14;
+    int64                   update_at = 15;
     map<string,string>      extra = 16;
 }
