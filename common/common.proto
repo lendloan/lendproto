@@ -437,11 +437,11 @@ message LendLoanGather {
     string                  credentials = 8;
     string                  signature = 9;
     repeated ShareImage     thumbs = 10;
-    repeated ShareImage     retImages = 11;
+    repeated ShareImage     ret_images = 11;
     string                  ret_infos = 12;
     string                  remark = 13;
-    int64                   createAt = 14;
-    int64                   updateAt = 15;
+    int64                   create_at = 14;
+    int64                   update_at = 15;
     map<string,string>      extra = 16;
 }
 
