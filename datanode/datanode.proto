@@ -842,7 +842,7 @@ message LendLoanGatherReq {
 message LendLoanGatherRes {
     rescode.Code                    rescode = 1;
     string                          resmsg = 2;
-    repeated common.LendLoanGather  gather = 3;
+    repeated common.Gather          gathers = 3;
     map<string,string>              extra = 4;
 }
 

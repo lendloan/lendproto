@@ -426,24 +426,6 @@ enum LendLoan_Status {
 	ALREADY_INVALID         = 0x00008; // 已经无效
 }
 
-message LendLoanGather {
-    int64                   id = 1;
-    int64                   nd_uid = 2;
-    int64                   an_uid = 3;
-    repeated string         ll_ids = 4;
-    int64                   status = 5;
-    string                  bits = 6;
-    int64                   expire = 7;
-    string                  credentials = 8;
-    string                  signature = 9;
-    repeated ShareImage     thumbs = 10;
-    repeated ShareImage     ret_images = 11;
-    string                  ret_infos = 12;
-    string                  remark = 13;
-    int64                   create_at = 14;
-    int64                   update_at = 15;
-    map<string,string>      extra = 16;
-}
 
 message LendLoan  {
     int64                   id = 1;
@@ -462,4 +444,32 @@ message LendLoan  {
     int64                   create_at = 14;
     int64                   update_at = 15;
     map<string,string>      extra = 16;
+}
+
+
+message LendLoanGather {
+    int64                   id = 1;
+    string                  desc = 2;
+    int64                   nd_uid = 3;
+    int64                   an_uid = 4;
+    repeated string         ll_ids = 5;
+    int64                   status = 6;
+    string                  bits = 7;
+    int64                   expire = 8;
+    string                  credentials = 9;
+    string                  signature = 10;
+    repeated ShareImage     ret_images = 12;
+    string                  ret_infos = 13;
+    string                  remark = 14;
+    int64                   create_at = 15;
+    int64                   update_at = 16;
+    map<string,string>      extra = 17;
+}
+
+message Gather {
+    string                  name = 1;  // 名字
+    int64                   status = 2; // 聚集的状态
+    UserInfo                user_info = 3; // 用户信息(非自己的)
+    LendLoanGather          gather_info = 4; // 聚集信息
+    repeated LendLoan       lendloans = 5;  // 借入借出项
 }
