@@ -147,6 +147,8 @@ type DatanodeService interface {
 	GetFriends(ctx context.Context, in *GetFriendsReq, opts ...client.CallOption) (*GetFriendsRes, error)
 	// 添加借入借出
 	AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error)
+	// 创建聚集数据
+	CreateGather(ctx context.Context, in *CreateGatherReq, opts ...client.CallOption) (*CreateGatherRes, error)
 	// 获取借入借出聚集记录
 	LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error)
 	// 获取借入借入借出记录
@@ -789,6 +791,16 @@ func (c *datanodeService) AddLendLoan(ctx context.Context, in *AddLendLoanReq, o
 	return out, nil
 }
 
+func (c *datanodeService) CreateGather(ctx context.Context, in *CreateGatherReq, opts ...client.CallOption) (*CreateGatherRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.CreateGather", in)
+	out := new(CreateGatherRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *datanodeService) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.LendLoanGather", in)
 	out := new(LendLoanGatherRes)
@@ -941,6 +953,8 @@ type DatanodeServiceHandler interface {
 	GetFriends(context.Context, *GetFriendsReq, *GetFriendsRes) error
 	// 添加借入借出
 	AddLendLoan(context.Context, *AddLendLoanReq, *AddLendLoanRes) error
+	// 创建聚集数据
+	CreateGather(context.Context, *CreateGatherReq, *CreateGatherRes) error
 	// 获取借入借出聚集记录
 	LendLoanGather(context.Context, *LendLoanGatherReq, *LendLoanGatherRes) error
 	// 获取借入借入借出记录
@@ -1015,6 +1029,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		FriendsCount(ctx context.Context, in *FriendsCountReq, out *FriendsCountRes) error
 		GetFriends(ctx context.Context, in *GetFriendsReq, out *GetFriendsRes) error
 		AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error
+		CreateGather(ctx context.Context, in *CreateGatherReq, out *CreateGatherRes) error
 		LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error
 		LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error
 		GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error
@@ -1277,6 +1292,10 @@ func (h *datanodeServiceHandler) GetFriends(ctx context.Context, in *GetFriendsR
 
 func (h *datanodeServiceHandler) AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error {
 	return h.DatanodeServiceHandler.AddLendLoan(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) CreateGather(ctx context.Context, in *CreateGatherReq, out *CreateGatherRes) error {
+	return h.DatanodeServiceHandler.CreateGather(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error {

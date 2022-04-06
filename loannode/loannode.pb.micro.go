@@ -40,6 +40,8 @@ func NewLoannodeServiceEndpoints() []*api.Endpoint {
 type LoannodeService interface {
 	// 添加借入借出
 	AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error)
+	// 创建聚集数据
+	CreateGather(ctx context.Context, in *CreateGatherReq, opts ...client.CallOption) (*CreateGatherRes, error)
 	// 获取借入借出聚集记录
 	LendLoanGather(ctx context.Context, in *LendLoanGatherReq, opts ...client.CallOption) (*LendLoanGatherRes, error)
 	// 获取借入借入借出记录
@@ -65,6 +67,16 @@ func NewLoannodeService(name string, c client.Client) LoannodeService {
 func (c *loannodeService) AddLendLoan(ctx context.Context, in *AddLendLoanReq, opts ...client.CallOption) (*AddLendLoanRes, error) {
 	req := c.c.NewRequest(c.name, "LoannodeService.AddLendLoan", in)
 	out := new(AddLendLoanRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loannodeService) CreateGather(ctx context.Context, in *CreateGatherReq, opts ...client.CallOption) (*CreateGatherRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.CreateGather", in)
+	out := new(CreateGatherRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -117,6 +129,8 @@ func (c *loannodeService) LendLoanStatus(ctx context.Context, in *LendLoanStatus
 type LoannodeServiceHandler interface {
 	// 添加借入借出
 	AddLendLoan(context.Context, *AddLendLoanReq, *AddLendLoanRes) error
+	// 创建聚集数据
+	CreateGather(context.Context, *CreateGatherReq, *CreateGatherRes) error
 	// 获取借入借出聚集记录
 	LendLoanGather(context.Context, *LendLoanGatherReq, *LendLoanGatherRes) error
 	// 获取借入借入借出记录
@@ -130,6 +144,7 @@ type LoannodeServiceHandler interface {
 func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler, opts ...server.HandlerOption) error {
 	type loannodeService interface {
 		AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error
+		CreateGather(ctx context.Context, in *CreateGatherReq, out *CreateGatherRes) error
 		LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error
 		LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error
 		GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error
@@ -148,6 +163,10 @@ type loannodeServiceHandler struct {
 
 func (h *loannodeServiceHandler) AddLendLoan(ctx context.Context, in *AddLendLoanReq, out *AddLendLoanRes) error {
 	return h.LoannodeServiceHandler.AddLendLoan(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) CreateGather(ctx context.Context, in *CreateGatherReq, out *CreateGatherRes) error {
+	return h.LoannodeServiceHandler.CreateGather(ctx, in, out)
 }
 
 func (h *loannodeServiceHandler) LendLoanGather(ctx context.Context, in *LendLoanGatherReq, out *LendLoanGatherRes) error {
