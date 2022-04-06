@@ -83,6 +83,7 @@ message UserInfo {
     string                city = 5;
     string                country = 6;
     int64                 vip = 7;
+    int64                 uid = 8;
 }
 
 message WechatUserinfo {
@@ -472,4 +473,5 @@ message Gather {
     UserInfo                user_info = 3; // 用户信息(非自己的)
     LendLoanGather          gather_info = 4; // 聚集信息
     repeated LendLoan       lendloans = 5;  // 借入借出项
+    int64                   id = 6; 
 }
