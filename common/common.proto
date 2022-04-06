@@ -452,7 +452,7 @@ message LendLoanGather {
     string                  desc = 2;
     int64                   nd_uid = 3;
     int64                   an_uid = 4;
-    repeated string         ll_ids = 5;
+    string                  ll_ids = 5;
     int64                   status = 6;
     string                  bits = 7;
     int64                   expire = 8;
