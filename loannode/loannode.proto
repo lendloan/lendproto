@@ -61,7 +61,7 @@ message LendLoanReq {
 message LendLoanRes {
     rescode.Code                    rescode = 1;
     string                          resmsg = 2;
-    common.Gather                   gather = 3;
+    common.LendLoanGather           gather = 3;
     repeated common.LendLoan        lendloans = 4;
     map<string,string>              extra = 5;
 }
