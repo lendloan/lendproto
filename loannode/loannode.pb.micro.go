@@ -50,6 +50,9 @@ type LoannodeService interface {
 	GatherStatus(ctx context.Context, in *GatherStatusReq, opts ...client.CallOption) (*GatherStatusRes, error)
 	// 修改借入借出状态
 	LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, opts ...client.CallOption) (*LendLoanStatusRes, error)
+	// 更新借入借出的name以及媒体数据
+	LlendName(ctx context.Context, in *LlendNameReq, opts ...client.CallOption) (*LlendNameRes, error)
+	LlendMedia(ctx context.Context, in *LlendMediaReq, opts ...client.CallOption) (*LlendMediaRes, error)
 }
 
 type loannodeService struct {
@@ -124,6 +127,26 @@ func (c *loannodeService) LendLoanStatus(ctx context.Context, in *LendLoanStatus
 	return out, nil
 }
 
+func (c *loannodeService) LlendName(ctx context.Context, in *LlendNameReq, opts ...client.CallOption) (*LlendNameRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.LlendName", in)
+	out := new(LlendNameRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loannodeService) LlendMedia(ctx context.Context, in *LlendMediaReq, opts ...client.CallOption) (*LlendMediaRes, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.LlendMedia", in)
+	out := new(LlendMediaRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LoannodeService service
 
 type LoannodeServiceHandler interface {
@@ -139,6 +162,9 @@ type LoannodeServiceHandler interface {
 	GatherStatus(context.Context, *GatherStatusReq, *GatherStatusRes) error
 	// 修改借入借出状态
 	LendLoanStatus(context.Context, *LendLoanStatusReq, *LendLoanStatusRes) error
+	// 更新借入借出的name以及媒体数据
+	LlendName(context.Context, *LlendNameReq, *LlendNameRes) error
+	LlendMedia(context.Context, *LlendMediaReq, *LlendMediaRes) error
 }
 
 func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler, opts ...server.HandlerOption) error {
@@ -149,6 +175,8 @@ func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler
 		LendLoan(ctx context.Context, in *LendLoanReq, out *LendLoanRes) error
 		GatherStatus(ctx context.Context, in *GatherStatusReq, out *GatherStatusRes) error
 		LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error
+		LlendName(ctx context.Context, in *LlendNameReq, out *LlendNameRes) error
+		LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error
 	}
 	type LoannodeService struct {
 		loannodeService
@@ -183,4 +211,12 @@ func (h *loannodeServiceHandler) GatherStatus(ctx context.Context, in *GatherSta
 
 func (h *loannodeServiceHandler) LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error {
 	return h.LoannodeServiceHandler.LendLoanStatus(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) LlendName(ctx context.Context, in *LlendNameReq, out *LlendNameRes) error {
+	return h.LoannodeServiceHandler.LlendName(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error {
+	return h.LoannodeServiceHandler.LlendMedia(ctx, in, out)
 }
