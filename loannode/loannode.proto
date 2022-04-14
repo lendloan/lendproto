@@ -95,10 +95,11 @@ message LendLoanStatusRes {
 }
 
 message LlendNameReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    string                      name = 3;
-    map<string,string>          extra = 4;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    string                      name = 4;
+    map<string,string>          extra = 5;
 }
 
 message LlendNameRes {
@@ -108,10 +109,11 @@ message LlendNameRes {
 }
 
 message LlendMediaReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    common.ShareImage           media = 3;
-    map<string,string>          extra = 4;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    repeated common.ShareImage  media = 4;
+    map<string,string>          extra = 5;
 }
 
 message LlendMediaRes {

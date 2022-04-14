@@ -6,9 +6,10 @@ import "common/common.proto";
 option go_package="./sharenode";
 
 message AddShareReq {
-	common.ShareItem            share = 1;
-    repeated  int64             to_uids = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+	common.ShareItem            share = 2;
+    repeated  int64             to_uids = 3;
+    map<string,string>          extra = 4;
 }
 
 message AddShareRes {
@@ -18,10 +19,11 @@ message AddShareRes {
 }
 
 message ShareTitleReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    string                      title = 3;
-    map<string,string>          extra = 4;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    string                      title = 4;
+    map<string,string>          extra = 5;
 }
 
 message ShareTitleRes {
@@ -31,10 +33,11 @@ message ShareTitleRes {
 }
 
 message ShareMediaReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    common.ShareImage                  media = 3;
-    map<string,string>          extra = 4;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    repeated common.ShareImage  media = 4;
+    map<string,string>          extra = 5;
 }
 
 message ShareMediaRes {
@@ -44,10 +47,11 @@ message ShareMediaRes {
 }
 
 message ShareUidsReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    repeated  int64             to_uids = 3;
-    map<string,string>          extra = 4;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    repeated  int64             to_uids = 4;
+    map<string,string>          extra = 5;
 }
 
 message ShareUidsRes {
@@ -57,14 +61,15 @@ message ShareUidsRes {
 }
 
 message QueryShareReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    int64                       from_uid = 3;
-    int64                       start_at = 4;
-    int64                       end_at = 5;
-    int32                       page = 6;
-    int32                       size = 7;
-    map<string,string>          extra = 8;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    int64                       from_uid = 4;
+    int64                       start_at = 5;
+    int64                       end_at = 6;
+    int32                       page = 7;
+    int32                       size = 8;
+    map<string,string>          extra = 9;
 }
 
 message QueryShareRes {
@@ -75,8 +80,9 @@ message QueryShareRes {
 }
 
 message UpdateTemplateReq {
-    common.TemplateItem                 template = 1;
-    map<string, string>                 extra = 2;
+    common.Authorize            auth =  1;
+    common.TemplateItem         template = 2;
+    map<string, string>         extra = 3;
 }
 
 message UpdateTemplateRes {
@@ -86,10 +92,11 @@ message UpdateTemplateRes {
 }
 
 message QueryTemplateReq {
-    common.TemplateItem                 template = 1;
-    int32                               page = 2;
-    int32                               size = 3;
-    map<string, string>                 extra = 4;
+    common.Authorize                    auth =  1;
+    common.TemplateItem                 template = 2;
+    int32                               page = 3;
+    int32                               size = 4;
+    map<string, string>                 extra = 5;
 }
 
 message QueryTemplateRes {
@@ -100,10 +107,11 @@ message QueryTemplateRes {
 }
 
 message TemplateCountReq {
-    common.TemplateItem                 template = 1;
-    int32                               page = 2;
-    int32                               size = 3;
-    map<string, string>                 extra = 4;
+    common.Authorize                    auth =  1;
+    common.TemplateItem                 template = 2;
+    int32                               page = 3;
+    int32                               size = 4;
+    map<string, string>                 extra = 5;
 }
 
 message TemplateCountRes {
@@ -114,9 +122,10 @@ message TemplateCountRes {
 }
 
 message DelShareReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    map<string,string>          extra = 4;
 }
 
 message DelShareRes {
@@ -126,9 +135,10 @@ message DelShareRes {
 }
 
 message DelTemplateReq {
-    int64                       id = 1;
-    int64                       uid = 2;
-    map<string,string>          extra = 3;
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       uid = 3;
+    map<string,string>          extra = 4;
 }
 
 message DelTemplateRes {
