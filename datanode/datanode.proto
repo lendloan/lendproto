@@ -934,6 +934,20 @@ message LlendMediaRes {
     map<string,string>          extra = 3;
 }
 
+message BindStatusReq {
+    int64                       uid = 1;
+    string                      field = 2; // mobile,email
+    map<string,string>          extra = 3;
+}
+
+message BindStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    string                      field = 3;
+    bool                        isbind = 4;
+    map<string,string>          extra = 5; // ["mobile"];["email"]
+}
+
 service DatanodeService {
 	// ---------- 用户接口 ------- //
 	// 创建新用户
@@ -944,6 +958,8 @@ service DatanodeService {
 	rpc SearchUser(SearchUserReq) returns (SearchUserRes) {}
 	// 更新用户信息
 	rpc UpdateUserInfo(UpdateUserinfoReq) returns (UpdateUserinfoRes) {}
+    // 用户绑定状态查询
+    rpc BindStatus(BindStatusReq) returns (BindStatusRes) {}
 	
 	// ---------------- 文件 ------------------//
 	// 获取目录,目录之间的/替换成-

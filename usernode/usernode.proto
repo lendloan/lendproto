@@ -131,6 +131,21 @@ message GetUserInfoRes {
     map<string,string>        extra = 4;
 }
 
+message BindStatusReq {
+    common.Authorize            auth = 1;
+    int64                       uid = 2;
+    string                      field = 3; // mobile,email
+    map<string,string>          extra = 4;
+}
+
+message BindStatusRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    string                      field = 3;
+    bool                        isbind = 4;
+    map<string,string>          extra = 5; // ["mobile"];["email"]
+}
+
 service UsernodeService {
     // 更新用户信息
     rpc  UpdateUserInfo(UpdateUserinfoReq) returns(UpdateUserinfoRes) {}
@@ -152,6 +167,10 @@ service UsernodeService {
 
     // 用户VIP获取
     rpc UserVip(UserVipReq) returns (UserVipRes) {}
+
     // 获取用户基本信息
     rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRes) {}
+
+    // 用户绑定状态查询
+    rpc BindStatus(BindStatusReq) returns (BindStatusRes) {}
 }
