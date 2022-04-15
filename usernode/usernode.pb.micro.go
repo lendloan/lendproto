@@ -54,6 +54,8 @@ type UsernodeService interface {
 	UserVip(ctx context.Context, in *UserVipReq, opts ...client.CallOption) (*UserVipRes, error)
 	// 获取用户基本信息
 	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...client.CallOption) (*GetUserInfoRes, error)
+	// 用户绑定状态查询
+	BindStatus(ctx context.Context, in *BindStatusReq, opts ...client.CallOption) (*BindStatusRes, error)
 }
 
 type usernodeService struct {
@@ -148,6 +150,16 @@ func (c *usernodeService) GetUserInfo(ctx context.Context, in *GetUserInfoReq, o
 	return out, nil
 }
 
+func (c *usernodeService) BindStatus(ctx context.Context, in *BindStatusReq, opts ...client.CallOption) (*BindStatusRes, error) {
+	req := c.c.NewRequest(c.name, "UsernodeService.BindStatus", in)
+	out := new(BindStatusRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for UsernodeService service
 
 type UsernodeServiceHandler interface {
@@ -167,6 +179,8 @@ type UsernodeServiceHandler interface {
 	UserVip(context.Context, *UserVipReq, *UserVipRes) error
 	// 获取用户基本信息
 	GetUserInfo(context.Context, *GetUserInfoReq, *GetUserInfoRes) error
+	// 用户绑定状态查询
+	BindStatus(context.Context, *BindStatusReq, *BindStatusRes) error
 }
 
 func RegisterUsernodeServiceHandler(s server.Server, hdlr UsernodeServiceHandler, opts ...server.HandlerOption) error {
@@ -179,6 +193,7 @@ func RegisterUsernodeServiceHandler(s server.Server, hdlr UsernodeServiceHandler
 		UserScore(ctx context.Context, in *UserScoreReq, out *UserScoreRes) error
 		UserVip(ctx context.Context, in *UserVipReq, out *UserVipRes) error
 		GetUserInfo(ctx context.Context, in *GetUserInfoReq, out *GetUserInfoRes) error
+		BindStatus(ctx context.Context, in *BindStatusReq, out *BindStatusRes) error
 	}
 	type UsernodeService struct {
 		usernodeService
@@ -221,4 +236,8 @@ func (h *usernodeServiceHandler) UserVip(ctx context.Context, in *UserVipReq, ou
 
 func (h *usernodeServiceHandler) GetUserInfo(ctx context.Context, in *GetUserInfoReq, out *GetUserInfoRes) error {
 	return h.UsernodeServiceHandler.GetUserInfo(ctx, in, out)
+}
+
+func (h *usernodeServiceHandler) BindStatus(ctx context.Context, in *BindStatusReq, out *BindStatusRes) error {
+	return h.UsernodeServiceHandler.BindStatus(ctx, in, out)
 }
