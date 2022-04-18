@@ -164,6 +164,10 @@ type DatanodeService interface {
 	// 更新借入借出的name以及媒体数据
 	LlendName(ctx context.Context, in *LlendNameReq, opts ...client.CallOption) (*LlendNameRes, error)
 	LlendMedia(ctx context.Context, in *LlendMediaReq, opts ...client.CallOption) (*LlendMediaRes, error)
+	// 添加反馈
+	AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error)
+	// 获取反馈
+	GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error)
 }
 
 type datanodeService struct {
@@ -888,6 +892,26 @@ func (c *datanodeService) LlendMedia(ctx context.Context, in *LlendMediaReq, opt
 	return out, nil
 }
 
+func (c *datanodeService) AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddFeedback", in)
+	out := new(AddFeedbackRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.GetFeedback", in)
+	out := new(GetFeedbackRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -1017,6 +1041,10 @@ type DatanodeServiceHandler interface {
 	// 更新借入借出的name以及媒体数据
 	LlendName(context.Context, *LlendNameReq, *LlendNameRes) error
 	LlendMedia(context.Context, *LlendMediaReq, *LlendMediaRes) error
+	// 添加反馈
+	AddFeedback(context.Context, *AddFeedbackReq, *AddFeedbackRes) error
+	// 获取反馈
+	GetFeedback(context.Context, *GetFeedbackReq, *GetFeedbackRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -1092,6 +1120,8 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error
 		LlendName(ctx context.Context, in *LlendNameReq, out *LlendNameRes) error
 		LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error
+		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
+		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1386,4 +1416,12 @@ func (h *datanodeServiceHandler) LlendName(ctx context.Context, in *LlendNameReq
 
 func (h *datanodeServiceHandler) LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error {
 	return h.DatanodeServiceHandler.LlendMedia(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error {
+	return h.DatanodeServiceHandler.AddFeedback(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error {
+	return h.DatanodeServiceHandler.GetFeedback(ctx, in, out)
 }

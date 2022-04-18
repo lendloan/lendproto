@@ -44,6 +44,10 @@ type LognodeService interface {
 	QueryUserLog(ctx context.Context, in *QueryUserLogReq, opts ...client.CallOption) (*QueryUserLogRes, error)
 	// 日志数量
 	UserLogCount(ctx context.Context, in *UserLogCountReq, opts ...client.CallOption) (*UserLogCountRes, error)
+	// 添加反馈
+	AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error)
+	// 获取反馈
+	GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error)
 }
 
 type lognodeService struct {
@@ -98,6 +102,26 @@ func (c *lognodeService) UserLogCount(ctx context.Context, in *UserLogCountReq, 
 	return out, nil
 }
 
+func (c *lognodeService) AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error) {
+	req := c.c.NewRequest(c.name, "LognodeService.AddFeedback", in)
+	out := new(AddFeedbackRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lognodeService) GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error) {
+	req := c.c.NewRequest(c.name, "LognodeService.GetFeedback", in)
+	out := new(GetFeedbackRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LognodeService service
 
 type LognodeServiceHandler interface {
@@ -107,6 +131,10 @@ type LognodeServiceHandler interface {
 	QueryUserLog(context.Context, *QueryUserLogReq, *QueryUserLogRes) error
 	// 日志数量
 	UserLogCount(context.Context, *UserLogCountReq, *UserLogCountRes) error
+	// 添加反馈
+	AddFeedback(context.Context, *AddFeedbackReq, *AddFeedbackRes) error
+	// 获取反馈
+	GetFeedback(context.Context, *GetFeedbackReq, *GetFeedbackRes) error
 }
 
 func RegisterLognodeServiceHandler(s server.Server, hdlr LognodeServiceHandler, opts ...server.HandlerOption) error {
@@ -115,6 +143,8 @@ func RegisterLognodeServiceHandler(s server.Server, hdlr LognodeServiceHandler, 
 		CallLog(ctx context.Context, in *CallLogReq, out *common.Response) error
 		QueryUserLog(ctx context.Context, in *QueryUserLogReq, out *QueryUserLogRes) error
 		UserLogCount(ctx context.Context, in *UserLogCountReq, out *UserLogCountRes) error
+		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
+		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
 	}
 	type LognodeService struct {
 		lognodeService
@@ -141,4 +171,12 @@ func (h *lognodeServiceHandler) QueryUserLog(ctx context.Context, in *QueryUserL
 
 func (h *lognodeServiceHandler) UserLogCount(ctx context.Context, in *UserLogCountReq, out *UserLogCountRes) error {
 	return h.LognodeServiceHandler.UserLogCount(ctx, in, out)
+}
+
+func (h *lognodeServiceHandler) AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error {
+	return h.LognodeServiceHandler.AddFeedback(ctx, in, out)
+}
+
+func (h *lognodeServiceHandler) GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error {
+	return h.LognodeServiceHandler.GetFeedback(ctx, in, out)
 }
