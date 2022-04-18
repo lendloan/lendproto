@@ -115,7 +115,7 @@ message GetFeedbackReq {
      map<string,string>            extra = 6;
 }
 
-message AddFeedbackRes {
+message GetFeedbackRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     repeated common.Feedback    feedbacks = 3;
@@ -132,7 +132,7 @@ service LognodeService {
 	rpc  UserLogCount( UserLogCountReq) returns (UserLogCountRes) {}
 
      // 添加反馈
-    rpc AddFeedbackReq(AddFeedback) returns (AddFeedbackRex) {}
+    rpc AddFeedback(AddFeedbackReq) returns (AddFeedbackRes) {}
     // 获取反馈
     rpc GetFeedback(GetFeedbackReq) returns (GetFeedbackRes) {}
 }
