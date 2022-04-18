@@ -475,3 +475,12 @@ message Gather {
     repeated LendLoan       lendloans = 5;  // 借入借出项
     int64                   id = 6; 
 }
+
+message Feedback {
+    int64                   id = 1;
+    int64                   uid = 2;
+    string                  mobile = 3;
+    string                  images = 4;
+    string                  desc = 5;
+    int64                   create_at = 6;
+}

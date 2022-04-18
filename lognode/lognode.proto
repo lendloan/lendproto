@@ -93,6 +93,36 @@ message UserLogCountRes {
      map<string,string>        extra = 4;
 }
 
+
+message AddFeedbackReq {
+     common.Authorize              auth = 1;
+     common.Feedback               feedback = 2;
+     map<string,string>            extra = 3;
+}
+
+message AddFeedbackRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message GetFeedbackReq {
+     common.Authorize              auth = 1;
+     int64                         uid = 2;
+     string                        mobile = 3;
+     int32                         page = 4;
+     int32                         size = 5;
+     map<string,string>            extra = 6;
+}
+
+message AddFeedbackRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.Feedback    feedbacks = 3;
+    map<string,string>          extra = 4;
+}
+
+
 service LognodeService {
 	rpc  Log( LogReq) returns(common.Response) {}
 	rpc  CallLog( CallLogReq) returns (common.Response){}
@@ -100,4 +130,9 @@ service LognodeService {
 	rpc  QueryUserLog( QueryUserLogReq) returns (QueryUserLogRes) {}
 	// 日志数量
 	rpc  UserLogCount( UserLogCountReq) returns (UserLogCountRes) {}
+
+     // 添加反馈
+    rpc AddFeedbackReq(AddFeedback) returns (AddFeedbackRex) {}
+    // 获取反馈
+    rpc GetFeedback(GetFeedbackReq) returns (GetFeedbackRes) {}
 }
