@@ -49,6 +49,8 @@ type DatanodeService interface {
 	UpdateUserInfo(ctx context.Context, in *UpdateUserinfoReq, opts ...client.CallOption) (*UpdateUserinfoRes, error)
 	// 用户绑定状态查询
 	BindStatus(ctx context.Context, in *BindStatusReq, opts ...client.CallOption) (*BindStatusRes, error)
+	// 绑定用户信息
+	BindInfo(ctx context.Context, in *BindInfoReq, opts ...client.CallOption) (*BindInfoRes, error)
 	// ---------------- 文件 ------------------//
 	// 获取目录,目录之间的/替换成-
 	FileDirOne(ctx context.Context, in *FileDirReq, opts ...client.CallOption) (*FileDirRes, error)
@@ -219,6 +221,16 @@ func (c *datanodeService) UpdateUserInfo(ctx context.Context, in *UpdateUserinfo
 func (c *datanodeService) BindStatus(ctx context.Context, in *BindStatusReq, opts ...client.CallOption) (*BindStatusRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.BindStatus", in)
 	out := new(BindStatusRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) BindInfo(ctx context.Context, in *BindInfoReq, opts ...client.CallOption) (*BindInfoRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.BindInfo", in)
+	out := new(BindInfoRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -890,6 +902,8 @@ type DatanodeServiceHandler interface {
 	UpdateUserInfo(context.Context, *UpdateUserinfoReq, *UpdateUserinfoRes) error
 	// 用户绑定状态查询
 	BindStatus(context.Context, *BindStatusReq, *BindStatusRes) error
+	// 绑定用户信息
+	BindInfo(context.Context, *BindInfoReq, *BindInfoRes) error
 	// ---------------- 文件 ------------------//
 	// 获取目录,目录之间的/替换成-
 	FileDirOne(context.Context, *FileDirReq, *FileDirRes) error
@@ -1012,6 +1026,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		SearchUser(ctx context.Context, in *SearchUserReq, out *SearchUserRes) error
 		UpdateUserInfo(ctx context.Context, in *UpdateUserinfoReq, out *UpdateUserinfoRes) error
 		BindStatus(ctx context.Context, in *BindStatusReq, out *BindStatusRes) error
+		BindInfo(ctx context.Context, in *BindInfoReq, out *BindInfoRes) error
 		FileDirOne(ctx context.Context, in *FileDirReq, out *FileDirRes) error
 		FileDirAdd(ctx context.Context, in *AddDirReq, out *AddDirRes) error
 		AddFile(ctx context.Context, in *AddFileReq, out *AddFileRes) error
@@ -1107,6 +1122,10 @@ func (h *datanodeServiceHandler) UpdateUserInfo(ctx context.Context, in *UpdateU
 
 func (h *datanodeServiceHandler) BindStatus(ctx context.Context, in *BindStatusReq, out *BindStatusRes) error {
 	return h.DatanodeServiceHandler.BindStatus(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) BindInfo(ctx context.Context, in *BindInfoReq, out *BindInfoRes) error {
+	return h.DatanodeServiceHandler.BindInfo(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) FileDirOne(ctx context.Context, in *FileDirReq, out *FileDirRes) error {
