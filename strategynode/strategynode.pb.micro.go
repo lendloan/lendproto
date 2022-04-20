@@ -38,8 +38,8 @@ func NewStrategynodeServiceEndpoints() []*api.Endpoint {
 // Client API for StrategynodeService service
 
 type StrategynodeService interface {
-	// 添加共享记录
 	Query(ctx context.Context, in *QueryReq, opts ...client.CallOption) (*QueryRes, error)
+	Verify(ctx context.Context, in *VerifyReq, opts ...client.CallOption) (*VerifyRes, error)
 }
 
 type strategynodeService struct {
@@ -64,16 +64,27 @@ func (c *strategynodeService) Query(ctx context.Context, in *QueryReq, opts ...c
 	return out, nil
 }
 
+func (c *strategynodeService) Verify(ctx context.Context, in *VerifyReq, opts ...client.CallOption) (*VerifyRes, error) {
+	req := c.c.NewRequest(c.name, "StrategynodeService.Verify", in)
+	out := new(VerifyRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for StrategynodeService service
 
 type StrategynodeServiceHandler interface {
-	// 添加共享记录
 	Query(context.Context, *QueryReq, *QueryRes) error
+	Verify(context.Context, *VerifyReq, *VerifyRes) error
 }
 
 func RegisterStrategynodeServiceHandler(s server.Server, hdlr StrategynodeServiceHandler, opts ...server.HandlerOption) error {
 	type strategynodeService interface {
 		Query(ctx context.Context, in *QueryReq, out *QueryRes) error
+		Verify(ctx context.Context, in *VerifyReq, out *VerifyRes) error
 	}
 	type StrategynodeService struct {
 		strategynodeService
@@ -88,4 +99,8 @@ type strategynodeServiceHandler struct {
 
 func (h *strategynodeServiceHandler) Query(ctx context.Context, in *QueryReq, out *QueryRes) error {
 	return h.StrategynodeServiceHandler.Query(ctx, in, out)
+}
+
+func (h *strategynodeServiceHandler) Verify(ctx context.Context, in *VerifyReq, out *VerifyRes) error {
+	return h.StrategynodeServiceHandler.Verify(ctx, in, out)
 }
