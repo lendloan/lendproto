@@ -25,7 +25,19 @@ message QueryRes {
     map<string,string>          extra = 4;
 }
 
+message VerifyReq {
+    common.Authorize        auth = 1;
+    int64                   uid = 2;
+    map<string,string>      info = 3;
+}
+
+message VerifyRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
 service StrategynodeService {
-    // 添加共享记录
     rpc Query(QueryReq) returns (QueryRes) {}
+    rpc Verify(VerifyReq) returns (VerifyRes) {}
 }
