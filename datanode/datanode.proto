@@ -286,6 +286,20 @@ message SubmitCertRes {
     map<string,string>    extra = 3;
 }
 
+message SubCertImgReq {
+    int64                 uid = 1;
+    string                image_up = 2;
+    string                image_down = 3;
+    string                image_face = 4;
+    map<string,string>    extra = 5;
+}
+
+message SubCertImgRes {
+    rescode.Code          rescode = 1;
+    string                resmsg = 2;
+    map<string,string>    extra = 3;
+}
+
 message CertStatusReq {
     int64                 uid = 1;
     int64                 cert_uid = 2;
@@ -1039,12 +1053,15 @@ service DatanodeService {
 	
 	// 提交实名
 	rpc SubmitCert(SubmitCertReq) returns (SubmitCertRes) {}
+    // 提交实名图像
+    rpc SubCertImg(SubCertImgReq) returns (SubCertImgRes) {}
 	// 更新实名状态
 	rpc CertStatus(CertStatusReq) returns (CertStatusRes) {}
 	// 获取实名信息
 	rpc CertInfo(CertInfoReq) returns (CertInfoRes) {}
 	// 实名日志记录
 	rpc CertFlow(CertFlowReq) returns (CertFlowRes) {}
+
 	// 添加日志
 	rpc AddUserLog(AddUserLogReq) returns (AddUserLogRes) {}
 	// 获取日志
