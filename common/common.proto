@@ -484,3 +484,7 @@ message Feedback {
     string                  desc = 5;
     int64                   create_at = 6;
 }
+
+message ShareVisi {
+    int64                   uid = 1;
+}

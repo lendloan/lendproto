@@ -54,6 +54,8 @@ type SharenodeService interface {
 	ShareUids(ctx context.Context, in *ShareUidsReq, opts ...client.CallOption) (*ShareUidsRes, error)
 	DelShare(ctx context.Context, in *DelShareReq, opts ...client.CallOption) (*DelShareRes, error)
 	DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...client.CallOption) (*DelTemplateRes, error)
+	// 获取共享可见用户uid列表
+	ShareVisible(ctx context.Context, in *ShareVisibleReq, opts ...client.CallOption) (*ShareVisibleRes, error)
 }
 
 type sharenodeService struct {
@@ -168,6 +170,16 @@ func (c *sharenodeService) DelTemplate(ctx context.Context, in *DelTemplateReq, 
 	return out, nil
 }
 
+func (c *sharenodeService) ShareVisible(ctx context.Context, in *ShareVisibleReq, opts ...client.CallOption) (*ShareVisibleRes, error) {
+	req := c.c.NewRequest(c.name, "SharenodeService.ShareVisible", in)
+	out := new(ShareVisibleRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SharenodeService service
 
 type SharenodeServiceHandler interface {
@@ -187,6 +199,8 @@ type SharenodeServiceHandler interface {
 	ShareUids(context.Context, *ShareUidsReq, *ShareUidsRes) error
 	DelShare(context.Context, *DelShareReq, *DelShareRes) error
 	DelTemplate(context.Context, *DelTemplateReq, *DelTemplateRes) error
+	// 获取共享可见用户uid列表
+	ShareVisible(context.Context, *ShareVisibleReq, *ShareVisibleRes) error
 }
 
 func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandler, opts ...server.HandlerOption) error {
@@ -201,6 +215,7 @@ func RegisterSharenodeServiceHandler(s server.Server, hdlr SharenodeServiceHandl
 		ShareUids(ctx context.Context, in *ShareUidsReq, out *ShareUidsRes) error
 		DelShare(ctx context.Context, in *DelShareReq, out *DelShareRes) error
 		DelTemplate(ctx context.Context, in *DelTemplateReq, out *DelTemplateRes) error
+		ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error
 	}
 	type SharenodeService struct {
 		sharenodeService
@@ -251,4 +266,8 @@ func (h *sharenodeServiceHandler) DelShare(ctx context.Context, in *DelShareReq,
 
 func (h *sharenodeServiceHandler) DelTemplate(ctx context.Context, in *DelTemplateReq, out *DelTemplateRes) error {
 	return h.SharenodeServiceHandler.DelTemplate(ctx, in, out)
+}
+
+func (h *sharenodeServiceHandler) ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error {
+	return h.SharenodeServiceHandler.ShareVisible(ctx, in, out)
 }

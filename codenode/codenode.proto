@@ -24,7 +24,7 @@ message CodeReq {
     string                desc =  2;
     CodeType             type =  3;
     OperateType          optype =  4;
-    map<string,string>    extra =  5;
+    map<string,string>    extra =  5; // ["appid"] = 
 }
 
 message CodeRes {
@@ -39,7 +39,7 @@ message VerifyCodeReq {
     string                desc =  2;
     string                code =  3;
     OperateType          optype =  4;
-    map<string,string>    extra =  5;
+    map<string,string>    extra =  5; // ["appid"] = 
 }
 
 message VerifyCodeRes {

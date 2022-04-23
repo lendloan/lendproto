@@ -83,6 +83,8 @@ type DatanodeService interface {
 	BaiduEntity(ctx context.Context, in *BaiduEntityReq, opts ...client.CallOption) (*BaiduEntityRes, error)
 	// 提交实名
 	SubmitCert(ctx context.Context, in *SubmitCertReq, opts ...client.CallOption) (*SubmitCertRes, error)
+	// 提交实名图像
+	SubCertImg(ctx context.Context, in *SubCertImgReq, opts ...client.CallOption) (*SubCertImgRes, error)
 	// 更新实名状态
 	CertStatus(ctx context.Context, in *CertStatusReq, opts ...client.CallOption) (*CertStatusRes, error)
 	// 获取实名信息
@@ -168,6 +170,8 @@ type DatanodeService interface {
 	AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error)
 	// 获取反馈
 	GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error)
+	// 获取共享可见用户uid列表
+	ShareVisible(ctx context.Context, in *ShareVisibleReq, opts ...client.CallOption) (*ShareVisibleRes, error)
 }
 
 type datanodeService struct {
@@ -405,6 +409,16 @@ func (c *datanodeService) BaiduEntity(ctx context.Context, in *BaiduEntityReq, o
 func (c *datanodeService) SubmitCert(ctx context.Context, in *SubmitCertReq, opts ...client.CallOption) (*SubmitCertRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.SubmitCert", in)
 	out := new(SubmitCertRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) SubCertImg(ctx context.Context, in *SubCertImgReq, opts ...client.CallOption) (*SubCertImgRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.SubCertImg", in)
+	out := new(SubCertImgRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -912,6 +926,16 @@ func (c *datanodeService) GetFeedback(ctx context.Context, in *GetFeedbackReq, o
 	return out, nil
 }
 
+func (c *datanodeService) ShareVisible(ctx context.Context, in *ShareVisibleReq, opts ...client.CallOption) (*ShareVisibleRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.ShareVisible", in)
+	out := new(ShareVisibleRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -960,6 +984,8 @@ type DatanodeServiceHandler interface {
 	BaiduEntity(context.Context, *BaiduEntityReq, *BaiduEntityRes) error
 	// 提交实名
 	SubmitCert(context.Context, *SubmitCertReq, *SubmitCertRes) error
+	// 提交实名图像
+	SubCertImg(context.Context, *SubCertImgReq, *SubCertImgRes) error
 	// 更新实名状态
 	CertStatus(context.Context, *CertStatusReq, *CertStatusRes) error
 	// 获取实名信息
@@ -1045,6 +1071,8 @@ type DatanodeServiceHandler interface {
 	AddFeedback(context.Context, *AddFeedbackReq, *AddFeedbackRes) error
 	// 获取反馈
 	GetFeedback(context.Context, *GetFeedbackReq, *GetFeedbackRes) error
+	// 获取共享可见用户uid列表
+	ShareVisible(context.Context, *ShareVisibleReq, *ShareVisibleRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -1072,6 +1100,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		SetBaiduEntity(ctx context.Context, in *SetBaiduEntityReq, out *SetBaiduEntityRes) error
 		BaiduEntity(ctx context.Context, in *BaiduEntityReq, out *BaiduEntityRes) error
 		SubmitCert(ctx context.Context, in *SubmitCertReq, out *SubmitCertRes) error
+		SubCertImg(ctx context.Context, in *SubCertImgReq, out *SubCertImgRes) error
 		CertStatus(ctx context.Context, in *CertStatusReq, out *CertStatusRes) error
 		CertInfo(ctx context.Context, in *CertInfoReq, out *CertInfoRes) error
 		CertFlow(ctx context.Context, in *CertFlowReq, out *CertFlowRes) error
@@ -1122,6 +1151,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error
 		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
 		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
+		ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1224,6 +1254,10 @@ func (h *datanodeServiceHandler) BaiduEntity(ctx context.Context, in *BaiduEntit
 
 func (h *datanodeServiceHandler) SubmitCert(ctx context.Context, in *SubmitCertReq, out *SubmitCertRes) error {
 	return h.DatanodeServiceHandler.SubmitCert(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) SubCertImg(ctx context.Context, in *SubCertImgReq, out *SubCertImgRes) error {
+	return h.DatanodeServiceHandler.SubCertImg(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) CertStatus(ctx context.Context, in *CertStatusReq, out *CertStatusRes) error {
@@ -1424,4 +1458,8 @@ func (h *datanodeServiceHandler) AddFeedback(ctx context.Context, in *AddFeedbac
 
 func (h *datanodeServiceHandler) GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error {
 	return h.DatanodeServiceHandler.GetFeedback(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error {
+	return h.DatanodeServiceHandler.ShareVisible(ctx, in, out)
 }

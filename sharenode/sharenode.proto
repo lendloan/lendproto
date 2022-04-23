@@ -147,6 +147,19 @@ message DelTemplateRes {
     map<string,string>          extra = 3;
 }
 
+message ShareVisibleReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    map<string,string>          extra = 3;
+}
+
+message ShareVisibleRes {
+    rescode.Code                    rescode = 1;
+    string                          resmsg = 2;
+    repeated common.ShareVisi       visibles = 3;
+    map<string,string>              extra = 4;
+}
+
 service SharenodeService {
     // 添加共享记录
     rpc AddShare(AddShareReq) returns (AddShareRes) {}
@@ -168,4 +181,7 @@ service SharenodeService {
     rpc ShareUids(ShareUidsReq) returns (ShareUidsRes) {}
     rpc DelShare(DelShareReq) returns (DelShareRes) {}
     rpc DelTemplate(DelTemplateReq) returns (DelTemplateRes) {}
+
+    // 获取共享可见用户uid列表
+    rpc ShareVisible(ShareVisibleReq) returns (ShareVisibleRes) {}
 }
