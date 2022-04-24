@@ -40,6 +40,8 @@ func NewCertnodeServiceEndpoints() []*api.Endpoint {
 type CertnodeService interface {
 	// 提交实名
 	SubmitCert(ctx context.Context, in *SubmitCertReq, opts ...client.CallOption) (*SubmitCertRes, error)
+	// 提交实名图像
+	SubCertImg(ctx context.Context, in *SubCertImgReq, opts ...client.CallOption) (*SubCertImgRes, error)
 	// 获取实名信息
 	CertInfo(ctx context.Context, in *CertInfoReq, opts ...client.CallOption) (*CertInfoRes, error)
 	// 实名日志记录
@@ -72,6 +74,16 @@ func NewCertnodeService(name string, c client.Client) CertnodeService {
 func (c *certnodeService) SubmitCert(ctx context.Context, in *SubmitCertReq, opts ...client.CallOption) (*SubmitCertRes, error) {
 	req := c.c.NewRequest(c.name, "CertnodeService.SubmitCert", in)
 	out := new(SubmitCertRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *certnodeService) SubCertImg(ctx context.Context, in *SubCertImgReq, opts ...client.CallOption) (*SubCertImgRes, error) {
+	req := c.c.NewRequest(c.name, "CertnodeService.SubCertImg", in)
+	out := new(SubCertImgRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -154,6 +166,8 @@ func (c *certnodeService) CertStatus(ctx context.Context, in *CertStatusReq, opt
 type CertnodeServiceHandler interface {
 	// 提交实名
 	SubmitCert(context.Context, *SubmitCertReq, *SubmitCertRes) error
+	// 提交实名图像
+	SubCertImg(context.Context, *SubCertImgReq, *SubCertImgRes) error
 	// 获取实名信息
 	CertInfo(context.Context, *CertInfoReq, *CertInfoRes) error
 	// 实名日志记录
@@ -174,6 +188,7 @@ type CertnodeServiceHandler interface {
 func RegisterCertnodeServiceHandler(s server.Server, hdlr CertnodeServiceHandler, opts ...server.HandlerOption) error {
 	type certnodeService interface {
 		SubmitCert(ctx context.Context, in *SubmitCertReq, out *SubmitCertRes) error
+		SubCertImg(ctx context.Context, in *SubCertImgReq, out *SubCertImgRes) error
 		CertInfo(ctx context.Context, in *CertInfoReq, out *CertInfoRes) error
 		CertFlow(ctx context.Context, in *CertFlowReq, out *CertFlowRes) error
 		CertCancel(ctx context.Context, in *CertCancelReq, out *CertCancelRes) error
@@ -195,6 +210,10 @@ type certnodeServiceHandler struct {
 
 func (h *certnodeServiceHandler) SubmitCert(ctx context.Context, in *SubmitCertReq, out *SubmitCertRes) error {
 	return h.CertnodeServiceHandler.SubmitCert(ctx, in, out)
+}
+
+func (h *certnodeServiceHandler) SubCertImg(ctx context.Context, in *SubCertImgReq, out *SubCertImgRes) error {
+	return h.CertnodeServiceHandler.SubCertImg(ctx, in, out)
 }
 
 func (h *certnodeServiceHandler) CertInfo(ctx context.Context, in *CertInfoReq, out *CertInfoRes) error {
