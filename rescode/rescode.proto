@@ -55,4 +55,8 @@ enum Code {
     code_BAIDU_ENTITY_ERROR = 30062;         // 百度entity请求错误
     code_BAIDU_IDIDENT_ERROR = 30063;        // 百度身份证识别请求错误
     code_BAIDU_IDIDENT_FAIL = 30084;         // 百度身份证识别失败
+
+    code_CERT_STATUS_NOT_S0S = 40000;        // 状态不是S0S
+    code_CERT_STATUS_NOT_S0I = 40001;        // 状态不是S0I
+    code_CERT_STATUS_NOT_S0A = 40002;        // 状态不是S0A 
 }
