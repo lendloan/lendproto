@@ -48,9 +48,10 @@ enum FromPlatom {
     from_platom_FROM_ALIPAY     = 0x0002;    // 支付宝平台
 }
 
-enum CertTyoe {
-    cert_tyoe_ID              =   0x0000;     // 身份证实名
-    cert_tyoe_FACE            =   0x0001;     // 刷脸实名
+enum CertType {
+    cert_type_ID              =   0x0000;     // 身份证实名
+    cert_type_FACE            =   0x0001;     // 刷脸实名
+    cert_type_THRID           =   0x0002;     // 第三方实名
 }
 
 enum Update_userinfo_field {
@@ -177,7 +178,7 @@ message PersonCert {
     string                image_up = 4;
     string                image_down = 5;
     string                image_face = 6;
-    int32                 cert_type = 7;
+    CertType              cert_type = 7;
     string                status = 8;
     string                info = 9;
     string                mark = 10;

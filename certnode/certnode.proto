@@ -111,20 +111,6 @@ message CertCancelRes {
     map<string,string>        extra = 3;
 }
 
-message CertCacheReq {
-    common.Authorize      auth = 1;
-    string                key = 2;
-    string                value = 3;
-    int64                 expire = 4;
-    map<string,string>    extra = 5;
-}
-
-message CertCacheRes {
-    rescode.Code              rescode = 1;
-    string                    resmsg = 2;
-    map<string,string>        extra = 3;
-}
-
 message CertStatusReq {
     common.Authorize      auth = 1;
     int64                 uid = 2;
@@ -154,8 +140,6 @@ service CertnodeService {
 	rpc CertApproved(CertApprovedReq)  returns (CertApprovedRes) {}
 	// 实名失败 
 	rpc CertRefuse(CertRefuseReq) returns (CertRefuseRes) {}
-	// 实名缓存
-	rpc CertCache(CertCacheReq)  returns (CertCacheRes) {}
     // 实名状态
     rpc CertStatus(CertStatusReq) returns (CertStatusRes) {}
 }
