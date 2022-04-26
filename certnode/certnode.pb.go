@@ -1072,148 +1072,6 @@ func (x *CertCancelRes) GetExtra() map[string]string {
 	return nil
 }
 
-type CertCacheReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Auth   *common.Authorize `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
-	Key    string            `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
-	Value  string            `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
-	Expire int64             `protobuf:"varint,4,opt,name=expire,proto3" json:"expire,omitempty"`
-	Extra  map[string]string `protobuf:"bytes,5,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-}
-
-func (x *CertCacheReq) Reset() {
-	*x = CertCacheReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_certnode_proto_msgTypes[14]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CertCacheReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CertCacheReq) ProtoMessage() {}
-
-func (x *CertCacheReq) ProtoReflect() protoreflect.Message {
-	mi := &file_certnode_proto_msgTypes[14]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CertCacheReq.ProtoReflect.Descriptor instead.
-func (*CertCacheReq) Descriptor() ([]byte, []int) {
-	return file_certnode_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *CertCacheReq) GetAuth() *common.Authorize {
-	if x != nil {
-		return x.Auth
-	}
-	return nil
-}
-
-func (x *CertCacheReq) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-func (x *CertCacheReq) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
-func (x *CertCacheReq) GetExpire() int64 {
-	if x != nil {
-		return x.Expire
-	}
-	return 0
-}
-
-func (x *CertCacheReq) GetExtra() map[string]string {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
-type CertCacheRes struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Rescode rescode.Code      `protobuf:"varint,1,opt,name=rescode,proto3,enum=rescode.Code" json:"rescode,omitempty"`
-	Resmsg  string            `protobuf:"bytes,2,opt,name=resmsg,proto3" json:"resmsg,omitempty"`
-	Extra   map[string]string `protobuf:"bytes,3,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-}
-
-func (x *CertCacheRes) Reset() {
-	*x = CertCacheRes{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_certnode_proto_msgTypes[15]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CertCacheRes) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CertCacheRes) ProtoMessage() {}
-
-func (x *CertCacheRes) ProtoReflect() protoreflect.Message {
-	mi := &file_certnode_proto_msgTypes[15]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CertCacheRes.ProtoReflect.Descriptor instead.
-func (*CertCacheRes) Descriptor() ([]byte, []int) {
-	return file_certnode_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *CertCacheRes) GetRescode() rescode.Code {
-	if x != nil {
-		return x.Rescode
-	}
-	return rescode.Code(0)
-}
-
-func (x *CertCacheRes) GetResmsg() string {
-	if x != nil {
-		return x.Resmsg
-	}
-	return ""
-}
-
-func (x *CertCacheRes) GetExtra() map[string]string {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
 type CertStatusReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1227,7 +1085,7 @@ type CertStatusReq struct {
 func (x *CertStatusReq) Reset() {
 	*x = CertStatusReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_certnode_proto_msgTypes[16]
+		mi := &file_certnode_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1240,7 +1098,7 @@ func (x *CertStatusReq) String() string {
 func (*CertStatusReq) ProtoMessage() {}
 
 func (x *CertStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_certnode_proto_msgTypes[16]
+	mi := &file_certnode_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1253,7 +1111,7 @@ func (x *CertStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CertStatusReq.ProtoReflect.Descriptor instead.
 func (*CertStatusReq) Descriptor() ([]byte, []int) {
-	return file_certnode_proto_rawDescGZIP(), []int{16}
+	return file_certnode_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CertStatusReq) GetAuth() *common.Authorize {
@@ -1291,7 +1149,7 @@ type CertStatusRes struct {
 func (x *CertStatusRes) Reset() {
 	*x = CertStatusRes{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_certnode_proto_msgTypes[17]
+		mi := &file_certnode_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1304,7 +1162,7 @@ func (x *CertStatusRes) String() string {
 func (*CertStatusRes) ProtoMessage() {}
 
 func (x *CertStatusRes) ProtoReflect() protoreflect.Message {
-	mi := &file_certnode_proto_msgTypes[17]
+	mi := &file_certnode_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1317,7 +1175,7 @@ func (x *CertStatusRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CertStatusRes.ProtoReflect.Descriptor instead.
 func (*CertStatusRes) Descriptor() ([]byte, []int) {
-	return file_certnode_proto_rawDescGZIP(), []int{17}
+	return file_certnode_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CertStatusRes) GetRescode() rescode.Code {
@@ -1563,33 +1421,6 @@ var file_certnode_proto_rawDesc = []byte{
 	0x74, 0x72, 0x61, 0x1a, 0x38, 0x0a, 0x0a, 0x45, 0x78, 0x74, 0x72, 0x61, 0x45, 0x6e, 0x74, 0x72,
 	0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
 	0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xe8, 0x01,
-	0x0a, 0x0c, 0x43, 0x65, 0x72, 0x74, 0x43, 0x61, 0x63, 0x68, 0x65, 0x52, 0x65, 0x71, 0x12, 0x25,
-	0x0a, 0x04, 0x61, 0x75, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x63,
-	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x52,
-	0x04, 0x61, 0x75, 0x74, 0x68, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x16, 0x0a,
-	0x06, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x65,
-	0x78, 0x70, 0x69, 0x72, 0x65, 0x12, 0x37, 0x0a, 0x05, 0x65, 0x78, 0x74, 0x72, 0x61, 0x18, 0x05,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
-	0x43, 0x65, 0x72, 0x74, 0x43, 0x61, 0x63, 0x68, 0x65, 0x52, 0x65, 0x71, 0x2e, 0x45, 0x78, 0x74,
-	0x72, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x05, 0x65, 0x78, 0x74, 0x72, 0x61, 0x1a, 0x38,
-	0x0a, 0x0a, 0x45, 0x78, 0x74, 0x72, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
-	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14,
-	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76,
-	0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xc2, 0x01, 0x0a, 0x0c, 0x43, 0x65, 0x72,
-	0x74, 0x43, 0x61, 0x63, 0x68, 0x65, 0x52, 0x65, 0x73, 0x12, 0x27, 0x0a, 0x07, 0x72, 0x65, 0x73,
-	0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0d, 0x2e, 0x72, 0x65, 0x73,
-	0x63, 0x6f, 0x64, 0x65, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x07, 0x72, 0x65, 0x73, 0x63, 0x6f,
-	0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x6d, 0x73, 0x67, 0x12, 0x37, 0x0a, 0x05, 0x65, 0x78,
-	0x74, 0x72, 0x61, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x63, 0x65, 0x72, 0x74,
-	0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x43, 0x61, 0x63, 0x68, 0x65, 0x52, 0x65,
-	0x73, 0x2e, 0x45, 0x78, 0x74, 0x72, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x05, 0x65, 0x78,
-	0x74, 0x72, 0x61, 0x1a, 0x38, 0x0a, 0x0a, 0x45, 0x78, 0x74, 0x72, 0x61, 0x45, 0x6e, 0x74, 0x72,
-	0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
-	0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xbc, 0x01,
 	0x0a, 0x0d, 0x43, 0x65, 0x72, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x12,
 	0x25, 0x0a, 0x04, 0x61, 0x75, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e,
@@ -1616,7 +1447,7 @@ var file_certnode_proto_rawDesc = []byte{
 	0x61, 0x1a, 0x38, 0x0a, 0x0a, 0x45, 0x78, 0x74, 0x72, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12,
 	0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65,
 	0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x32, 0xda, 0x04, 0x0a, 0x0f,
+	0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x32, 0x9b, 0x04, 0x0a, 0x0f,
 	0x43, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
 	0x40, 0x0a, 0x0a, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x43, 0x65, 0x72, 0x74, 0x12, 0x17, 0x2e,
 	0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x43,
@@ -1646,16 +1477,12 @@ var file_certnode_proto_rawDesc = []byte{
 	0x75, 0x73, 0x65, 0x12, 0x17, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x43,
 	0x65, 0x72, 0x74, 0x52, 0x65, 0x66, 0x75, 0x73, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x63,
 	0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x52, 0x65, 0x66, 0x75,
-	0x73, 0x65, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12, 0x3d, 0x0a, 0x09, 0x43, 0x65, 0x72, 0x74, 0x43,
-	0x61, 0x63, 0x68, 0x65, 0x12, 0x16, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
-	0x43, 0x65, 0x72, 0x74, 0x43, 0x61, 0x63, 0x68, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x63,
-	0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x43, 0x61, 0x63, 0x68,
-	0x65, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x0a, 0x43, 0x65, 0x72, 0x74, 0x53, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x12, 0x17, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
-	0x43, 0x65, 0x72, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e,
-	0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x53, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x22, 0x00, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2f, 0x63, 0x65,
-	0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x65, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x0a, 0x43, 0x65, 0x72, 0x74, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x17, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65,
+	0x2e, 0x43, 0x65, 0x72, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x17,
+	0x2e, 0x63, 0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x53, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x22, 0x00, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2f, 0x63,
+	0x65, 0x72, 0x74, 0x6e, 0x6f, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1670,7 +1497,7 @@ func file_certnode_proto_rawDescGZIP() []byte {
 	return file_certnode_proto_rawDescData
 }
 
-var file_certnode_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_certnode_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_certnode_proto_goTypes = []interface{}{
 	(*SubmitCertReq)(nil),     // 0: certnode.SubmitCertReq
 	(*SubmitCertRes)(nil),     // 1: certnode.SubmitCertRes
@@ -1686,97 +1513,87 @@ var file_certnode_proto_goTypes = []interface{}{
 	(*CertFlowRes)(nil),       // 11: certnode.CertFlowRes
 	(*CertCancelReq)(nil),     // 12: certnode.CertCancelReq
 	(*CertCancelRes)(nil),     // 13: certnode.CertCancelRes
-	(*CertCacheReq)(nil),      // 14: certnode.CertCacheReq
-	(*CertCacheRes)(nil),      // 15: certnode.CertCacheRes
-	(*CertStatusReq)(nil),     // 16: certnode.CertStatusReq
-	(*CertStatusRes)(nil),     // 17: certnode.CertStatusRes
-	nil,                       // 18: certnode.SubmitCertReq.ExtraEntry
-	nil,                       // 19: certnode.SubmitCertRes.ExtraEntry
-	nil,                       // 20: certnode.SubCertImgReq.ExtraEntry
-	nil,                       // 21: certnode.SubCertImgRes.ExtraEntry
-	nil,                       // 22: certnode.CertApprovedReq.ExtraEntry
-	nil,                       // 23: certnode.CertApprovedRes.ExtraEntry
-	nil,                       // 24: certnode.CertRefuseReq.ExtraEntry
-	nil,                       // 25: certnode.CertRefuseRes.ExtraEntry
-	nil,                       // 26: certnode.CertInfoReq.ExtraEntry
-	nil,                       // 27: certnode.CertInfoRes.ExtraEntry
-	nil,                       // 28: certnode.CertFlowReq.ExtraEntry
-	nil,                       // 29: certnode.CertFlowRes.ExtraEntry
-	nil,                       // 30: certnode.CertCancelReq.ExtraEntry
-	nil,                       // 31: certnode.CertCancelRes.ExtraEntry
-	nil,                       // 32: certnode.CertCacheReq.ExtraEntry
-	nil,                       // 33: certnode.CertCacheRes.ExtraEntry
-	nil,                       // 34: certnode.CertStatusReq.ExtraEntry
-	nil,                       // 35: certnode.CertStatusRes.ExtraEntry
-	(*common.Authorize)(nil),  // 36: common.Authorize
-	(*common.PersonCert)(nil), // 37: common.PersonCert
-	(rescode.Code)(0),         // 38: rescode.Code
+	(*CertStatusReq)(nil),     // 14: certnode.CertStatusReq
+	(*CertStatusRes)(nil),     // 15: certnode.CertStatusRes
+	nil,                       // 16: certnode.SubmitCertReq.ExtraEntry
+	nil,                       // 17: certnode.SubmitCertRes.ExtraEntry
+	nil,                       // 18: certnode.SubCertImgReq.ExtraEntry
+	nil,                       // 19: certnode.SubCertImgRes.ExtraEntry
+	nil,                       // 20: certnode.CertApprovedReq.ExtraEntry
+	nil,                       // 21: certnode.CertApprovedRes.ExtraEntry
+	nil,                       // 22: certnode.CertRefuseReq.ExtraEntry
+	nil,                       // 23: certnode.CertRefuseRes.ExtraEntry
+	nil,                       // 24: certnode.CertInfoReq.ExtraEntry
+	nil,                       // 25: certnode.CertInfoRes.ExtraEntry
+	nil,                       // 26: certnode.CertFlowReq.ExtraEntry
+	nil,                       // 27: certnode.CertFlowRes.ExtraEntry
+	nil,                       // 28: certnode.CertCancelReq.ExtraEntry
+	nil,                       // 29: certnode.CertCancelRes.ExtraEntry
+	nil,                       // 30: certnode.CertStatusReq.ExtraEntry
+	nil,                       // 31: certnode.CertStatusRes.ExtraEntry
+	(*common.Authorize)(nil),  // 32: common.Authorize
+	(*common.PersonCert)(nil), // 33: common.PersonCert
+	(rescode.Code)(0),         // 34: rescode.Code
 }
 var file_certnode_proto_depIdxs = []int32{
-	36, // 0: certnode.SubmitCertReq.auth:type_name -> common.Authorize
-	37, // 1: certnode.SubmitCertReq.cert:type_name -> common.PersonCert
-	18, // 2: certnode.SubmitCertReq.extra:type_name -> certnode.SubmitCertReq.ExtraEntry
-	38, // 3: certnode.SubmitCertRes.rescode:type_name -> rescode.Code
-	19, // 4: certnode.SubmitCertRes.extra:type_name -> certnode.SubmitCertRes.ExtraEntry
-	36, // 5: certnode.SubCertImgReq.auth:type_name -> common.Authorize
-	20, // 6: certnode.SubCertImgReq.extra:type_name -> certnode.SubCertImgReq.ExtraEntry
-	38, // 7: certnode.SubCertImgRes.rescode:type_name -> rescode.Code
-	21, // 8: certnode.SubCertImgRes.extra:type_name -> certnode.SubCertImgRes.ExtraEntry
-	36, // 9: certnode.CertApprovedReq.auth:type_name -> common.Authorize
-	22, // 10: certnode.CertApprovedReq.extra:type_name -> certnode.CertApprovedReq.ExtraEntry
-	38, // 11: certnode.CertApprovedRes.rescode:type_name -> rescode.Code
-	37, // 12: certnode.CertApprovedRes.cert:type_name -> common.PersonCert
-	23, // 13: certnode.CertApprovedRes.extra:type_name -> certnode.CertApprovedRes.ExtraEntry
-	36, // 14: certnode.CertRefuseReq.auth:type_name -> common.Authorize
-	24, // 15: certnode.CertRefuseReq.extra:type_name -> certnode.CertRefuseReq.ExtraEntry
-	38, // 16: certnode.CertRefuseRes.rescode:type_name -> rescode.Code
-	37, // 17: certnode.CertRefuseRes.cert:type_name -> common.PersonCert
-	25, // 18: certnode.CertRefuseRes.extra:type_name -> certnode.CertRefuseRes.ExtraEntry
-	36, // 19: certnode.CertInfoReq.auth:type_name -> common.Authorize
-	26, // 20: certnode.CertInfoReq.extra:type_name -> certnode.CertInfoReq.ExtraEntry
-	38, // 21: certnode.CertInfoRes.rescode:type_name -> rescode.Code
-	37, // 22: certnode.CertInfoRes.cert:type_name -> common.PersonCert
-	27, // 23: certnode.CertInfoRes.extra:type_name -> certnode.CertInfoRes.ExtraEntry
-	36, // 24: certnode.CertFlowReq.auth:type_name -> common.Authorize
-	28, // 25: certnode.CertFlowReq.extra:type_name -> certnode.CertFlowReq.ExtraEntry
-	38, // 26: certnode.CertFlowRes.rescode:type_name -> rescode.Code
-	37, // 27: certnode.CertFlowRes.cert:type_name -> common.PersonCert
-	29, // 28: certnode.CertFlowRes.extra:type_name -> certnode.CertFlowRes.ExtraEntry
-	36, // 29: certnode.CertCancelReq.auth:type_name -> common.Authorize
-	30, // 30: certnode.CertCancelReq.extra:type_name -> certnode.CertCancelReq.ExtraEntry
-	38, // 31: certnode.CertCancelRes.rescode:type_name -> rescode.Code
-	31, // 32: certnode.CertCancelRes.extra:type_name -> certnode.CertCancelRes.ExtraEntry
-	36, // 33: certnode.CertCacheReq.auth:type_name -> common.Authorize
-	32, // 34: certnode.CertCacheReq.extra:type_name -> certnode.CertCacheReq.ExtraEntry
-	38, // 35: certnode.CertCacheRes.rescode:type_name -> rescode.Code
-	33, // 36: certnode.CertCacheRes.extra:type_name -> certnode.CertCacheRes.ExtraEntry
-	36, // 37: certnode.CertStatusReq.auth:type_name -> common.Authorize
-	34, // 38: certnode.CertStatusReq.extra:type_name -> certnode.CertStatusReq.ExtraEntry
-	38, // 39: certnode.CertStatusRes.rescode:type_name -> rescode.Code
-	35, // 40: certnode.CertStatusRes.extra:type_name -> certnode.CertStatusRes.ExtraEntry
-	0,  // 41: certnode.CertnodeService.SubmitCert:input_type -> certnode.SubmitCertReq
-	2,  // 42: certnode.CertnodeService.SubCertImg:input_type -> certnode.SubCertImgReq
-	8,  // 43: certnode.CertnodeService.CertInfo:input_type -> certnode.CertInfoReq
-	10, // 44: certnode.CertnodeService.CertFlow:input_type -> certnode.CertFlowReq
-	12, // 45: certnode.CertnodeService.CertCancel:input_type -> certnode.CertCancelReq
-	4,  // 46: certnode.CertnodeService.CertApproved:input_type -> certnode.CertApprovedReq
-	6,  // 47: certnode.CertnodeService.CertRefuse:input_type -> certnode.CertRefuseReq
-	14, // 48: certnode.CertnodeService.CertCache:input_type -> certnode.CertCacheReq
-	16, // 49: certnode.CertnodeService.CertStatus:input_type -> certnode.CertStatusReq
-	1,  // 50: certnode.CertnodeService.SubmitCert:output_type -> certnode.SubmitCertRes
-	3,  // 51: certnode.CertnodeService.SubCertImg:output_type -> certnode.SubCertImgRes
-	9,  // 52: certnode.CertnodeService.CertInfo:output_type -> certnode.CertInfoRes
-	11, // 53: certnode.CertnodeService.CertFlow:output_type -> certnode.CertFlowRes
-	13, // 54: certnode.CertnodeService.CertCancel:output_type -> certnode.CertCancelRes
-	5,  // 55: certnode.CertnodeService.CertApproved:output_type -> certnode.CertApprovedRes
-	7,  // 56: certnode.CertnodeService.CertRefuse:output_type -> certnode.CertRefuseRes
-	15, // 57: certnode.CertnodeService.CertCache:output_type -> certnode.CertCacheRes
-	17, // 58: certnode.CertnodeService.CertStatus:output_type -> certnode.CertStatusRes
-	50, // [50:59] is the sub-list for method output_type
-	41, // [41:50] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	32, // 0: certnode.SubmitCertReq.auth:type_name -> common.Authorize
+	33, // 1: certnode.SubmitCertReq.cert:type_name -> common.PersonCert
+	16, // 2: certnode.SubmitCertReq.extra:type_name -> certnode.SubmitCertReq.ExtraEntry
+	34, // 3: certnode.SubmitCertRes.rescode:type_name -> rescode.Code
+	17, // 4: certnode.SubmitCertRes.extra:type_name -> certnode.SubmitCertRes.ExtraEntry
+	32, // 5: certnode.SubCertImgReq.auth:type_name -> common.Authorize
+	18, // 6: certnode.SubCertImgReq.extra:type_name -> certnode.SubCertImgReq.ExtraEntry
+	34, // 7: certnode.SubCertImgRes.rescode:type_name -> rescode.Code
+	19, // 8: certnode.SubCertImgRes.extra:type_name -> certnode.SubCertImgRes.ExtraEntry
+	32, // 9: certnode.CertApprovedReq.auth:type_name -> common.Authorize
+	20, // 10: certnode.CertApprovedReq.extra:type_name -> certnode.CertApprovedReq.ExtraEntry
+	34, // 11: certnode.CertApprovedRes.rescode:type_name -> rescode.Code
+	33, // 12: certnode.CertApprovedRes.cert:type_name -> common.PersonCert
+	21, // 13: certnode.CertApprovedRes.extra:type_name -> certnode.CertApprovedRes.ExtraEntry
+	32, // 14: certnode.CertRefuseReq.auth:type_name -> common.Authorize
+	22, // 15: certnode.CertRefuseReq.extra:type_name -> certnode.CertRefuseReq.ExtraEntry
+	34, // 16: certnode.CertRefuseRes.rescode:type_name -> rescode.Code
+	33, // 17: certnode.CertRefuseRes.cert:type_name -> common.PersonCert
+	23, // 18: certnode.CertRefuseRes.extra:type_name -> certnode.CertRefuseRes.ExtraEntry
+	32, // 19: certnode.CertInfoReq.auth:type_name -> common.Authorize
+	24, // 20: certnode.CertInfoReq.extra:type_name -> certnode.CertInfoReq.ExtraEntry
+	34, // 21: certnode.CertInfoRes.rescode:type_name -> rescode.Code
+	33, // 22: certnode.CertInfoRes.cert:type_name -> common.PersonCert
+	25, // 23: certnode.CertInfoRes.extra:type_name -> certnode.CertInfoRes.ExtraEntry
+	32, // 24: certnode.CertFlowReq.auth:type_name -> common.Authorize
+	26, // 25: certnode.CertFlowReq.extra:type_name -> certnode.CertFlowReq.ExtraEntry
+	34, // 26: certnode.CertFlowRes.rescode:type_name -> rescode.Code
+	33, // 27: certnode.CertFlowRes.cert:type_name -> common.PersonCert
+	27, // 28: certnode.CertFlowRes.extra:type_name -> certnode.CertFlowRes.ExtraEntry
+	32, // 29: certnode.CertCancelReq.auth:type_name -> common.Authorize
+	28, // 30: certnode.CertCancelReq.extra:type_name -> certnode.CertCancelReq.ExtraEntry
+	34, // 31: certnode.CertCancelRes.rescode:type_name -> rescode.Code
+	29, // 32: certnode.CertCancelRes.extra:type_name -> certnode.CertCancelRes.ExtraEntry
+	32, // 33: certnode.CertStatusReq.auth:type_name -> common.Authorize
+	30, // 34: certnode.CertStatusReq.extra:type_name -> certnode.CertStatusReq.ExtraEntry
+	34, // 35: certnode.CertStatusRes.rescode:type_name -> rescode.Code
+	31, // 36: certnode.CertStatusRes.extra:type_name -> certnode.CertStatusRes.ExtraEntry
+	0,  // 37: certnode.CertnodeService.SubmitCert:input_type -> certnode.SubmitCertReq
+	2,  // 38: certnode.CertnodeService.SubCertImg:input_type -> certnode.SubCertImgReq
+	8,  // 39: certnode.CertnodeService.CertInfo:input_type -> certnode.CertInfoReq
+	10, // 40: certnode.CertnodeService.CertFlow:input_type -> certnode.CertFlowReq
+	12, // 41: certnode.CertnodeService.CertCancel:input_type -> certnode.CertCancelReq
+	4,  // 42: certnode.CertnodeService.CertApproved:input_type -> certnode.CertApprovedReq
+	6,  // 43: certnode.CertnodeService.CertRefuse:input_type -> certnode.CertRefuseReq
+	14, // 44: certnode.CertnodeService.CertStatus:input_type -> certnode.CertStatusReq
+	1,  // 45: certnode.CertnodeService.SubmitCert:output_type -> certnode.SubmitCertRes
+	3,  // 46: certnode.CertnodeService.SubCertImg:output_type -> certnode.SubCertImgRes
+	9,  // 47: certnode.CertnodeService.CertInfo:output_type -> certnode.CertInfoRes
+	11, // 48: certnode.CertnodeService.CertFlow:output_type -> certnode.CertFlowRes
+	13, // 49: certnode.CertnodeService.CertCancel:output_type -> certnode.CertCancelRes
+	5,  // 50: certnode.CertnodeService.CertApproved:output_type -> certnode.CertApprovedRes
+	7,  // 51: certnode.CertnodeService.CertRefuse:output_type -> certnode.CertRefuseRes
+	15, // 52: certnode.CertnodeService.CertStatus:output_type -> certnode.CertStatusRes
+	45, // [45:53] is the sub-list for method output_type
+	37, // [37:45] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_certnode_proto_init() }
@@ -1954,30 +1771,6 @@ func file_certnode_proto_init() {
 			}
 		}
 		file_certnode_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CertCacheReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_certnode_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CertCacheRes); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_certnode_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CertStatusReq); i {
 			case 0:
 				return &v.state
@@ -1989,7 +1782,7 @@ func file_certnode_proto_init() {
 				return nil
 			}
 		}
-		file_certnode_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_certnode_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CertStatusRes); i {
 			case 0:
 				return &v.state
@@ -2008,7 +1801,7 @@ func file_certnode_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_certnode_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   36,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

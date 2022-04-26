@@ -53,8 +53,6 @@ type CertnodeService interface {
 	CertApproved(ctx context.Context, in *CertApprovedReq, opts ...client.CallOption) (*CertApprovedRes, error)
 	// 实名失败
 	CertRefuse(ctx context.Context, in *CertRefuseReq, opts ...client.CallOption) (*CertRefuseRes, error)
-	// 实名缓存
-	CertCache(ctx context.Context, in *CertCacheReq, opts ...client.CallOption) (*CertCacheRes, error)
 	// 实名状态
 	CertStatus(ctx context.Context, in *CertStatusReq, opts ...client.CallOption) (*CertStatusRes, error)
 }
@@ -141,16 +139,6 @@ func (c *certnodeService) CertRefuse(ctx context.Context, in *CertRefuseReq, opt
 	return out, nil
 }
 
-func (c *certnodeService) CertCache(ctx context.Context, in *CertCacheReq, opts ...client.CallOption) (*CertCacheRes, error) {
-	req := c.c.NewRequest(c.name, "CertnodeService.CertCache", in)
-	out := new(CertCacheRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *certnodeService) CertStatus(ctx context.Context, in *CertStatusReq, opts ...client.CallOption) (*CertStatusRes, error) {
 	req := c.c.NewRequest(c.name, "CertnodeService.CertStatus", in)
 	out := new(CertStatusRes)
@@ -179,8 +167,6 @@ type CertnodeServiceHandler interface {
 	CertApproved(context.Context, *CertApprovedReq, *CertApprovedRes) error
 	// 实名失败
 	CertRefuse(context.Context, *CertRefuseReq, *CertRefuseRes) error
-	// 实名缓存
-	CertCache(context.Context, *CertCacheReq, *CertCacheRes) error
 	// 实名状态
 	CertStatus(context.Context, *CertStatusReq, *CertStatusRes) error
 }
@@ -194,7 +180,6 @@ func RegisterCertnodeServiceHandler(s server.Server, hdlr CertnodeServiceHandler
 		CertCancel(ctx context.Context, in *CertCancelReq, out *CertCancelRes) error
 		CertApproved(ctx context.Context, in *CertApprovedReq, out *CertApprovedRes) error
 		CertRefuse(ctx context.Context, in *CertRefuseReq, out *CertRefuseRes) error
-		CertCache(ctx context.Context, in *CertCacheReq, out *CertCacheRes) error
 		CertStatus(ctx context.Context, in *CertStatusReq, out *CertStatusRes) error
 	}
 	type CertnodeService struct {
@@ -234,10 +219,6 @@ func (h *certnodeServiceHandler) CertApproved(ctx context.Context, in *CertAppro
 
 func (h *certnodeServiceHandler) CertRefuse(ctx context.Context, in *CertRefuseReq, out *CertRefuseRes) error {
 	return h.CertnodeServiceHandler.CertRefuse(ctx, in, out)
-}
-
-func (h *certnodeServiceHandler) CertCache(ctx context.Context, in *CertCacheReq, out *CertCacheRes) error {
-	return h.CertnodeServiceHandler.CertCache(ctx, in, out)
 }
 
 func (h *certnodeServiceHandler) CertStatus(ctx context.Context, in *CertStatusReq, out *CertStatusRes) error {
