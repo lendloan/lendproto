@@ -490,3 +490,19 @@ message Feedback {
 message ShareVisi {
     int64                   uid = 1;
 }
+
+enum StrategyType {
+    Verify_PASS             = 1;    // 密码验证
+    Verify_Sms_Code         = 2;    // 手机验证码
+    Verify_Image_Code       = 3;    // 图像验证码
+}
+
+message Strategy {
+    StrategyType        type = 1;   // 策略类型
+    string              title = 2;  // 策略标题
+    string              info = 3;   // 策略信息
+    string              detail = 4; // 策略明细
+    string              notify = 5; // 路由 
+    string              style = 6;  // dialog/page/toast
+    map<string,string>  extra = 7;
+}
