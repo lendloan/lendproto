@@ -122,6 +122,19 @@ message LlendMediaRes {
     map<string,string>          extra = 3;
 }
 
+message LlendTotalReq {
+    int64                       id = 1;
+    int64                       uid = 2;
+    int64                       total = 3;
+    map<string,string>          extra = 4;
+}
+
+message LlendTotalRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
 service LoannodeService {
     // 添加借入借出
     rpc AddLendLoan(AddLendLoanReq) returns (AddLendLoanRes) {}
@@ -139,4 +152,5 @@ service LoannodeService {
     // 更新借入借出的name以及媒体数据
     rpc LlendName(LlendNameReq) returns (LlendNameRes) {}
     rpc LlendMedia(LlendMediaReq) returns (LlendMediaRes) {}
+    rpc LlendTotal(LlendTotalReq) returns (LlendTotalReq) {}
 }
