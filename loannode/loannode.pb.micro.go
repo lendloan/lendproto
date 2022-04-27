@@ -53,6 +53,7 @@ type LoannodeService interface {
 	// 更新借入借出的name以及媒体数据
 	LlendName(ctx context.Context, in *LlendNameReq, opts ...client.CallOption) (*LlendNameRes, error)
 	LlendMedia(ctx context.Context, in *LlendMediaReq, opts ...client.CallOption) (*LlendMediaRes, error)
+	LlendTotal(ctx context.Context, in *LlendTotalReq, opts ...client.CallOption) (*LlendTotalReq, error)
 }
 
 type loannodeService struct {
@@ -147,6 +148,16 @@ func (c *loannodeService) LlendMedia(ctx context.Context, in *LlendMediaReq, opt
 	return out, nil
 }
 
+func (c *loannodeService) LlendTotal(ctx context.Context, in *LlendTotalReq, opts ...client.CallOption) (*LlendTotalReq, error) {
+	req := c.c.NewRequest(c.name, "LoannodeService.LlendTotal", in)
+	out := new(LlendTotalReq)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LoannodeService service
 
 type LoannodeServiceHandler interface {
@@ -165,6 +176,7 @@ type LoannodeServiceHandler interface {
 	// 更新借入借出的name以及媒体数据
 	LlendName(context.Context, *LlendNameReq, *LlendNameRes) error
 	LlendMedia(context.Context, *LlendMediaReq, *LlendMediaRes) error
+	LlendTotal(context.Context, *LlendTotalReq, *LlendTotalReq) error
 }
 
 func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler, opts ...server.HandlerOption) error {
@@ -177,6 +189,7 @@ func RegisterLoannodeServiceHandler(s server.Server, hdlr LoannodeServiceHandler
 		LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error
 		LlendName(ctx context.Context, in *LlendNameReq, out *LlendNameRes) error
 		LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error
+		LlendTotal(ctx context.Context, in *LlendTotalReq, out *LlendTotalReq) error
 	}
 	type LoannodeService struct {
 		loannodeService
@@ -219,4 +232,8 @@ func (h *loannodeServiceHandler) LlendName(ctx context.Context, in *LlendNameReq
 
 func (h *loannodeServiceHandler) LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error {
 	return h.LoannodeServiceHandler.LlendMedia(ctx, in, out)
+}
+
+func (h *loannodeServiceHandler) LlendTotal(ctx context.Context, in *LlendTotalReq, out *LlendTotalReq) error {
+	return h.LoannodeServiceHandler.LlendTotal(ctx, in, out)
 }
