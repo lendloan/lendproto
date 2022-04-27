@@ -436,16 +436,17 @@ message LendLoan  {
     string                  guid = 4;
     string                  name = 5;
     repeated ShareImage     images = 6;
-    string                  location = 7;
-    string                  nd_ip = 8;
-    string                  an_ip = 9;
-    string                  nd_dvid = 10;
-    string                  an_dvid = 11;
-    int64                   status = 12;
-    int64                   expire = 13;
-    int64                   create_at = 14;
-    int64                   update_at = 15;
-    map<string,string>      extra = 16;
+    int64                   total = 7;
+    string                  location = 8;
+    string                  nd_ip = 9;
+    string                  an_ip = 10;
+    string                  nd_dvid = 11;
+    string                  an_dvid = 12;
+    int64                   status = 13;
+    int64                   expire = 14;
+    int64                   create_at = 15;
+    int64                   update_at = 16;
+    map<string,string>      extra = 17;
 }
 
 
