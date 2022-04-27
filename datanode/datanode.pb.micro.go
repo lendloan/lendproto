@@ -166,7 +166,7 @@ type DatanodeService interface {
 	// 更新借入借出的name以及媒体数据
 	LlendName(ctx context.Context, in *LlendNameReq, opts ...client.CallOption) (*LlendNameRes, error)
 	LlendMedia(ctx context.Context, in *LlendMediaReq, opts ...client.CallOption) (*LlendMediaRes, error)
-	LlendTotal(ctx context.Context, in *LlendTotalReq, opts ...client.CallOption) (*LlendTotalReq, error)
+	LlendTotal(ctx context.Context, in *LlendTotalReq, opts ...client.CallOption) (*LlendTotalRes, error)
 	// 添加反馈
 	AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error)
 	// 获取反馈
@@ -907,9 +907,9 @@ func (c *datanodeService) LlendMedia(ctx context.Context, in *LlendMediaReq, opt
 	return out, nil
 }
 
-func (c *datanodeService) LlendTotal(ctx context.Context, in *LlendTotalReq, opts ...client.CallOption) (*LlendTotalReq, error) {
+func (c *datanodeService) LlendTotal(ctx context.Context, in *LlendTotalReq, opts ...client.CallOption) (*LlendTotalRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.LlendTotal", in)
-	out := new(LlendTotalReq)
+	out := new(LlendTotalRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1078,7 +1078,7 @@ type DatanodeServiceHandler interface {
 	// 更新借入借出的name以及媒体数据
 	LlendName(context.Context, *LlendNameReq, *LlendNameRes) error
 	LlendMedia(context.Context, *LlendMediaReq, *LlendMediaRes) error
-	LlendTotal(context.Context, *LlendTotalReq, *LlendTotalReq) error
+	LlendTotal(context.Context, *LlendTotalReq, *LlendTotalRes) error
 	// 添加反馈
 	AddFeedback(context.Context, *AddFeedbackReq, *AddFeedbackRes) error
 	// 获取反馈
@@ -1161,7 +1161,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		LendLoanStatus(ctx context.Context, in *LendLoanStatusReq, out *LendLoanStatusRes) error
 		LlendName(ctx context.Context, in *LlendNameReq, out *LlendNameRes) error
 		LlendMedia(ctx context.Context, in *LlendMediaReq, out *LlendMediaRes) error
-		LlendTotal(ctx context.Context, in *LlendTotalReq, out *LlendTotalReq) error
+		LlendTotal(ctx context.Context, in *LlendTotalReq, out *LlendTotalRes) error
 		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
 		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
 		ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error
@@ -1465,7 +1465,7 @@ func (h *datanodeServiceHandler) LlendMedia(ctx context.Context, in *LlendMediaR
 	return h.DatanodeServiceHandler.LlendMedia(ctx, in, out)
 }
 
-func (h *datanodeServiceHandler) LlendTotal(ctx context.Context, in *LlendTotalReq, out *LlendTotalReq) error {
+func (h *datanodeServiceHandler) LlendTotal(ctx context.Context, in *LlendTotalReq, out *LlendTotalRes) error {
 	return h.DatanodeServiceHandler.LlendTotal(ctx, in, out)
 }
 
