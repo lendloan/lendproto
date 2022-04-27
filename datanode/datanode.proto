@@ -1175,7 +1175,7 @@ service DatanodeService {
     // 更新借入借出的name以及媒体数据
     rpc LlendName(LlendNameReq) returns (LlendNameRes) {}
     rpc LlendMedia(LlendMediaReq) returns (LlendMediaRes) {}
-    rpc LlendTotal(LlendTotalReq) returns (LlendTotalReq) {}
+    rpc LlendTotal(LlendTotalReq) returns (LlendTotalRes) {}
 
     // 添加反馈
     rpc AddFeedback(AddFeedbackReq) returns (AddFeedbackRes) {}

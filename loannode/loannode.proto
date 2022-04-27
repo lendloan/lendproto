@@ -152,5 +152,5 @@ service LoannodeService {
     // 更新借入借出的name以及媒体数据
     rpc LlendName(LlendNameReq) returns (LlendNameRes) {}
     rpc LlendMedia(LlendMediaReq) returns (LlendMediaRes) {}
-    rpc LlendTotal(LlendTotalReq) returns (LlendTotalReq) {}
+    rpc LlendTotal(LlendTotalReq) returns (LlendTotalRes) {}
 }
