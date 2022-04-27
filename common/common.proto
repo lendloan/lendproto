@@ -492,6 +492,7 @@ message ShareVisi {
 }
 
 enum StrategyType {
+    Verify_None		    = 0;    // 不需要验证
     Verify_PASS             = 1;    // 密码验证
     Verify_Sms_Code         = 2;    // 手机验证码
     Verify_Image_Code       = 3;    // 图像验证码

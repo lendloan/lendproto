@@ -42,6 +42,10 @@ type RegisternodeService interface {
 	NormalUser(ctx context.Context, in *NormalUserReq, opts ...client.CallOption) (*NormalUserRes, error)
 	// 创建合作用户
 	CooperatorUser(ctx context.Context, in *CooperatorUserReq, opts ...client.CallOption) (*CooperatorUserRes, error)
+	// 添加反馈
+	AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error)
+	// 获取反馈
+	GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error)
 }
 
 type registernodeService struct {
@@ -76,6 +80,26 @@ func (c *registernodeService) CooperatorUser(ctx context.Context, in *Cooperator
 	return out, nil
 }
 
+func (c *registernodeService) AddFeedback(ctx context.Context, in *AddFeedbackReq, opts ...client.CallOption) (*AddFeedbackRes, error) {
+	req := c.c.NewRequest(c.name, "RegisternodeService.AddFeedback", in)
+	out := new(AddFeedbackRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *registernodeService) GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error) {
+	req := c.c.NewRequest(c.name, "RegisternodeService.GetFeedback", in)
+	out := new(GetFeedbackRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for RegisternodeService service
 
 type RegisternodeServiceHandler interface {
@@ -83,12 +107,18 @@ type RegisternodeServiceHandler interface {
 	NormalUser(context.Context, *NormalUserReq, *NormalUserRes) error
 	// 创建合作用户
 	CooperatorUser(context.Context, *CooperatorUserReq, *CooperatorUserRes) error
+	// 添加反馈
+	AddFeedback(context.Context, *AddFeedbackReq, *AddFeedbackRes) error
+	// 获取反馈
+	GetFeedback(context.Context, *GetFeedbackReq, *GetFeedbackRes) error
 }
 
 func RegisterRegisternodeServiceHandler(s server.Server, hdlr RegisternodeServiceHandler, opts ...server.HandlerOption) error {
 	type registernodeService interface {
 		NormalUser(ctx context.Context, in *NormalUserReq, out *NormalUserRes) error
 		CooperatorUser(ctx context.Context, in *CooperatorUserReq, out *CooperatorUserRes) error
+		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
+		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
 	}
 	type RegisternodeService struct {
 		registernodeService
@@ -107,4 +137,12 @@ func (h *registernodeServiceHandler) NormalUser(ctx context.Context, in *NormalU
 
 func (h *registernodeServiceHandler) CooperatorUser(ctx context.Context, in *CooperatorUserReq, out *CooperatorUserRes) error {
 	return h.RegisternodeServiceHandler.CooperatorUser(ctx, in, out)
+}
+
+func (h *registernodeServiceHandler) AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error {
+	return h.RegisternodeServiceHandler.AddFeedback(ctx, in, out)
+}
+
+func (h *registernodeServiceHandler) GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error {
+	return h.RegisternodeServiceHandler.GetFeedback(ctx, in, out)
 }
