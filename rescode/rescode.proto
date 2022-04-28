@@ -59,6 +59,7 @@ enum Code {
     code_CERT_STATUS_NOT_S0S = 40000;        // 状态不是S0S
     code_CERT_STATUS_NOT_S0I = 40001;        // 状态不是S0I
     code_CERT_STATUS_NOT_S0A = 40002;        // 状态不是S0A 
+    code_CERT_STATUS_NOT_S0X = 40003;        // 状态不是S0A 
 
     code_RULES_NEED_NEXT_VERIFY = 11001;    // 下一步验证
     code_RULES_REJECT_LOGIN = 11002;        // 拒绝登陆
