@@ -134,11 +134,6 @@ type DatanodeService interface {
 	AddShare(ctx context.Context, in *AddShareReq, opts ...client.CallOption) (*AddShareRes, error)
 	// 获取共享记录
 	QueryShare(ctx context.Context, in *QueryShareReq, opts ...client.CallOption) (*QueryShareRes, error)
-	// 我的物品
-	AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, opts ...client.CallOption) (*AddMeGoodsCategoryRes, error)
-	GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, opts ...client.CallOption) (*GetMeGoodsCategoryRes, error)
-	UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, opts ...client.CallOption) (*UpdateMeGoodsRes, error)
-	QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error)
 	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error)
 	QueryTemplate(ctx context.Context, in *QueryTemplateReq, opts ...client.CallOption) (*QueryTemplateRes, error)
 	TemplateCount(ctx context.Context, in *TemplateCountReq, opts ...client.CallOption) (*TemplateCountRes, error)
@@ -173,6 +168,12 @@ type DatanodeService interface {
 	GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error)
 	// 获取共享可见用户uid列表
 	ShareVisible(ctx context.Context, in *ShareVisibleReq, opts ...client.CallOption) (*ShareVisibleRes, error)
+	AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, opts ...client.CallOption) (*AddGoodsTotalRes, error)
+	UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, opts ...client.CallOption) (*UpdateGoodsCateRes, error)
+	UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, opts ...client.CallOption) (*UpdateGoodsNameRes, error)
+	UpdateGoodsIntro(ctx context.Context, in *UpdateGoodsIntroReq, opts ...client.CallOption) (*UpdateGoodsIntroRes, error)
+	UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, opts ...client.CallOption) (*UpdateGoodsPriceRes, error)
+	Goods(ctx context.Context, in *GoodsReq, opts ...client.CallOption) (*GoodsRes, error)
 }
 
 type datanodeService struct {
@@ -677,46 +678,6 @@ func (c *datanodeService) QueryShare(ctx context.Context, in *QueryShareReq, opt
 	return out, nil
 }
 
-func (c *datanodeService) AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, opts ...client.CallOption) (*AddMeGoodsCategoryRes, error) {
-	req := c.c.NewRequest(c.name, "DatanodeService.AddMeGoodsCategory", in)
-	out := new(AddMeGoodsCategoryRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *datanodeService) GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, opts ...client.CallOption) (*GetMeGoodsCategoryRes, error) {
-	req := c.c.NewRequest(c.name, "DatanodeService.GetMeGoodsCategory", in)
-	out := new(GetMeGoodsCategoryRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *datanodeService) UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, opts ...client.CallOption) (*UpdateMeGoodsRes, error) {
-	req := c.c.NewRequest(c.name, "DatanodeService.UpdateMeGoods", in)
-	out := new(UpdateMeGoodsRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *datanodeService) QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, opts ...client.CallOption) (*QueryMeGoodsRes, error) {
-	req := c.c.NewRequest(c.name, "DatanodeService.QueryMeGoods", in)
-	out := new(QueryMeGoodsRes)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *datanodeService) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...client.CallOption) (*UpdateTemplateRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.UpdateTemplate", in)
 	out := new(UpdateTemplateRes)
@@ -947,6 +908,66 @@ func (c *datanodeService) ShareVisible(ctx context.Context, in *ShareVisibleReq,
 	return out, nil
 }
 
+func (c *datanodeService) AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, opts ...client.CallOption) (*AddGoodsTotalRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddGoodsTotal", in)
+	out := new(AddGoodsTotalRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, opts ...client.CallOption) (*UpdateGoodsCateRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateGoodsCate", in)
+	out := new(UpdateGoodsCateRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, opts ...client.CallOption) (*UpdateGoodsNameRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateGoodsName", in)
+	out := new(UpdateGoodsNameRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) UpdateGoodsIntro(ctx context.Context, in *UpdateGoodsIntroReq, opts ...client.CallOption) (*UpdateGoodsIntroRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateGoodsIntro", in)
+	out := new(UpdateGoodsIntroRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, opts ...client.CallOption) (*UpdateGoodsPriceRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateGoodsPrice", in)
+	out := new(UpdateGoodsPriceRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) Goods(ctx context.Context, in *GoodsReq, opts ...client.CallOption) (*GoodsRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.Goods", in)
+	out := new(GoodsRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -1046,11 +1067,6 @@ type DatanodeServiceHandler interface {
 	AddShare(context.Context, *AddShareReq, *AddShareRes) error
 	// 获取共享记录
 	QueryShare(context.Context, *QueryShareReq, *QueryShareRes) error
-	// 我的物品
-	AddMeGoodsCategory(context.Context, *AddMeGoodsCategoryReq, *AddMeGoodsCategoryRes) error
-	GetMeGoodsCategory(context.Context, *GetMeGoodsCategoryReq, *GetMeGoodsCategoryRes) error
-	UpdateMeGoods(context.Context, *UpdateMeGoodsReq, *UpdateMeGoodsRes) error
-	QueryMeGoods(context.Context, *QueryMeGoodsReq, *QueryMeGoodsRes) error
 	UpdateTemplate(context.Context, *UpdateTemplateReq, *UpdateTemplateRes) error
 	QueryTemplate(context.Context, *QueryTemplateReq, *QueryTemplateRes) error
 	TemplateCount(context.Context, *TemplateCountReq, *TemplateCountRes) error
@@ -1085,6 +1101,12 @@ type DatanodeServiceHandler interface {
 	GetFeedback(context.Context, *GetFeedbackReq, *GetFeedbackRes) error
 	// 获取共享可见用户uid列表
 	ShareVisible(context.Context, *ShareVisibleReq, *ShareVisibleRes) error
+	AddGoodsTotal(context.Context, *AddGoodsTotalReq, *AddGoodsTotalRes) error
+	UpdateGoodsCate(context.Context, *UpdateGoodsCateReq, *UpdateGoodsCateRes) error
+	UpdateGoodsName(context.Context, *UpdateGoodsNameReq, *UpdateGoodsNameRes) error
+	UpdateGoodsIntro(context.Context, *UpdateGoodsIntroReq, *UpdateGoodsIntroRes) error
+	UpdateGoodsPrice(context.Context, *UpdateGoodsPriceReq, *UpdateGoodsPriceRes) error
+	Goods(context.Context, *GoodsReq, *GoodsRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -1138,10 +1160,6 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		FootLog(ctx context.Context, in *FootLogReq, out *FootLogRes) error
 		AddShare(ctx context.Context, in *AddShareReq, out *AddShareRes) error
 		QueryShare(ctx context.Context, in *QueryShareReq, out *QueryShareRes) error
-		AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, out *AddMeGoodsCategoryRes) error
-		GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, out *GetMeGoodsCategoryRes) error
-		UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error
-		QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error
 		UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error
 		QueryTemplate(ctx context.Context, in *QueryTemplateReq, out *QueryTemplateRes) error
 		TemplateCount(ctx context.Context, in *TemplateCountReq, out *TemplateCountRes) error
@@ -1165,6 +1183,12 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
 		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
 		ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error
+		AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, out *AddGoodsTotalRes) error
+		UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, out *UpdateGoodsCateRes) error
+		UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, out *UpdateGoodsNameRes) error
+		UpdateGoodsIntro(ctx context.Context, in *UpdateGoodsIntroReq, out *UpdateGoodsIntroRes) error
+		UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, out *UpdateGoodsPriceRes) error
+		Goods(ctx context.Context, in *GoodsReq, out *GoodsRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1373,22 +1397,6 @@ func (h *datanodeServiceHandler) QueryShare(ctx context.Context, in *QueryShareR
 	return h.DatanodeServiceHandler.QueryShare(ctx, in, out)
 }
 
-func (h *datanodeServiceHandler) AddMeGoodsCategory(ctx context.Context, in *AddMeGoodsCategoryReq, out *AddMeGoodsCategoryRes) error {
-	return h.DatanodeServiceHandler.AddMeGoodsCategory(ctx, in, out)
-}
-
-func (h *datanodeServiceHandler) GetMeGoodsCategory(ctx context.Context, in *GetMeGoodsCategoryReq, out *GetMeGoodsCategoryRes) error {
-	return h.DatanodeServiceHandler.GetMeGoodsCategory(ctx, in, out)
-}
-
-func (h *datanodeServiceHandler) UpdateMeGoods(ctx context.Context, in *UpdateMeGoodsReq, out *UpdateMeGoodsRes) error {
-	return h.DatanodeServiceHandler.UpdateMeGoods(ctx, in, out)
-}
-
-func (h *datanodeServiceHandler) QueryMeGoods(ctx context.Context, in *QueryMeGoodsReq, out *QueryMeGoodsRes) error {
-	return h.DatanodeServiceHandler.QueryMeGoods(ctx, in, out)
-}
-
 func (h *datanodeServiceHandler) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, out *UpdateTemplateRes) error {
 	return h.DatanodeServiceHandler.UpdateTemplate(ctx, in, out)
 }
@@ -1479,4 +1487,28 @@ func (h *datanodeServiceHandler) GetFeedback(ctx context.Context, in *GetFeedbac
 
 func (h *datanodeServiceHandler) ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error {
 	return h.DatanodeServiceHandler.ShareVisible(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, out *AddGoodsTotalRes) error {
+	return h.DatanodeServiceHandler.AddGoodsTotal(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, out *UpdateGoodsCateRes) error {
+	return h.DatanodeServiceHandler.UpdateGoodsCate(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, out *UpdateGoodsNameRes) error {
+	return h.DatanodeServiceHandler.UpdateGoodsName(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateGoodsIntro(ctx context.Context, in *UpdateGoodsIntroReq, out *UpdateGoodsIntroRes) error {
+	return h.DatanodeServiceHandler.UpdateGoodsIntro(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, out *UpdateGoodsPriceRes) error {
+	return h.DatanodeServiceHandler.UpdateGoodsPrice(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) Goods(ctx context.Context, in *GoodsReq, out *GoodsRes) error {
+	return h.DatanodeServiceHandler.Goods(ctx, in, out)
 }
