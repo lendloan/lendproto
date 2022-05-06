@@ -398,27 +398,6 @@ message TemplateItem {
     map<string,string>      extra = 6;
 }
 
-message MeGoodsCategory {
-    int64                   id = 1;
-    int64                   uid = 2;
-    string                  name = 3;
-    string                  icon = 4;
-    int64                   create_at = 5;
-}
-
-message MeGoods {
-    int64                   id = 1;
-    int64                   cate_id = 2;
-    int64                   uid = 3;
-    string                  name = 4;
-    string                  info = 5;
-    repeated ShareImage     media = 6;
-    int64                   total = 7;
-    int64                   price = 8;
-    int64                   status = 9;
-    string                  extra = 10;
-    int64                   createAt = 11;
-}
 
 enum LendLoan_Status {
     WAIT_LOAN               = 0x00000; // 创建状态
@@ -508,6 +487,15 @@ message Strategy {
     map<string,string>  extra = 7;
 }
 
+
+message GoodsCategory {
+    int64                   id = 1;
+    int64                   uid = 2;
+    string                  name = 3;
+    string                  icon = 4;
+    int64                   create_at = 5;
+}
+
 message GoodsTotal  {
     int64                   id = 1;
     int64                   uid = 2;
@@ -516,7 +504,8 @@ message GoodsTotal  {
     string                  intro = 5;
     int64                   price = 6;
     repeated ShareImage     media = 7;
-    int64                   create_at = 8;
-    int64                   update_at = 9;
-    map<string,string>      extra = 10;
+    string                  cate_name = 8;
+    int64                   create_at = 9;
+    int64                   update_at = 10;
+    map<string,string>      extra = 11;
 }

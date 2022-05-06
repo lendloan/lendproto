@@ -986,6 +986,31 @@ message AddGoodsTotalReq {
     map<string,string>              extra = 2;
 }
 
+
+message AddGoodsCategoryReq {
+    int64                       op = 1;
+    common.GoodsCategory        category = 2;
+    map<string, string>         extra = 3;
+}
+
+message AddGoodsCategoryRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message GoodsCategoryReq {
+    int64                       uid = 1;
+    map<string, string>         extra = 2;
+}
+
+message GoodsCategoryRes {
+    rescode.Code                        rescode = 1;
+    string                              resmsg = 2;
+    repeated common.GoodsCategory       categorys = 3;
+    map<string,string>                  extra = 4;
+}
+
 message AddGoodsTotalRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
@@ -1206,6 +1231,9 @@ service DatanodeService {
     // 获取共享可见用户uid列表
     rpc ShareVisible(ShareVisibleReq) returns (ShareVisibleRes) {}
 
+    // 我的物品
+    rpc AddGoodsCategory(AddGoodsCategoryReq) returns (AddGoodsCategoryRes) {}
+    rpc GoodsCategory(GoodsCategoryReq) returns (GoodsCategoryRes) {}
     rpc AddGoodsTotal(AddGoodsTotalReq) returns (AddGoodsTotalRes) {}
     rpc UpdateGoodsCate(UpdateGoodsCateReq) returns (UpdateGoodsCateRes) {}
     rpc UpdateGoodsName(UpdateGoodsNameReq) returns (UpdateGoodsNameRes) {}
