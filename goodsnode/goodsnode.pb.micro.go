@@ -38,6 +38,9 @@ func NewGoodsnodeServiceEndpoints() []*api.Endpoint {
 // Client API for GoodsnodeService service
 
 type GoodsnodeService interface {
+	// 我的物品
+	AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, opts ...client.CallOption) (*AddGoodsCategoryRes, error)
+	GoodsCategory(ctx context.Context, in *GoodsCategoryReq, opts ...client.CallOption) (*GoodsCategoryRes, error)
 	AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, opts ...client.CallOption) (*AddGoodsTotalRes, error)
 	UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, opts ...client.CallOption) (*UpdateGoodsCateRes, error)
 	UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, opts ...client.CallOption) (*UpdateGoodsNameRes, error)
@@ -56,6 +59,26 @@ func NewGoodsnodeService(name string, c client.Client) GoodsnodeService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *goodsnodeService) AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, opts ...client.CallOption) (*AddGoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "GoodsnodeService.AddGoodsCategory", in)
+	out := new(AddGoodsCategoryRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *goodsnodeService) GoodsCategory(ctx context.Context, in *GoodsCategoryReq, opts ...client.CallOption) (*GoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "GoodsnodeService.GoodsCategory", in)
+	out := new(GoodsCategoryRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *goodsnodeService) AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, opts ...client.CallOption) (*AddGoodsTotalRes, error) {
@@ -121,6 +144,9 @@ func (c *goodsnodeService) Goods(ctx context.Context, in *GoodsReq, opts ...clie
 // Server API for GoodsnodeService service
 
 type GoodsnodeServiceHandler interface {
+	// 我的物品
+	AddGoodsCategory(context.Context, *AddGoodsCategoryReq, *AddGoodsCategoryRes) error
+	GoodsCategory(context.Context, *GoodsCategoryReq, *GoodsCategoryRes) error
 	AddGoodsTotal(context.Context, *AddGoodsTotalReq, *AddGoodsTotalRes) error
 	UpdateGoodsCate(context.Context, *UpdateGoodsCateReq, *UpdateGoodsCateRes) error
 	UpdateGoodsName(context.Context, *UpdateGoodsNameReq, *UpdateGoodsNameRes) error
@@ -131,6 +157,8 @@ type GoodsnodeServiceHandler interface {
 
 func RegisterGoodsnodeServiceHandler(s server.Server, hdlr GoodsnodeServiceHandler, opts ...server.HandlerOption) error {
 	type goodsnodeService interface {
+		AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, out *AddGoodsCategoryRes) error
+		GoodsCategory(ctx context.Context, in *GoodsCategoryReq, out *GoodsCategoryRes) error
 		AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, out *AddGoodsTotalRes) error
 		UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, out *UpdateGoodsCateRes) error
 		UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, out *UpdateGoodsNameRes) error
@@ -147,6 +175,14 @@ func RegisterGoodsnodeServiceHandler(s server.Server, hdlr GoodsnodeServiceHandl
 
 type goodsnodeServiceHandler struct {
 	GoodsnodeServiceHandler
+}
+
+func (h *goodsnodeServiceHandler) AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, out *AddGoodsCategoryRes) error {
+	return h.GoodsnodeServiceHandler.AddGoodsCategory(ctx, in, out)
+}
+
+func (h *goodsnodeServiceHandler) GoodsCategory(ctx context.Context, in *GoodsCategoryReq, out *GoodsCategoryRes) error {
+	return h.GoodsnodeServiceHandler.GoodsCategory(ctx, in, out)
 }
 
 func (h *goodsnodeServiceHandler) AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, out *AddGoodsTotalRes) error {

@@ -168,6 +168,9 @@ type DatanodeService interface {
 	GetFeedback(ctx context.Context, in *GetFeedbackReq, opts ...client.CallOption) (*GetFeedbackRes, error)
 	// 获取共享可见用户uid列表
 	ShareVisible(ctx context.Context, in *ShareVisibleReq, opts ...client.CallOption) (*ShareVisibleRes, error)
+	// 我的物品
+	AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, opts ...client.CallOption) (*AddGoodsCategoryRes, error)
+	GoodsCategory(ctx context.Context, in *GoodsCategoryReq, opts ...client.CallOption) (*GoodsCategoryRes, error)
 	AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, opts ...client.CallOption) (*AddGoodsTotalRes, error)
 	UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, opts ...client.CallOption) (*UpdateGoodsCateRes, error)
 	UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, opts ...client.CallOption) (*UpdateGoodsNameRes, error)
@@ -908,6 +911,26 @@ func (c *datanodeService) ShareVisible(ctx context.Context, in *ShareVisibleReq,
 	return out, nil
 }
 
+func (c *datanodeService) AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, opts ...client.CallOption) (*AddGoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.AddGoodsCategory", in)
+	out := new(AddGoodsCategoryRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) GoodsCategory(ctx context.Context, in *GoodsCategoryReq, opts ...client.CallOption) (*GoodsCategoryRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.GoodsCategory", in)
+	out := new(GoodsCategoryRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *datanodeService) AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, opts ...client.CallOption) (*AddGoodsTotalRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.AddGoodsTotal", in)
 	out := new(AddGoodsTotalRes)
@@ -1101,6 +1124,9 @@ type DatanodeServiceHandler interface {
 	GetFeedback(context.Context, *GetFeedbackReq, *GetFeedbackRes) error
 	// 获取共享可见用户uid列表
 	ShareVisible(context.Context, *ShareVisibleReq, *ShareVisibleRes) error
+	// 我的物品
+	AddGoodsCategory(context.Context, *AddGoodsCategoryReq, *AddGoodsCategoryRes) error
+	GoodsCategory(context.Context, *GoodsCategoryReq, *GoodsCategoryRes) error
 	AddGoodsTotal(context.Context, *AddGoodsTotalReq, *AddGoodsTotalRes) error
 	UpdateGoodsCate(context.Context, *UpdateGoodsCateReq, *UpdateGoodsCateRes) error
 	UpdateGoodsName(context.Context, *UpdateGoodsNameReq, *UpdateGoodsNameRes) error
@@ -1183,6 +1209,8 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		AddFeedback(ctx context.Context, in *AddFeedbackReq, out *AddFeedbackRes) error
 		GetFeedback(ctx context.Context, in *GetFeedbackReq, out *GetFeedbackRes) error
 		ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error
+		AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, out *AddGoodsCategoryRes) error
+		GoodsCategory(ctx context.Context, in *GoodsCategoryReq, out *GoodsCategoryRes) error
 		AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, out *AddGoodsTotalRes) error
 		UpdateGoodsCate(ctx context.Context, in *UpdateGoodsCateReq, out *UpdateGoodsCateRes) error
 		UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, out *UpdateGoodsNameRes) error
@@ -1487,6 +1515,14 @@ func (h *datanodeServiceHandler) GetFeedback(ctx context.Context, in *GetFeedbac
 
 func (h *datanodeServiceHandler) ShareVisible(ctx context.Context, in *ShareVisibleReq, out *ShareVisibleRes) error {
 	return h.DatanodeServiceHandler.ShareVisible(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) AddGoodsCategory(ctx context.Context, in *AddGoodsCategoryReq, out *AddGoodsCategoryRes) error {
+	return h.DatanodeServiceHandler.AddGoodsCategory(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) GoodsCategory(ctx context.Context, in *GoodsCategoryReq, out *GoodsCategoryRes) error {
+	return h.DatanodeServiceHandler.GoodsCategory(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) AddGoodsTotal(ctx context.Context, in *AddGoodsTotalReq, out *AddGoodsTotalRes) error {
