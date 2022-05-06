@@ -646,54 +646,6 @@ message QueryShareRes {
     map<string,string>          extra = 4;
 }
 
-message AddMeGoodsCategoryReq {
-    int64                       op = 1;
-    common.MeGoodsCategory      category = 2;
-    map<string, string>         extra = 3;
-}
-
-message AddMeGoodsCategoryRes {
-    rescode.Code                rescode = 1;
-    string                      resmsg = 2;
-    map<string,string>          extra = 3;
-}
-
-message GetMeGoodsCategoryReq {
-    int64                       uid = 1;
-    map<string, string>         extra = 2;
-}
-
-message GetMeGoodsCategoryRes {
-    rescode.Code                        rescode = 1;
-    string                              resmsg = 2;
-    repeated common.MeGoodsCategory     categorys = 3;
-    map<string,string>                  extra = 4;
-}
-
-message UpdateMeGoodsReq {
-    int64                       op = 1;
-    common.MeGoods              goods = 2;
-    map<string,string>          extra = 3;
-}
-
-message UpdateMeGoodsRes {
-    rescode.Code                rescode = 1;
-    string                      resmsg = 2;
-    map<string,string>          extra = 3;
-}
-
-message QueryMeGoodsReq {
-    int64                       uid = 1;
-    map<string, string>         extra = 2;
-}
-
-message QueryMeGoodsRes {
-    rescode.Code                        rescode = 1;
-    string                              resmsg = 2;
-    repeated common.MeGoods             goods = 3;
-    map<string,string>                  extra = 4;
-}
-
 message UpdateTemplateReq {
     common.TemplateItem                 template = 1;
     map<string, string>                 extra = 2;
@@ -1029,6 +981,81 @@ message ShareVisibleRes {
     map<string,string>              extra = 4;
 }
 
+message AddGoodsTotalReq {
+    common.GoodsTotal               goods = 1;
+    map<string,string>              extra = 2;
+}
+
+message AddGoodsTotalRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateGoodsCateReq {
+    int64                       id = 1;
+    int64                       cate_id = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateGoodsCateRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateGoodsNameReq {
+    int64                       id = 1;
+    string                      name = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateGoodsNameRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+
+message UpdateGoodsIntroReq {
+    int64                       id = 1;
+    string                      intro = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateGoodsIntroRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+
+message UpdateGoodsPriceReq {
+    int64                       id = 1;
+    int64                       price = 2;
+    map<string,string>          extra = 3;
+}
+
+message UpdateGoodsPriceRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message GoodsReq {
+    int64                       uid = 1;
+    int64                       page = 2;
+    int64                       size = 3;
+    map<string,string>          extra = 4;
+}
+
+message GoodsRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.GoodsTotal  goods = 3;
+    map<string,string>          extra = 4;
+}
+
 service DatanodeService {
 	// ---------- 用户接口 ------- //
 	// 创建新用户
@@ -1138,12 +1165,6 @@ service DatanodeService {
     // 获取共享记录
     rpc QueryShare(QueryShareReq) returns (QueryShareRes) {}
 
-    // 我的物品
-    rpc AddMeGoodsCategory(AddMeGoodsCategoryReq) returns (AddMeGoodsCategoryRes) {}
-    rpc GetMeGoodsCategory(GetMeGoodsCategoryReq) returns (GetMeGoodsCategoryRes) {}
-    rpc UpdateMeGoods(UpdateMeGoodsReq) returns (UpdateMeGoodsRes) {}
-    rpc QueryMeGoods(QueryMeGoodsReq) returns (QueryMeGoodsRes) {}
-
     rpc UpdateTemplate(UpdateTemplateReq) returns (UpdateTemplateRes) {}
     rpc QueryTemplate(QueryTemplateReq) returns (QueryTemplateRes) {}
     rpc TemplateCount(TemplateCountReq) returns (TemplateCountRes) {}
@@ -1184,4 +1205,11 @@ service DatanodeService {
 
     // 获取共享可见用户uid列表
     rpc ShareVisible(ShareVisibleReq) returns (ShareVisibleRes) {}
+
+    rpc AddGoodsTotal(AddGoodsTotalReq) returns (AddGoodsTotalRes) {}
+    rpc UpdateGoodsCate(UpdateGoodsCateReq) returns (UpdateGoodsCateRes) {}
+    rpc UpdateGoodsName(UpdateGoodsNameReq) returns (UpdateGoodsNameRes) {}
+    rpc UpdateGoodsIntro(UpdateGoodsIntroReq) returns (UpdateGoodsIntroRes) {}
+    rpc UpdateGoodsPrice(UpdateGoodsPriceReq) returns (UpdateGoodsPriceRes) {}
+    rpc Goods(GoodsReq) returns (GoodsRes) {}
 }

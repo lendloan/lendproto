@@ -507,3 +507,16 @@ message Strategy {
     string              style = 6;  // dialog/page/toast
     map<string,string>  extra = 7;
 }
+
+message GoodsTotal  {
+    int64                   id = 1;
+    int64                   uid = 2;
+    int64                   cate_id = 3;
+    string                  name = 4;
+    string                  intro = 5;
+    int64                   price = 6;
+    repeated ShareImage     media = 7;
+    int64                   create_at = 8;
+    int64                   update_at = 9;
+    map<string,string>      extra = 10;
+}

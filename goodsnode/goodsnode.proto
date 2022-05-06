@@ -5,71 +5,92 @@ import "common/common.proto";
 
 option go_package="./goodsnode";
 
-message AddMeGoodsCategoryReq {
-    int64                       op = 1;
-    common.MeGoodsCategory      category = 2;
-    map<string, string>         extra = 3;
+message AddGoodsTotalReq {
+    common.Authorize                auth =  1;
+    common.GoodsTotal               goods = 2;
+    map<string,string>              extra = 3;
 }
 
-message AddMeGoodsCategoryRes {
+message AddGoodsTotalRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     map<string,string>          extra = 3;
 }
 
-message GetMeGoodsCategoryReq {
-    int64                       uid = 1;
-    map<string, string>         extra = 2;
+message UpdateGoodsCateReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       cate_id = 3;
+    map<string,string>          extra = 4;
 }
 
-message GetMeGoodsCategoryRes {
-    rescode.Code                        rescode = 1;
-    string                              resmsg = 2;
-    repeated common.MeGoodsCategory     categorys = 3;
-    map<string,string>                  extra = 4;
-}
-
-message AddMeGoodsReq {
-    int64                       op = 1;
-    common.MeGoods              goods = 2;
-    map<string,string>          extra = 3;
-}
-
-message AddMeGoodsRes {
+message UpdateGoodsCateRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     map<string,string>          extra = 3;
 }
 
-message UpdateMeGoodsReq {
-    int64                       op = 1;
-    common.MeGoods              goods = 2;
-    map<string,string>          extra = 3;
+message UpdateGoodsNameReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    string                      name = 3;
+    map<string,string>          extra = 4;
 }
 
-message UpdateMeGoodsRes {
+message UpdateGoodsNameRes {
     rescode.Code                rescode = 1;
     string                      resmsg = 2;
     map<string,string>          extra = 3;
 }
 
-message QueryMeGoodsReq {
-    int64                       uid = 1;
-    map<string, string>         extra = 2;
+
+message UpdateGoodsIntroReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    string                      intro = 3;
+    map<string,string>          extra = 4;
 }
 
-message QueryMeGoodsRes {
-    rescode.Code                        rescode = 1;
-    string                              resmsg = 2;
-    repeated common.MeGoods             goods = 3;
-    map<string,string>                  extra = 4;
+message UpdateGoodsIntroRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+
+message UpdateGoodsPriceReq {
+    common.Authorize            auth =  1;
+    int64                       id = 2;
+    int64                       price = 3;
+    map<string,string>          extra = 4;
+}
+
+message UpdateGoodsPriceRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    map<string,string>          extra = 3;
+}
+
+message GoodsReq {
+    common.Authorize            auth =  1;
+    int64                       uid = 2;
+    int64                       page = 3;
+    int64                       size = 4;
+    map<string,string>          extra = 5;
+}
+
+message GoodsRes {
+    rescode.Code                rescode = 1;
+    string                      resmsg = 2;
+    repeated common.GoodsTotal  goods = 3;
+    map<string,string>          extra = 4;
 }
 
 service GoodsnodeService {
-    // 我的物品
-    rpc AddMeGoodsCategory(AddMeGoodsCategoryReq) returns (AddMeGoodsCategoryRes) {}
-    rpc GetMeGoodsCategory(GetMeGoodsCategoryReq) returns (GetMeGoodsCategoryRes) {}
-    rpc AddMeGoods(AddMeGoodsReq) returns (AddMeGoodsRes) {}
-    rpc UpdateMeGoods(UpdateMeGoodsReq) returns (UpdateMeGoodsRes) {}
-    rpc QueryMeGoods(QueryMeGoodsReq) returns (QueryMeGoodsRes) {}
+    rpc AddGoodsTotal(AddGoodsTotalReq) returns (AddGoodsTotalRes) {}
+    rpc UpdateGoodsCate(UpdateGoodsCateReq) returns (UpdateGoodsCateRes) {}
+    rpc UpdateGoodsName(UpdateGoodsNameReq) returns (UpdateGoodsNameRes) {}
+    rpc UpdateGoodsIntro(UpdateGoodsIntroReq) returns (UpdateGoodsIntroRes) {}
+    rpc UpdateGoodsPrice(UpdateGoodsPriceReq) returns (UpdateGoodsPriceRes) {}
+    rpc Goods(GoodsReq) returns (GoodsRes) {}
 }
