@@ -176,6 +176,7 @@ type DatanodeService interface {
 	UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, opts ...client.CallOption) (*UpdateGoodsNameRes, error)
 	UpdateGoodsIntro(ctx context.Context, in *UpdateGoodsIntroReq, opts ...client.CallOption) (*UpdateGoodsIntroRes, error)
 	UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, opts ...client.CallOption) (*UpdateGoodsPriceRes, error)
+	UpdateGoodsMedia(ctx context.Context, in *UpdateGoodsMediaReq, opts ...client.CallOption) (*UpdateGoodsMediaRes, error)
 	Goods(ctx context.Context, in *GoodsReq, opts ...client.CallOption) (*GoodsRes, error)
 }
 
@@ -981,6 +982,16 @@ func (c *datanodeService) UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsP
 	return out, nil
 }
 
+func (c *datanodeService) UpdateGoodsMedia(ctx context.Context, in *UpdateGoodsMediaReq, opts ...client.CallOption) (*UpdateGoodsMediaRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateGoodsMedia", in)
+	out := new(UpdateGoodsMediaRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *datanodeService) Goods(ctx context.Context, in *GoodsReq, opts ...client.CallOption) (*GoodsRes, error) {
 	req := c.c.NewRequest(c.name, "DatanodeService.Goods", in)
 	out := new(GoodsRes)
@@ -1132,6 +1143,7 @@ type DatanodeServiceHandler interface {
 	UpdateGoodsName(context.Context, *UpdateGoodsNameReq, *UpdateGoodsNameRes) error
 	UpdateGoodsIntro(context.Context, *UpdateGoodsIntroReq, *UpdateGoodsIntroRes) error
 	UpdateGoodsPrice(context.Context, *UpdateGoodsPriceReq, *UpdateGoodsPriceRes) error
+	UpdateGoodsMedia(context.Context, *UpdateGoodsMediaReq, *UpdateGoodsMediaRes) error
 	Goods(context.Context, *GoodsReq, *GoodsRes) error
 }
 
@@ -1216,6 +1228,7 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		UpdateGoodsName(ctx context.Context, in *UpdateGoodsNameReq, out *UpdateGoodsNameRes) error
 		UpdateGoodsIntro(ctx context.Context, in *UpdateGoodsIntroReq, out *UpdateGoodsIntroRes) error
 		UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, out *UpdateGoodsPriceRes) error
+		UpdateGoodsMedia(ctx context.Context, in *UpdateGoodsMediaReq, out *UpdateGoodsMediaRes) error
 		Goods(ctx context.Context, in *GoodsReq, out *GoodsRes) error
 	}
 	type DatanodeService struct {
@@ -1543,6 +1556,10 @@ func (h *datanodeServiceHandler) UpdateGoodsIntro(ctx context.Context, in *Updat
 
 func (h *datanodeServiceHandler) UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, out *UpdateGoodsPriceRes) error {
 	return h.DatanodeServiceHandler.UpdateGoodsPrice(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateGoodsMedia(ctx context.Context, in *UpdateGoodsMediaReq, out *UpdateGoodsMediaRes) error {
+	return h.DatanodeServiceHandler.UpdateGoodsMedia(ctx, in, out)
 }
 
 func (h *datanodeServiceHandler) Goods(ctx context.Context, in *GoodsReq, out *GoodsRes) error {
