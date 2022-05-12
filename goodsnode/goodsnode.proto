@@ -6,8 +6,8 @@ import "common/common.proto";
 option go_package="./goodsnode";
 
 message AddGoodsCategoryReq {
-    int64                       op = 1;
-    common.GoodsCategory      category = 2;
+    common.Authorize            auth =  1;
+    common.GoodsCategory        category = 2;
     map<string, string>         extra = 3;
 }
 
@@ -18,8 +18,9 @@ message AddGoodsCategoryRes {
 }
 
 message GoodsCategoryReq {
-    int64                       uid = 1;
-    map<string, string>         extra = 2;
+    common.Authorize            auth =  1;
+    int64                       uid = 2;
+    map<string, string>         extra = 3;
 }
 
 message GoodsCategoryRes {
@@ -115,7 +116,8 @@ message GoodsReq {
     int64                       uid = 2;
     int64                       page = 3;
     int64                       size = 4;
-    map<string,string>          extra = 5;
+    int64                       cate_id = 5;
+    map<string,string>          extra = 6;
 }
 
 message GoodsRes {
