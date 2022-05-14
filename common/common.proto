@@ -487,7 +487,6 @@ message Strategy {
     map<string,string>  extra = 7;
 }
 
-
 message GoodsCategory {
     int64                   id = 1;
     int64                   uid = 2;
@@ -504,8 +503,8 @@ message GoodsTotal  {
     string                  intro = 5;
     int64                   price = 6;
     repeated ShareImage     media = 7;
-    string                  cate_name = 8;
-    int64                   create_at = 9;
-    int64                   update_at = 10;
+    int64                   create_at = 8;
+    int64                   update_at = 9;
+    GoodsCategory           category = 10;
     map<string,string>      extra = 11;
 }
