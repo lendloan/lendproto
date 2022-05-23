@@ -506,5 +506,6 @@ message GoodsTotal  {
     int64                   create_at = 8;
     int64                   update_at = 9;
     GoodsCategory           category = 10;
-    map<string,string>      extra = 11;
+    int64                   status = 11;
+    map<string,string>      extra = 12;
 }
