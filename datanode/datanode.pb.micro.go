@@ -178,6 +178,8 @@ type DatanodeService interface {
 	UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, opts ...client.CallOption) (*UpdateGoodsPriceRes, error)
 	UpdateGoodsMedia(ctx context.Context, in *UpdateGoodsMediaReq, opts ...client.CallOption) (*UpdateGoodsMediaRes, error)
 	Goods(ctx context.Context, in *GoodsReq, opts ...client.CallOption) (*GoodsRes, error)
+	UpdateModelTrain(ctx context.Context, in *UpdateModelTrainReq, opts ...client.CallOption) (*UpdateModelTrainRes, error)
+	ModelTrain(ctx context.Context, in *ModelTrainReq, opts ...client.CallOption) (*ModelTrainRes, error)
 }
 
 type datanodeService struct {
@@ -1002,6 +1004,26 @@ func (c *datanodeService) Goods(ctx context.Context, in *GoodsReq, opts ...clien
 	return out, nil
 }
 
+func (c *datanodeService) UpdateModelTrain(ctx context.Context, in *UpdateModelTrainReq, opts ...client.CallOption) (*UpdateModelTrainRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.UpdateModelTrain", in)
+	out := new(UpdateModelTrainRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datanodeService) ModelTrain(ctx context.Context, in *ModelTrainReq, opts ...client.CallOption) (*ModelTrainRes, error) {
+	req := c.c.NewRequest(c.name, "DatanodeService.ModelTrain", in)
+	out := new(ModelTrainRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DatanodeService service
 
 type DatanodeServiceHandler interface {
@@ -1145,6 +1167,8 @@ type DatanodeServiceHandler interface {
 	UpdateGoodsPrice(context.Context, *UpdateGoodsPriceReq, *UpdateGoodsPriceRes) error
 	UpdateGoodsMedia(context.Context, *UpdateGoodsMediaReq, *UpdateGoodsMediaRes) error
 	Goods(context.Context, *GoodsReq, *GoodsRes) error
+	UpdateModelTrain(context.Context, *UpdateModelTrainReq, *UpdateModelTrainRes) error
+	ModelTrain(context.Context, *ModelTrainReq, *ModelTrainRes) error
 }
 
 func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler, opts ...server.HandlerOption) error {
@@ -1230,6 +1254,8 @@ func RegisterDatanodeServiceHandler(s server.Server, hdlr DatanodeServiceHandler
 		UpdateGoodsPrice(ctx context.Context, in *UpdateGoodsPriceReq, out *UpdateGoodsPriceRes) error
 		UpdateGoodsMedia(ctx context.Context, in *UpdateGoodsMediaReq, out *UpdateGoodsMediaRes) error
 		Goods(ctx context.Context, in *GoodsReq, out *GoodsRes) error
+		UpdateModelTrain(ctx context.Context, in *UpdateModelTrainReq, out *UpdateModelTrainRes) error
+		ModelTrain(ctx context.Context, in *ModelTrainReq, out *ModelTrainRes) error
 	}
 	type DatanodeService struct {
 		datanodeService
@@ -1564,4 +1590,12 @@ func (h *datanodeServiceHandler) UpdateGoodsMedia(ctx context.Context, in *Updat
 
 func (h *datanodeServiceHandler) Goods(ctx context.Context, in *GoodsReq, out *GoodsRes) error {
 	return h.DatanodeServiceHandler.Goods(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) UpdateModelTrain(ctx context.Context, in *UpdateModelTrainReq, out *UpdateModelTrainRes) error {
+	return h.DatanodeServiceHandler.UpdateModelTrain(ctx, in, out)
+}
+
+func (h *datanodeServiceHandler) ModelTrain(ctx context.Context, in *ModelTrainReq, out *ModelTrainRes) error {
+	return h.DatanodeServiceHandler.ModelTrain(ctx, in, out)
 }

@@ -510,7 +510,7 @@ message GoodsTotal  {
     map<string,string>      extra = 12;
 }
 
-message ModelTrain struct {
+message ModelTrain {
 	int64       uid = 1;  
 	int64       train = 2;
 	string      model = 3;
